@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { APP_ROUTES } from './app.routes';
 import { ConfigComponent } from './config/config.component';
 import { SharedLibModule } from 'projects/shared-lib/src/public-api';
+import { UserMenuBadgeComponent } from './user-menu-badge/user-menu-badge.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SharedLibModule } from 'projects/shared-lib/src/public-api';
   declarations: [
     AppComponent,
     HomeComponent,
-    ConfigComponent
+    ConfigComponent,
+    UserMenuBadgeComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
