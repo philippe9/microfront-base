@@ -14,3 +14,7 @@ Demonstrates webpack 5 Module Federation with Angular and the Angular Router.
 - Run the shell
   - ng serve shell -o
 
+## New micro project
+
+- Run at the root ng g application user-core --skip-install=true
+- Then run ng add @angular-architects/module-federation --project user-core --port 3000

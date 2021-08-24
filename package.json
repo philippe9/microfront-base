@@ -3,17 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start:shell": "ng serve shell  -o",
-    "start:mfe1": "ng serve mfe1 -o",
-    "start:mfe2": "ng serve mfe2 -o",
+    "start:shell": "ng serve shell -o",
+    "start:user": "ng serve user-core -o",
+    "start:customer": "ng serve customer-core -o",
     "build:shell": "ng build shell --prod",
-    "build:mfe1": "ng build mfe1 --prod",
-    "build:mfe2": "ng build mfe2 --prod",
-    "start": "concurrently \"npm run start:shell\" \"npm run start:mfe1\" \"npm run start:mfe2\" ",
-    "build": "npm run build:shell && npm run build:mfe1 && npm run build:mfe2",
+    "start": "concurrently \"npm run start:shell\" \"npm run start:user\" \"npm run start:customer \" ",
+    "build": "npm run build:shell",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
   },
   "private": true,
   "dependencies": {
