@@ -33,12 +33,10 @@
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "projects/shell/src/environments/environment.ts",
-                  "with": "projects/shell/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "projects/shell/src/environments/environment.ts",
+                "with": "projects/shell/src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -125,6 +123,8 @@
           "options": {
             "tsConfig": "projects/shared-lib/tsconfig.lib.json",
             "project": "projects/shared-lib/ng-package.json"
+
+
           },
           "configurations": {
             "production": {
@@ -186,8 +186,7 @@
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
+              "budgets": [{
                   "type": "initial",
                   "maximumWarning": "500kb",
                   "maximumError": "1mb"
@@ -198,12 +197,10 @@
                   "maximumError": "4kb"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/user-core/src/environments/environment.ts",
-                  "with": "projects/user-core/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "projects/user-core/src/environments/environment.ts",
+                "with": "projects/user-core/src/environments/environment.prod.ts"
+              }],
               "outputHashing": "all",
               "extraWebpackConfig": "projects/user-core/webpack.prod.config.js"
             },
@@ -281,6 +278,7 @@
             "main": "projects/customer-core/src/main.ts",
             "polyfills": "projects/customer-core/src/polyfills.ts",
             "tsConfig": "projects/customer-core/tsconfig.app.json",
+            "aot": true,
             "assets": [
               "projects/customer-core/src/favicon.ico",
               "projects/customer-core/src/assets"
@@ -294,8 +292,7 @@
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
+              "budgets": [{
                   "type": "initial",
                   "maximumWarning": "500kb",
                   "maximumError": "1mb"
@@ -306,12 +303,10 @@
                   "maximumError": "4kb"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "projects/customer-core/src/environments/environment.ts",
-                  "with": "projects/customer-core/src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "projects/customer-core/src/environments/environment.ts",
+                "with": "projects/customer-core/src/environments/environment.prod.ts"
+              }],
               "outputHashing": "all",
               "extraWebpackConfig": "projects/customer-core/webpack.prod.config.js"
             },

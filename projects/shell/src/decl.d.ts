@@ -1,2 +1,4 @@
-declare module 'mfe1/Component';
-declare module 'mfe1/Module';
+declare module 'customer-core/Component';
+declare module 'customer-core/Module';
+declare module 'user-core/Component';
+declare module 'user-core/Module';
