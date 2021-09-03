@@ -7,12 +7,15 @@ import { APP_ROUTES } from './app.routes';
 import { ConfigComponent } from './config/config.component';
 import { SharedLibModule } from 'projects/shared-lib/src/public-api';
 import { UserMenuBadgeComponent } from './user-menu-badge/user-menu-badge.component';
+import { MenubarModule } from 'primeng/menubar';
+import { MenuItem } from 'primeng/api';
 
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
-    SharedLibModule
+    SharedLibModule,
+    MenubarModule
   ],
   declarations: [
     AppComponent,

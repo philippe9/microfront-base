@@ -7,6 +7,11 @@ const routes: Routes = [
     path: '',
     component: AppComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'customer',
+    loadChildren: () => import('./customer-parent/customer-parent.module')
+      .then(m => m.CustomerParentModule)
   }
 ];
 

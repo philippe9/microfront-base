@@ -9,7 +9,7 @@ export class LookupService {
         // For Loading
         remoteEntry: 'http://localhost:3000/remoteEntry.js',
         remoteName: 'userCore',
-        exposedModule: './Component',
+        exposedModule: './Module',
 
         // For Routing
         displayName: 'User core',
@@ -20,12 +20,15 @@ export class LookupService {
         // For Loading
         remoteEntry: 'http://localhost:3001/remoteEntry.js',
         remoteName: 'customerCore',
-        exposedModule: './Component',
+        exposedModule: './Module',
 
         // For Routing
         displayName: 'Customer core',
         routePath: 'customer',
-        ngModuleName: 'AppModule'
+        ngModuleName: 'CustomerParentModule',
+        subRoutes: [
+
+        ]
       }
     ] as Microfrontend[]);
   }

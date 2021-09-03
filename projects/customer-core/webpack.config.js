@@ -29,6 +29,7 @@ module.exports = {
       filename: "remoteEntry.js",
       exposes: {
         './Component': './projects/customer-core/src/app/app.component.ts',
+        './Module': './projects/customer-core/src/app/customer-parent/customer-parent.module.ts'
       },
 
       // For hosts (please adjust)
@@ -43,7 +44,8 @@ module.exports = {
         "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-
+        "@angular/compiler": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/platform-browser-dynamic": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         ...sharedMappings.getDescriptors()
       })
 
