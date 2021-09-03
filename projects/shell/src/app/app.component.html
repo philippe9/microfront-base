@@ -1,8 +1,18 @@
-<ul>
+<!-- <ul style="margin-top:75px">
   <li><img src="../assets/angular.png" width="50"></li>
   <li><a routerLink="/">Home</a></li>
   <li *ngFor="let mfe of microfrontends"><a [routerLink]="mfe.routePath">{{mfe.displayName}}</a></li>
   <li><a routerLink="/config">Config</a></li>
-</ul>
-<app-user-menu-badge></app-user-menu-badge>
+</ul> -->
+
+
+<p-menubar [model]="items">
+  <ng-template pTemplate="start">
+    <img src="../assets/angular.png" height="40" class="p-mr-2">
+  </ng-template>
+  <ng-template pTemplate="end">
+    <input type="text" pInputText placeholder="Search">
+  </ng-template>
+</p-menubar>
+<!-- <app-user-menu-badge></app-user-menu-badge> -->
 <router-outlet></router-outlet>

@@ -25,7 +25,10 @@ export class LookupService {
         // For Routing
         displayName: 'Customer core',
         routePath: 'customer',
-        ngModuleName: 'CustomerParentModule'
+        ngModuleName: 'CustomerParentModule',
+        subRoutes: [
+
+        ]
       }
     ] as Microfrontend[]);
   }
