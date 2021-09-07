@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title style="font-size: medium;">Commissions et taxes</mat-card-title>
+  <form >
+    <div class="row">
+      <mat-form-field class="col-4">
+        <mat-label>Commissions</mat-label>
+        <input matInput  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.mntCommission" disabled>
+      </mat-form-field>
+      <div class="col-2"></div>
+      <mat-form-field class="col-4">
+        <mat-label>Taxes</mat-label>
+        <input matInput  [ngModelOptions]="{standalone: true}" [(ngModel)]="data.mntTaxe" mntTaxe disabled>
+      </mat-form-field>
+      <div class="col-2">
+        <microfi-button [name]="'Détails'"></microfi-button>
+      </div>
+    </div>
+  </form>
+</mat-card>

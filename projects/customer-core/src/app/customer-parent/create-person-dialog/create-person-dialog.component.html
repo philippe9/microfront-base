@@ -1,0 +1,143 @@
+<h1 mat-dialog-title>Ajouter une personne</h1>
+<div mat-dialog-content class="container">
+  <form [formGroup]="personInfos" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <div class="col-4">
+        <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+        formControlName="uniteBancaire" libelle={{uniteLibelle}}>
+      </microfi-select-auto-complete>
+      </div>
+     
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Code</mat-label>
+        <input formControlName="code" matInput>
+      </mat-form-field>
+
+      
+    <div class="col-4">
+      <microfi-select-auto-complete url={{urlCiviliteList}} requestType={{resquesTypePost}} formControlName="civilite"
+          libelle='Civilité'>
+        </microfi-select-auto-complete>
+    </div>
+
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Nom</mat-label>
+        <input formControlName="nom" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Prenom</mat-label>
+        <input formControlName="prenom" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Sexe</mat-label>
+        <mat-select matNativeControl formControlName="sexe">
+          <mat-option value=""></mat-option>
+          <mat-option value="Homme">Homme</mat-option>
+          <mat-option value="Femme">Femme</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Nom jeune fille</mat-label>
+        <input formControlName="nomJeuneFille" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Date naissance</mat-label>
+        <input formControlName="dateNaissance" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Lieu naissance</mat-label>
+        <input formControlName="lieuNaissance" matInput>
+      </mat-form-field>
+    </div>
+
+
+    <div class="row">
+      <div class="col-4">
+        <microfi-select-auto-complete url={{urlProfessionList}} requestType={{resquesTypePost}} formControlName="profession"
+            libelle='Profession'>
+          </microfi-select-auto-complete>
+      </div>
+      <div class="col-4">
+        <microfi-select-auto-complete url={{urlPaysList}} requestType={{resquesTypeGet}} formControlName="paysNaissance"
+            libelle='Pays naissance'>
+          </microfi-select-auto-complete>
+      </div>
+      <div class="col-4">
+        <microfi-select-auto-complete url={{urlNationalite}} requestType={{resquesTypePost}} formControlName="nationalite"
+            libelle='Nationalité'>
+          </microfi-select-auto-complete>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-4">
+        <microfi-select-auto-complete url={{urlPaysList}} requestType={{resquesTypeGet}} formControlName="paysResidence"
+            libelle='Pays résidence'>
+          </microfi-select-auto-complete>
+      </div>
+
+      <div class="col-4">
+        <microfi-select-auto-complete url={{urlTypePieceList}} requestType={{resquesTypePost}} formControlName="typePiece"
+            libelle='Type pièce'>
+          </microfi-select-auto-complete>
+      </div>
+      
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>N° pièce</mat-label>
+        <input formControlName="numPiece" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Lieu délivrance</mat-label>
+        <input formControlName="lieuDelivrance" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Date délivrance</mat-label>
+        <input formControlName="dateDelivrance" matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Date expiration</mat-label>
+        <input formControlName="dateExpiration" matInput [matDatepicker]="picker2">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <div style="text-align: center;">
+      <button (click)="onNoClick()" type="reset" color="primary" mat-raised-button>
+        <mat-icon class="icon">close</mat-icon>
+        Annuler
+      </button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button color="primary" mat-raised-button>
+        <mat-icon class="icon">check</mat-icon>
+        Enregistrer
+      </button>
+    </div>
+
+  </form>
+
+
+</div>

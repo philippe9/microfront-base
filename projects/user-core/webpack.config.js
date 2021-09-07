@@ -25,11 +25,11 @@ module.exports = {
     new ModuleFederationPlugin({
 
       // For remotes (please adjust)
-      name: "userCore",
-      filename: "remoteEntry.js",
-      exposes: {
-        './Component': './projects/user-core/src/app/app.component.ts',
-      },
+      // name: "userCore",
+      // filename: "remoteEntry.js",
+      // exposes: {
+      //   './Component': './projects/user-core/src/app/app.component.ts',
+      // },
 
       // For hosts (please adjust)
       // remotes: {

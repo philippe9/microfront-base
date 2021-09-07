@@ -1,0 +1,484 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Global Imports
+/* You can add global styles to this file, and also import other style files */
+@import "assets/styles/helper";
+
+// 3rd party libraries
+/* $fa-font-path: "../node_modules/font-awesome/fonts";
+@import "../node_modules/font-awesome/scss/font-awesome.scss"; */
+
+@import "~@angular/material/theming";
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+// Plus imports for other components in your app.
+
+// Custom material palette
+$mat-denim: (100: #c3c9cf,
+  500: #8598a5,
+  700: #bdb56c,
+  contrast: (100: $dark-primary-text,
+    500: $light-primary-text,
+    700: $light-primary-text,
+  ),
+);
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$my-app-primary: mat-palette($mat-blue-grey);
+$my-app-accent: mat-palette($mat-pink, 500, 900, A100);
+$my-app-warn: mat-palette($mat-deep-orange);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as `color` or `typography`.
+/* $candy-app-theme: mat-light-theme(
+  (
+    color: (
+      primary: $candy-app-primary,
+      accent: $candy-app-accent,
+      warn: $candy-app-warn,
+    ),
+  )
+); */
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($my-app-theme);
+
+mat-form-field.mat-form-field {
+  font-size: 14px;
+}
+
+mat-card mat-card {
+  background-color: rgb(250, 248, 248);
+  margin: 5px;
+}
+
+mat-tab-label:focus,
+mat-tab-link:focus {
+  background-color: mat-color($my-app-warn, 0.3, 0.3);
+  text-decoration-style: none;
+}
+
+body {
+  overflow-y: auto;
+}
+
+mat-form-field.mat-form-field {
+  font-size: 13px;
+}
+
+#microfi-shell-container {
+  background-color: #f3f3f3;
+}
+
+.breadcrumb-wrapper .breadcrumb {
+  padding-left: 8em !important;
+}
+
+.first-section {
+  // margin-top: 3em !important;
+}
+
+.selectAccountClass {}
+
+.first-section1 {
+  width: 100% !important;
+}
+
+.first-section-min {
+  width: 100% !important;
+  // margin: 5px !important;
+}
+
+.mat-icon {
+  margin-right: 10px !important;
+}
+
+.mg-0 {
+  margin: 0px !important;
+}
+
+.mg-1 {
+  margin: 1em !important;
+}
+
+.mg-2 {
+  margin: 2em !important;
+}
+
+.mg-3 {
+  margin: 3em !important;
+}
+
+.mg-4 {
+  margin: 4em !important;
+}
+
+.ml-0 {
+  margin-left: 0px !important;
+}
+
+.ml-1 {
+  margin-left: 1em !important;
+}
+
+.ml-2 {
+  margin-left: 2em !important;
+}
+
+.ml-3 {
+  margin-left: 3em !important;
+}
+
+.ml-4 {
+  margin-left: 4em !important;
+}
+
+.mr-0 {
+  margin-right: 0px !important;
+}
+
+.mr-1 {
+  margin-right: 1em !important;
+}
+
+.mr-2 {
+  margin-right: 2em !important;
+}
+
+.mr-3 {
+  margin-right: 3em !important;
+}
+
+.mr-4 {
+  margin-right: 4em !important;
+}
+
+.mt-0 {
+  margin-top: 0px !important;
+}
+
+.mt-1 {
+  margin-top: 1em !important;
+}
+
+.mt-2 {
+  margin-top: 2em !important;
+}
+
+.mt-3 {
+  margin-top: 3em !important;
+}
+
+.mt-4 {
+  margin-top: 4em !important;
+}
+
+.mb-0 {
+  margin-bottom: 0px !important;
+}
+
+.mb-1 {
+  margin-bottom: 1em !important;
+}
+
+.mb-2 {
+  margin-bottom: 2em !important;
+}
+
+.mb-3 {
+  margin-bottom: 3em !important;
+}
+
+.mb-4 {
+  margin-bottom: 4em !important;
+}
+
+.p-0 {
+  padding: 0px !important;
+}
+
+.p-1 {
+  padding: 1em !important;
+}
+
+.p-2 {
+  padding: 2em !important;
+}
+
+.p-3 {
+  padding: 3em !important;
+}
+
+.p-4 {
+  padding: 4em !important;
+}
+
+.p-half {
+  padding: 0.5em !important;
+}
+
+.pt-half {
+  padding-top: 0.5em !important;
+}
+
+.pb-half {
+  padding-bottom: 0.5em !important;
+}
+
+.pl-half {
+  padding-left: 0.5em !important;
+}
+
+.pr-half {
+  padding-right: 0.5em !important;
+}
+
+.mg-half {
+  margin: 0.5em !important;
+}
+
+.mt-half {
+  margin-top: 0.5em !important;
+}
+
+.mb-half {
+  margin-bottom: 0.5em !important;
+}
+
+.ml-half {
+  margin-left: 0.5em !important;
+}
+
+.mr-half {
+  margin-right: 0.5em !important;
+}
+
+.pr-0 {
+  padding-right: 0px !important;
+}
+
+.pr-1 {
+  padding-right: 1em !important;
+}
+
+.pr-2 {
+  padding-right: 2em !important;
+}
+
+.pr-3 {
+  padding-right: 3em !important;
+}
+
+.pr-4 {
+  padding-right: 4em !important;
+}
+
+.pl-0 {
+  padding-left: 0px !important;
+}
+
+.pl-1 {
+  padding-left: 1em !important;
+}
+
+.pl-2 {
+  padding-left: 2em !important;
+}
+
+.pl-3 {
+  padding-left: 3em !important;
+}
+
+.pl-4 {
+  padding-left: 4em !important;
+}
+
+.pt-0 {
+  padding-top: 0px !important;
+}
+
+.pt-1 {
+  padding-top: 1em !important;
+}
+
+.pt-2 {
+  padding-top: 2em !important;
+}
+
+.pt-3 {
+  padding-top: 3em !important;
+}
+
+.pt-4 {
+  padding-top: 4em !important;
+}
+
+.pb-0 {
+  padding-bottom: 0px !important;
+}
+
+.pb-1 {
+  padding-bottom: 1em !important;
+}
+
+.pb-2 {
+  padding-bottom: 2em !important;
+}
+
+.pb-3 {
+  padding-bottom: 3em !important;
+}
+
+.pb-4 {
+  padding-bottom: 4em !important;
+}
+
+.w-0 {
+  width: 0 !important;
+}
+
+.w-25 {
+  width: 25% !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.w-75 {
+  width: 75% !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.h-0 {
+  height: 0 !important;
+}
+
+.h-25 {
+  height: 25% !important;
+}
+
+.h-50 {
+  height: 50% !important;
+}
+
+.h-75 {
+  height: 75% !important;
+}
+
+.h-100 {
+  height: 100% !important;
+}
+
+.h-auto {
+  height: auto !important;
+}
+
+.underlined {
+  border-bottom: 2px solid #666;
+}
+
+p {
+  font-size: 14px !important;
+}
+
+.center-align {
+  text-align: center !important;
+}
+
+.left-align {
+  text-align: left !important;
+}
+
+.right-align {
+  text-align: right !important;
+}
+
+.justify {
+  text-align: justify !important;
+}
+
+.left {
+  float: left !important;
+}
+
+.selected_table {
+  background: #a6a6d8c7 !important;
+}
+
+tr:hover {
+  background-color: #b1cedc8c !important;
+  cursor: pointer;
+}
+
+.menu-btn-right {
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 35vh;
+}
+
+input {
+  margin: 0px !important;
+}
+
+#billetage .mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+table td,
+td.mat-footer-cell,
+.table th {
+  font-size: 10px;
+  max-width: 75px;
+}
+
+// .table td, .table th
+.ui-overlaypanel-close-icon {
+  font-size: 1em !important;
+}
+
+.ui-overlaypanel .mat-list-base {
+  height: 220px !important;
+  overflow-y: auto !important;
+}
+
+.ng-invalid {
+  border-color: #ff5722;
+}
+
+.mat-toolbar-row,
+.mat-tab-link {
+  height: 35px !important;
+}
+
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: 35px !important;
+}
+
+#microfi-toolbar {
+  box-shadow: -10px 11px 1px -2px rgb(0 0 0 / 20%), -1px 7px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%) !important;
+}
+
+.cdk-overlay-pane {
+  max-width: 90vw;
+}
+
+body .ui-inputtext {
+  padding: 0.1em !important;
+}

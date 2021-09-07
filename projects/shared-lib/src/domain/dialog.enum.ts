@@ -1,0 +1,8 @@
+export enum Dialog {
+  CLOSE = 0,
+  CREATION,
+  MODIFICATION,
+  CONSULTATION,
+  DELETE,
+  VALIDATION
+}

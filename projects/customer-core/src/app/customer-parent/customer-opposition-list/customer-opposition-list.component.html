@@ -1,0 +1,113 @@
+<mat-card class="container">
+  <div class="row">
+    <div class="col-10">
+      <mat-card>
+        <mat-card-title>Option de recherche</mat-card-title>
+        <form [formGroup]="oppositionForm">
+          <div class="row">
+            <div class="col-6">
+              <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+                formControlName="uniteBancaire" libelle={{uniteLibelle}}>
+              </microfi-select-auto-complete>
+              <microfi-select-auto-complete formControlName="typeOpposition" url={{urlTypeOppositionList}}
+                requestType={{resquesTypeGet}} libelle='Type opposition'></microfi-select-auto-complete>
+              <div class="row">
+                <mat-form-field class="col-6" appearance="outline">
+                  <mat-label>Date debut opposition</mat-label>
+                  <input matInput formControlName="dteDebutOpposition" [matDatepicker]="picker1">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="col-6" appearance="outline">
+                  <mat-label>Date fin opposition</mat-label>
+                  <input matInput formControlName="dteFinOpposition" [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-6">
+              <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
+                formControlName="agence" libelle={{agenceLibelle}}>
+              </microfi-select-auto-complete>
+
+              <microfi-user-form [parentForm]="oppositionForm" formControlName="membre">
+              </microfi-user-form>
+              <!-- <microfi-select-customer-form formControlName="membre"></microfi-select-customer-form> -->
+
+              <div class="row">
+
+                <mat-form-field class="col-6" appearance="outline">
+                  <mat-label>Ref bord oppo</mat-label>
+                  <input formControlName="refBordOppo" matInput>
+                </mat-form-field>
+                <mat-form-field class="col-6" appearance="outline">
+                  <mat-label>Levée ?</mat-label>
+                  <mat-select formControlName="levee">
+                    <mat-option value=""></mat-option>
+                    <mat-option value="Oui">Oui</mat-option>
+                    <mat-option value="Non">Non</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="w-100 right-align">
+                <microfi-button [name]="'Rechercher'" (click)="find()">
+                </microfi-button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </mat-card>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> Type opposition</th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Membre</th>
+          <td mat-cell *matCellDef="let element"> {{element.client.libelle}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef> Date opposition</th>
+          <td mat-cell *matCellDef="let element"> {{element.dateOpposition}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Saisi">
+          <th mat-header-cell *matHeaderCellDef> Util. Saisi</th>
+          <td mat-cell *matCellDef="let element"> {{element.motif}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="leve">
+          <th mat-header-cell *matHeaderCellDef> Date levé</th>
+          <td mat-cell *matCellDef="let element"> {{element.dateLevee}} </td>
+        </ng-container>
+        <ng-container matColumnDef="utiLeve">
+          <th mat-header-cell *matHeaderCellDef> Uti. Levé</th>
+          <td mat-cell *matCellDef="let element"> {{element.motifLevee}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="selectedItem(row)" mat-row *matRowDef="let row; columns: displayedColumns;"
+          [class.selected_table]="row.code === selectedItemOnTables.code"></tr>
+      </table>
+    </div>
+    <div class="col-2">
+      <div class="d-flex menu-btn-right">
+        <microfi-button [name]="'Nouveau'" routerLink="/customer-opposition-view">
+        </microfi-button>
+        <microfi-button [name]="'Levee'" (click)="leveOpposition()">
+        </microfi-button>
+        <microfi-button [name]="'Imprimer'">
+        </microfi-button>
+
+        <microfi-button [name]="'Actualiser'">
+        </microfi-button>
+      </div>
+    </div>
+  </div>
+</mat-card>

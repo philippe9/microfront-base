@@ -25,7 +25,13 @@ module.exports = {
     new ModuleFederationPlugin({
 
       // No remotes configured upfront anymore!
-      remotes: {},
+      remotes: {
+        name: "customerCore",
+        filename: "remoteEntry.js",  // 2-3K w/ Meta Data
+        exposes: {
+          './Module': './projects/customer-core/src/app/customer-parent/customer-parent.module.ts',
+        },
+      },
 
       shared: share({
         "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
@@ -33,8 +39,10 @@ module.exports = {
         "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/compiler": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/material": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/platform-browser-dynamic": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-
+        "primeng": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "primeicons": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         ...sharedMappings.getDescriptors()
       })
 

@@ -1,0 +1,635 @@
+<mat-card class="container">
+  <mat-card-title>Personne morale</mat-card-title>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step label="Informations sur la civilite">
+      <form [formGroup]="userDetail1" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-6">
+            <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{requestType}}
+              formControlName="uniteBance" libelle='Unité Bancaire' [enable]="isEnabled"
+              [defaultValue]="actualPersonne.idUnite">
+            </microfi-select-auto-complete>
+          </div>
+
+          <div class="col-6">
+            <microfi-select-auto-complete url={{urlAgenceList}} requestType={{requestType}} formControlName="agence"
+              libelle='Agence' [enable]="isEnabled" [defaultValue]="actualPersonne.idAgence">
+            </microfi-select-auto-complete>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Code</mat-label>
+              <input formControlName="code" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Raison sociale</mat-label>
+              <input formControlName="raisonSociale" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Date de création</mat-label>
+              <input matInput formControlName="dateCreation" [matDatepicker]="picker2">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Capital</mat-label>
+              <input type="number" formControlName="capital" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Siège</mat-label>
+              <input formControlName="siege" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>N RCCM</mat-label>
+              <input formControlName="numRccm" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Date délivrance</mat-label>
+              <input formControlName="dateDeliv" matInput [matDatepicker]="picker7">
+              <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+              <mat-datepicker #picker7></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlFormeJuridiqueList}} requestType={{requestType2}}
+              formControlName="formeJuridique" libelle='Forme Juridique' [enable]="isEnabled"
+              [defaultValue]="actualPersonne.idFormeJuridique">
+            </microfi-select-auto-complete>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Aut. deliv. RCCM</mat-label>
+              <input formControlName="autDelivRccm" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Lieu deliv. RCCM</mat-label>
+              <input formControlName="autDelivRccm" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Chiffre Affaire HT</mat-label>
+              <input type="number" formControlName="chiffeAffaireHt" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Date Adhesion</mat-label>
+              <input formControlName="dateAdhesion" matInput [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlPaysList}} requestType={{requestType}} formControlName="pays"
+              libelle='Pays' [enable]="isEnabled" [defaultValue]="actualPersonne.idPays">
+            </microfi-select-auto-complete>
+          </div>
+
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlNationalite}} requestType={{requestType2}}
+              formControlName="nationalite" libelle='Nationalité' [enable]="isEnabled"
+              [defaultValue]="actualPersonne.idNationalite">
+            </microfi-select-auto-complete>
+          </div>
+
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlSecteurActivite}} requestType={{requestType2}}
+              formControlName="secteurActivite" libelle='Secteur Activité' [enable]="isEnabled"
+              [defaultValue]="actualPersonne.idSecteurActivite">
+            </microfi-select-auto-complete>
+          </div>
+
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlAgentEconomique}} requestType={{requestType2}}
+              formControlName="agentEco" libelle='Agent Eco.' [enable]="isEnabled"
+              [defaultValue]="actualPersonne.idAgentEconomique">
+            </microfi-select-auto-complete>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Mont. Parts</mat-label>
+              <input formControlName="montPart" type="number" matInput>
+            </mat-form-field>
+            <!-- <input type=
+              "text" autonumeric> -->
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Mont. Fonds.</mat-label>
+              <input formControlName="montFondSol" type="number" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+          </div>
+
+          <div class="col-3">
+          </div>
+        </div>
+      </form>
+      <div class="stepper-bouton">
+        <button mat-raised-button matStepperNext>Suivant</button>
+      </div>
+
+    </mat-step>
+    <mat-step label="Coordonnées" [optional]="isOptional">
+      <form [formGroup]="userDetail1" class="second-section">
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse 1</mat-label>
+              <input formControlName="adresse1" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>télephone 1</mat-label>
+              <input formControlName="tel1" type="tel" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>E-mail</mat-label>
+              <input formControlName="email" type="email" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse 2</mat-label>
+              <input formControlName="adresse2" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>télephone 2</mat-label>
+              <input formControlName="tel2" type="tel" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse 3</mat-label>
+              <input formControlName="adresse3" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Adresse 4</mat-label>
+              <input formControlName="adresse4" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>télephone 3</mat-label>
+              <input formControlName="tel3" type="tel" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>N. Fax</mat-label>
+              <input formControlName="numFax" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlProvince}} requestType={{requestType2}} libelle='Province'
+              [enable]="isEnabled" [defaultValue]="actualPersonne.idAgentEconomique">
+            </microfi-select-auto-complete>
+          </div>
+
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlTypeEntrepriseList}} requestType={{requestType2}}
+              libelle='Type Entreprise' [enable]="isEnabled" [defaultValue]="actualPersonne.idProvince">
+            </microfi-select-auto-complete>
+          </div>
+
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlDistrictList}} requestType={{requestType2}} libelle='District'
+              [enable]="isEnabled" [defaultValue]="actualPersonne.idDistrict">
+            </microfi-select-auto-complete>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <microfi-select-auto-complete url={{urlStatutEntrepriseList}} requestType={{requestType2}} libelle='Statut'
+              [enable]="isEnabled">
+            </microfi-select-auto-complete>
+          </div>
+          <div class="col-3">
+
+          </div>
+
+          <div class="col-3">
+
+          </div>
+
+          <div class="col-3">
+
+          </div>
+        </div>
+
+      </form>
+      <div class="stepper-bouton">
+        <button mat-raised-button matStepperPrevious>Précédent</button>
+        <button mat-raised-button matStepperNext>Suivant</button>
+      </div>
+
+    </mat-step>
+    <mat-step label="Informations Générales" [optional]="isOptional">
+      <form [formGroup]="userDetail1">
+        <div class="row">
+          <div class="col-6">
+            <mat-form-field appearance="outline">
+              <mat-label>N. Contribuable</mat-label>
+              <input formControlName="numContribuable" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-6">
+            <mat-form-field appearance="outline">
+              <mat-label>Nom2</mat-label>
+              <input formControlName="nom2" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>N. Statut</mat-label>
+              <input formControlName="numStatut" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>N. Récépicé</mat-label>
+              <input formControlName="numRecepice" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>N. Patente</mat-label>
+              <input formControlName="numPatente" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>N. Tax/Tpin</mat-label>
+              <input formControlName="numTax" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Date enrg. Statut</mat-label>
+              <input matInput formControlName="dateEnregStatut" [matDatepicker]="picker3">
+              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+              <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Code Postal</mat-label>
+              <input formControlName="codePostal" matInput>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Date déliv. récépicé</mat-label>
+              <input matInput formControlName="dateDelivRecepice" [matDatepicker]="picker4">
+              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+              <mat-datepicker #picker4></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-3">
+            <mat-form-field appearance="outline">
+              <mat-label>Aut. deliv. récépicé</mat-label>
+              <input formControlName="autDelivRecepice" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Date validé pate</mat-label>
+              <input matInput formControlName="dateValiditePate" [matDatepicker]="picker5">
+              <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+              <mat-datepicker #picker5></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Date fermeture</mat-label>
+              <input matInput formControlName="dateFermeture" [matDatepicker]="picker6">
+              <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+              <mat-datepicker #picker6></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="col-4">
+            <mat-form-field appearance="outline">
+              <mat-label>N. TVA</mat-label>
+              <input formControlName="numTva" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </form>
+      <div class="stepper-bouton">
+        <button mat-raised-button matStepperPrevious>Précédent</button>
+        <button mat-raised-button matStepperNext>Suivant</button>
+      </div>
+
+    </mat-step>
+    <mat-step label="Autres Informations" [optional]="isOptional">
+      <form [formGroup]="userDetail1">
+
+        <div class="row">
+          <!-- <mat-form-field class="col-6" appearance="outline">
+            <mat-label>Gestionnaire</mat-label>
+            <input type="text" placeholder="Choisir un gestionnaire" aria-label="gestionnaire" matInput
+              [formControl]="userDetail1.get('gestionnaire')" [matAutocomplete]="auto" />
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptionsGestionnaire | async" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field> -->
+
+          <microfi-select-auto-complete class="col-6" url={{urlGestionnaireList}} requestType={{requestType}}
+            formControlName="gestionnaire" libelle="Gestionnaire" [enable]="isEnabled"
+            [defaultValue]="actualPersonne.idGestionnaire">
+          </microfi-select-auto-complete>
+
+          <mat-form-field class="col-6" appearance="outline">
+            <mat-label>Groupe</mat-label>
+            <input type="text" placeholder="Choisir un groupe" aria-label="unité" matInput
+              [formControl]="userDetail1.get('groupe')" [matAutocomplete]="auto2" />
+            <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptionsGroupeClient | async" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-6" appearance="outline">
+            <mat-label>Famille</mat-label>
+            <input type="text" placeholder="Choisir une famille" aria-label="famille" matInput
+              [formControl]="userDetail1.get('famille')" [matAutocomplete]="auto1" />
+            <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptionsFamilleClient | async" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <div class="col-6">
+            <mat-form-field class="demo-full-width" appearance="outline" class="w-100">
+              <mat-label>Nature</mat-label>
+              <mat-select matNativeControl [formControl]="userDetail1.get('nature')">
+                <mat-option value=""></mat-option>
+                <mat-option value="Actif" selected>Actif</mat-option>
+                <mat-option value="Associe">Associe</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <microfi-select-auto-complete url={{urlQualiteList}} requestType={{requestType2}} formControlName="qualite"
+              libelle="Qualité" [enable]="isEnabled" [defaultValue]="actualPersonne.qualite">
+            </microfi-select-auto-complete>
+          </div>
+
+          <div class="col-4">
+            <microfi-select-auto-complete formControlName="profil" url={{urlProfilClientList}}
+              requestType={{requestType2}} libelle='Profil' [enable]="isEnabled" [defaultValue]="actualPersonne.profilClient">
+            </microfi-select-auto-complete>
+          </div>
+          <div class="col-4">
+            <microfi-select-auto-complete url={{urlNatureClientList}} requestType={{requestType2}}
+              [formControl]="userDetail1.get('natureClient')" libelle="Nature client" [enable]="isEnabled" [defaultValue]="actualPersonne.natureClient">
+            </microfi-select-auto-complete>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4">
+            <microfi-select-auto-complete class="w-100" url={{urlCategorieInterneList}} requestType={{requestType2}}
+              formControlName="catInterne" libelle="Cat. interne" [enable]="isEnabled" [defaultValue]="actualPersonne.categorieInterne">
+            </microfi-select-auto-complete>
+          </div>
+          <div class="col-4">
+            <microfi-select-auto-complete class="w-100" formControlName="ville" url={{urlVilleList}}
+              requestType={{requestType2}} libelle='Ville' [enable]="isEnabled" [defaultValue]="actualPersonne.ville">
+            </microfi-select-auto-complete>
+          </div>
+          <div class="col-4">
+            <microfi-select-auto-complete class="w-100" formControlName="utilAssocie" url={{urlUtilisateurList}}
+              requestType={{requestType}} libelle='Util. associé' [enable]="isEnabled" [defaultValue]="actualPersonne.idUtilisateur"></microfi-select-auto-complete>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="stepper-bouton">
+        <button mat-raised-button matStepperPrevious>Précédent</button>
+        <button mat-raised-button matStepperNext>Suivant</button>
+      </div>
+
+    </mat-step>
+    <mat-step label="Dirigeants" [optional]="isOptional">
+      <div class="row">
+        <div class="col-12" style="display: flex;justify-content: center;">
+          <button mat-raised-button color="primary" class="mr-2" (click)="openDialogAddPerson()">
+            <mat-icon>add</mat-icon>
+            Ajouter Dirigeant
+          </button>
+          <button mat-raised-button color="primary" (click)="openDialogCreatePerson()">
+            <mat-icon>add</mat-icon>
+            Créer Dirigeant
+          </button>
+        </div>
+      </div>
+      <br />
+
+      <table mat-table [dataSource]="dataSourceDirigeants" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef> Code</th>
+          <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nom">
+          <th mat-header-cell *matHeaderCellDef> Nom</th>
+          <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="prenom">
+          <th mat-header-cell *matHeaderCellDef> Prenom</th>
+          <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sexe">
+          <th mat-header-cell *matHeaderCellDef> Sexe</th>
+          <td mat-cell *matCellDef="let element"> {{element.sexe}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Action</th>
+          <td mat-cell *matCellDef="let element" class="action-link">
+
+            <button mat-mini-fab color="primary" (click)="handleDeleteDirigeant(element)" title="Selectionner">
+              <mat-icon class="icon">delete</mat-icon>
+            </button>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsDirigeants"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsDirigeants;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+      <div class="stepper-bouton">
+        <button mat-raised-button matStepperPrevious>Précédent</button>
+        <button mat-raised-button matStepperNext>Suivant</button>
+      </div>
+
+    </mat-step>
+
+    <mat-step label="Actionnaires" [optional]="isOptional">
+      <div class="row">
+        <div class="col-12" style="display: flex;justify-content: center;">
+          <button mat-raised-button class="mr-1" color="primary" (click)="openDialogCreateActionnairePerson()">
+            <mat-icon>add</mat-icon>
+            Personne physique
+          </button>
+          <button mat-raised-button class="mr-1" color="primary" (click)="openDialogCreateActionnaireMorale()">
+            <mat-icon>add</mat-icon>
+            Entreprise privée
+          </button>
+          <button mat-raised-button class="mr-1" color="primary" (click)="openDialogCreateActionnaireMorale()">
+            <mat-icon>add</mat-icon>
+            Entreprise public
+          </button>
+        </div>
+      </div>
+      <br />
+
+      <table mat-table [dataSource]="dataSourceActionnaires" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="nature">
+          <th mat-header-cell *matHeaderCellDef> Nature</th>
+          <td mat-cell *matCellDef="let actionnaire"> {{actionnaire.nature}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="est_membre">
+          <th mat-header-cell *matHeaderCellDef> Est membre?</th>
+          <td mat-cell *matCellDef="let actionnaire"> {{actionnaire.est_membre}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="designation">
+          <th mat-header-cell *matHeaderCellDef> Désignation</th>
+          <td mat-cell *matCellDef="let actionnaire"> {{actionnaire.raisonSociale}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="pourcentage_action">
+          <th mat-header-cell *matHeaderCellDef> Pourcentage action</th>
+          <td mat-cell *matCellDef="let actionnaire"> {{actionnaire.pourcentageAction}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Action</th>
+          <td mat-cell *matCellDef="let actionnaire" class="action-link">
+
+            <mat-icon class="icon" (click)="handleDeleteActionnaire(element)">delete</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsActionnaires"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsActionnaires;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+      <div class="stepper-bouton mb-2">
+        <button mat-raised-button matStepperPrevious>Précédent</button>
+        <!-- <button mat-raised-button matStepperNext>Suivant</button> -->
+        <button *ngIf="!isView" (click)="submitForm()" mat-raised-button class="btn-valider ml-2">
+          <mat-icon class="icon">check</mat-icon>
+          Valider
+        </button>
+      </div>
+
+      <div class="submit-div">
+
+
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-card>

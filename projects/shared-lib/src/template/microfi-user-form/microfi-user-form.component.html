@@ -1,0 +1,34 @@
+  <b>{{label}}</b>
+  <div class="compte_container row mb-1" pTooltip="{{tooltip}}" tooltipPosition="bottom">
+    <div class="col-3">
+      <form [formGroup]="selectAutoComplete">
+        <input type="text" formControlName="item" style="display: none;">
+      </form>
+      <input [(ngModel)]="actualValue.idClient" [(disabled)]="isDisabled" (blur)="focusLost($event)"
+        (keyup)="checkAccountEvent($event, op)" (keypress.enter)="searchUser()" pInputText class="w-100">
+    </div>
+    <div class="col-9">
+      <input [value]="actualValue.intituleClient" type="text" style="text-transform: uppercase;"
+        [(ngModel)]="actualValue.intituleClient" pInputText disabled class="w-100">
+    </div>
+  </div>
+
+  <p-overlayPanel appendTo='body' [dismissable]='false' #op [showCloseIcon]="true"
+    [style]="{width: '450px', height:'300px'}">
+
+    <div class="row">
+      <div class="col-4 pr-0">
+        <select name="" id="" [(ngModel)]="critere.code" class="microfi-user-select-criteria w-100">
+          <option [value]="critereL.code" *ngFor="let critereL of criteres">{{critereL.name}}</option>
+        </select>
+      </div>
+      <div class="col-8">
+        <input type="text" #userSearchInput [(ngModel)]="typedValue" pInputText (keyup)="searchUser()" class="w-100">
+      </div>
+    </div>
+    <mat-selection-list #shoes [multiple]="false">
+      <mat-list-option *ngFor="let compte of users" (click)="onRowSelect(compte, op)">
+        {{compte.idClient}}-{{compte.intituleClient}}
+      </mat-list-option>
+    </mat-selection-list>
+  </p-overlayPanel>

@@ -1,0 +1,113 @@
+.container {
+  width: 90%;
+  margin: auto;
+  margin-top: 10px;
+  //height: 720px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+}
+
+.menu {
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+
+.sous-menu1 {
+  width: 60%;
+  display: flex;
+}
+
+.sous-menu2 {
+  width: 30%;
+  display: flex;
+}
+
+button {
+  margin: auto;
+  height: 45px;
+}
+
+.btn-menu {
+  background-color: #f44336;
+  color: white;
+  line-height: 30px;
+}
+
+.btn-search {
+  height: 45px;
+  margin-top: 2px;
+  margin-right: 0;
+}
+
+.icon {
+  font-size: 22px;
+  margin: auto;
+}
+
+.first-section,
+.first-section {
+  height: 180px;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 5px;
+}
+
+.first-section::before {
+  margin-top: -10px;
+  margin-left: 15px;
+  position: absolute;
+  font-size: 15px;
+  font-weight: 500;
+  content: "Option de recherche";
+  color: rgb(7, 45, 199);
+  background-color: #eeeded;
+}
+
+.first-section1,
+.first-section2 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: 11px;
+  margin-bottom: -1.25em;
+}
+
+input {
+  font-size: 14px;
+}
+
+mat-form-field mat-label {
+  font-size: 14px;
+}
+
+mat-radio-button {
+  margin: 10px 0;
+}
+
+.first-section-min,
+.first-section-min1,
+.first-section2-min,
+.first-section2-min1 {
+  display: flex;
+  margin: auto;
+  width: 70%;
+  justify-content: space-between;
+}
+
+.first-section-min1 > mat-form-field,
+.first-section2-min1 > mat-form-field {
+  width: 45% !important;
+}
+
+table {
+  margin: auto;
+  background-color: #eeeded;
+}
+
+mat-card-title {
+  font-size: 16px;
+}

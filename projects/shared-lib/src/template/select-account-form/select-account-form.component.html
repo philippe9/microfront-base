@@ -1,0 +1,36 @@
+<!-- <form [formGroup]="selectAutoComplete" >
+  <mat-form-field class="col-12">
+    <mat-label>{{libelle}}</mat-label>
+    <input formControlName="item"  #stateInput
+     type="text" matInput [matAutocomplete]="auto">
+     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="getOptionText">
+       <mat-option
+       (onSelectionChange)="stateInput.value !=undefined"
+       *ngFor="let option of filteredOptions | async" [value]="option">
+         {{option.numeroCompte}}-{{option.cleCompte}}<br/>
+         <span>
+          {{option.agence.code}}-{{option.intitule}}
+         </span>
+         <br/>
+         <span>
+          {{option.produit.code}}-{{option.produit.libelle}}
+         </span>
+       </mat-option>
+     </mat-autocomplete>
+  </mat-form-field>
+</form>
+ -->
+
+
+<form [formGroup]="selectAutoComplete" required class="selectAccountClass">
+  <mat-form-field class="col-12">
+    <mat-select  placeholder={{lable}} #singleSelect formControlName="item" [disabled]="disable" required>
+      <mat-option (keyup)="dosearch()" required>
+        <ngx-mat-select-search  [formControl]="recordFilterCtrl"  [(ngModel)]="criterial"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let item of filteredRecords | async" [value]="item">
+        {{ item.numeroCompte }}-{{ item.cleCompte }}&nbsp;&nbsp;{{ item.intitule }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

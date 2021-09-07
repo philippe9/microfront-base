@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Fiche Adossage</h1>
+<div mat-dialog-content>
+  <div class="row mb-1 p-1" style="background-color: #eee;">
+    <div class="col-12">
+      <img [src]="signature" alt="" srcset="" style="height: 50vh;width: 100%;object-fit: contain;">
+    </div>
+  </div>
+  <div class="row" style="background-color: #ddd;">
+    <div class="col-6">
+      <mat-form-field>
+        <mat-label>Entrez O(Oui) / N(Non)</mat-label>
+        <input matInput name="rightImage" (keyup)="filterInput($event)" [(ngModel)]="agentAnswer.rightImage">
+      </mat-form-field>
+    </div>
+    <div class="col-6" style="display: flex;align-items: center;">
+      <mat-checkbox class="example-margin" name="rightSignature" [(ngModel)]="agentAnswer.rightSignature">
+        {{account.intitule}}
+      </mat-checkbox>
+    </div>
+  </div>
+
+</div>
+<div mat-dialog-actions style="float: right;">
+  <button mat-button class="primary" (click)="onValidateUser()">Valider</button>
+  <button mat-button [mat-dialog-close]="'Non'" cdkFocusInitial>Fermer</button>
+</div>

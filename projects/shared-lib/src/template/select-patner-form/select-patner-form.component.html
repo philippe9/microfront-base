@@ -1,0 +1,12 @@
+<form [formGroup]="selectAutoComplete" required class="selectAccountClass">
+  <mat-form-field class="col-12">
+    <mat-select placeholder={{lable}} #singleSelect formControlName="item" [disabled]="disable" required>
+      <mat-option (keyup)="dosearch()" required>
+        <ngx-mat-select-search [formControl]="recordFilterCtrl" [(ngModel)]="criterial"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let item of filteredRecords | async" [value]="item">
+        {{ item.code }}--{{ item.libelle }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

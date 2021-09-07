@@ -1,0 +1,82 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Gestion des clients décédés</mat-card-title>
+    <div class="row">
+      <div class="col-10">
+        <form>
+          <form [formGroup]="searchInfo">
+            <mat-card>
+              <div class="row">
+                <div class="col-3">
+                  <microfi-select-auto-complete formControlName="unite" url={{urlUniteBancaireList}}
+                    requestType={{resquesTypeGet}} libelle={{uniteLibelle}}></microfi-select-auto-complete>
+                </div>
+                <div class="col-3">
+                  <microfi-select-auto-complete formControlName="agence" url={{urlAgenceList}}
+                    requestType={{resquesTypeGet}} libelle={{agenceLibelle}}>
+                  </microfi-select-auto-complete>
+                </div>
+                <div class="col-6">
+
+                  <microfi-user-form [parentForm]="searchInfo" formControlName="customer" >
+                  </microfi-user-form>
+                </div>
+                <div class="col-12 right right-align">
+                  <microfi-button [name]="'Rechercher'" (click)="find()"></microfi-button>
+                </div>
+              </div>
+
+            </mat-card>
+          </form>
+        </form>
+
+        <br />
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="agence">
+              <th mat-header-cell *matHeaderCellDef> Agence</th>
+              <td mat-cell *matCellDef="let element"> {{element.agence.code}} </td>
+            </ng-container>
+            <ng-container matColumnDef="membre">
+              <th mat-header-cell *matHeaderCellDef> Membre</th>
+              <td mat-cell *matCellDef="let element"> {{element.client.libelle}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dateDeces">
+              <th mat-header-cell *matHeaderCellDef> Date décès</th>
+              <td mat-cell *matCellDef="let element"> {{element.dateDeces}} </td>
+            </ng-container>
+            <ng-container matColumnDef="utiCre">
+              <th mat-header-cell *matHeaderCellDef> Uti. Cre</th>
+              <td mat-cell *matCellDef="let element"> {{element.utiValid}} </td>
+            </ng-container>
+            <ng-container matColumnDef="utiValid">
+              <th mat-header-cell *matHeaderCellDef> Uti. Valid</th>
+              <td mat-cell *matCellDef="let element"> {{element.utiValid}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dateValid">
+              <th mat-header-cell *matHeaderCellDef> Date validation</th>
+              <td mat-cell *matCellDef="let element"> {{element.dateValid|date}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row (click)="selectedItem(row)" mat-row *matRowDef="let row; columns: displayedColumns;"
+              [class.selected_table]="row.id === selectedItemOnTables.id"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="d-flex menu-btn-right">
+          <microfi-button [name]="'Nouveau'" routerLink="/dead-customer-view"></microfi-button>&nbsp;
+          <microfi-button [name]="'Imprimer'"></microfi-button>&nbsp;
+          <!-- <microfi-button [name]="'Consulter'"></microfi-button>&nbsp; -->
+          <microfi-button [name]="'Modifier'" (click)="updateDeces()"></microfi-button>&nbsp;
+          <microfi-button [name]="'Valider'" (click)="validateDeces()"></microfi-button>&nbsp;
+          <microfi-button [name]="'Actualiser'"></microfi-button>&nbsp;
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

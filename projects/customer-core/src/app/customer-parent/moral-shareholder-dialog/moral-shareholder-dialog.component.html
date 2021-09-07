@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>Ajouter actionnaire morale</h1>
+<div mat-dialog-content class="container">
+  <form [formGroup]="personeMoraleInfos" class="first-section" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <section class="col-6">
+        <mat-checkbox [checked]="est_membre" (change)="handleChecked(est_membre)" value="est_membre">Est membre?
+        </mat-checkbox>
+      </section>
+
+      <microfi-select-auto-complete disable="est_membre" class="col-6 select-generic" url={{urlMembreMoraleList}}
+        requestType={{resquesTypeGet}} libelle='Membre'></microfi-select-auto-complete>
+
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Raison sociale</mat-label>
+        <input formControlName="raisonSociale" matInput>
+      </mat-form-field>
+
+      <microfi-select-auto-complete disable="est_membre" class="col-6 select-generic" url={{urlFormeJuridiqueList}}
+        requestType={{resquesTypeGet}} libelle='Forme Juridique'></microfi-select-auto-complete>
+
+    </div>
+
+    <div class="row">
+
+      <microfi-select-auto-complete disable="est_membre" class="col-6 select-generic" url={{urlSecteurActiviteList}}
+        requestType={{resquesTypePost}} libelle="Secteur d'activité"></microfi-select-auto-complete>
+
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Adresse</mat-label>
+        <input formControlName="adresse" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>N° RCCM</mat-label>
+        <input formControlName="numRccm" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>% Action</mat-label>
+        <input formControlName="pourcentageAction" matInput>
+      </mat-form-field>
+
+    </div>
+
+
+    <div style="text-align: center;">
+      <button type="reset" color="primary" mat-raised-button mat-dialog-close>
+        <mat-icon class="icon">close</mat-icon>
+        Annuler
+      </button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button (click)="onSubmit()" color="primary" mat-raised-button mat-dialog-close
+        [mat-dialog-close]="personeMoraleInfos.value">
+        <mat-icon class="icon">check</mat-icon>
+        Enregistrer
+      </button>
+    </div>
+
+  </form>
+
+
+</div>

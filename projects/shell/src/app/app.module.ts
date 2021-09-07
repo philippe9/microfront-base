@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { APP_ROUTES } from './app.routes';
 import { ConfigComponent } from './config/config.component';
-import { SharedLibModule } from 'projects/shared-lib/src/public-api';
+// import { SharedLibModule } from '../../../shared-lib/src/public-api';
 import { UserMenuBadgeComponent } from './user-menu-badge/user-menu-badge.component';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
@@ -14,7 +14,6 @@ import { MenuItem } from 'primeng/api';
   imports: [
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
-    SharedLibModule,
     MenubarModule
   ],
   declarations: [

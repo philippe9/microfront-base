@@ -1,0 +1,114 @@
+<h1 mat-dialog-title>Ajouter actionnaire physique</h1>
+<div mat-dialog-content class="container">
+  <form [formGroup]="personePhysiqueInfos" (ngSubmit)="onSubmit()">
+
+    <div class="row">
+      <section class="col-2">
+        <mat-checkbox formControlName="est_membre">Est membre?</mat-checkbox>
+      </section>
+
+      <microfi-select-customer-form formControlName="membre" class="col-6"></microfi-select-customer-form>
+      <!-- <microfi-select-auto-complete url={{urlClients}} requestType={{resquesTypePost}} formControlName="membre"
+        libelle="Membre" class="col-4" [postParams]="findDTOUsers">
+      </microfi-select-auto-complete> -->
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Nom</mat-label>
+        <input formControlName="nom" matInput>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Prénom</mat-label>
+        <input formControlName="prenom" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Date naissance</mat-label>
+        <input formControlName="dateNaissance" matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Lieu naissance</mat-label>
+        <input formControlName="lieuNaissance" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Nom père</mat-label>
+        <input formControlName="nomPere" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Nom mère</mat-label>
+        <input formControlName="nomMere" matInput>
+      </mat-form-field>
+
+      <microfi-select-auto-complete class="col-4 select-generic" url={{urlNationalite}} requestType={{resquesTypePost}}
+        libelle='Nationalité'></microfi-select-auto-complete>
+    </div>
+
+    <div class="row">
+      <microfi-select-auto-complete class="col-4 select-generic" url={{urlProfessionList}}
+        requestType={{resquesTypePost}} libelle='Profession'></microfi-select-auto-complete>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Lieu résidence</mat-label>
+        <input formControlName="lieuResidence" matInput>
+      </mat-form-field>
+
+      <microfi-select-auto-complete class="col-4 select-generic" url={{urlTypePieceList}}
+        requestType={{resquesTypePost}} libelle='Type pièce'></microfi-select-auto-complete>
+
+    </div>
+
+    <div class="row">
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>N° pièce</mat-label>
+        <input formControlName="numPiece" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Date délivrance</mat-label>
+        <input formControlName="dateDelivrance" matInput [matDatepicker]="picker2">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>Date expérience</mat-label>
+        <input formControlName="dateExpiration" matInput [matDatepicker]="picker3">
+        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-4">
+        <mat-label>% Action</mat-label>
+        <input formControlName="pourcentageAction" matInput>
+      </mat-form-field>
+    </div>
+
+    <div style="text-align: center;">
+      <button type="reset" color="primary" mat-raised-button mat-dialog-close>
+        <mat-icon class="icon">close</mat-icon>
+        Annuler
+      </button>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button (click)="onSubmit()" color="primary" mat-raised-button mat-dialog-close
+        [mat-dialog-close]="personePhysiqueInfos.value">
+        <mat-icon class="icon">check</mat-icon>
+        Enregistrer
+      </button>
+    </div>
+
+  </form>
+
+
+</div>

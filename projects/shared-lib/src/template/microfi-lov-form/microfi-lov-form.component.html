@@ -1,0 +1,37 @@
+<b>{{label}}</b>
+<div class="compte_container" style="display: flex;justify-content: space-around;">
+  <input type="text" [disabled]="isDisabled" (blur)="focusLost($event)" (keyup)="checkAccountEvent($event, op)"
+    (keypress.enter)="searchUser()" [(ngModel)]="actualValue.code" pInputText style="width:25%;margin-right:5px">
+  <input type="text" [(ngModel)]="actualValue.libelle" pInputText [disabled]="true" style="width:75%;margin-right:5px">
+</div>
+
+<!-- <p-overlayPanel [dismissable]='false' #op [showCloseIcon]="true" [style]="{width: '450px', height:'300px'}">
+
+  <input type="text" pInputText style="margin-left: 10px;width: 70%;">
+  <ng-template pTemplate>
+    <p-listbox (onClick)="onRowSelect($event, op)" [(ngModel)]="user" [options]="users" optionLabel="intitule"
+      [style]="{'margin-top':'1rem','height':'220px', 'overflow-y':'auto'}">
+      <ng-template let-compte pTemplate="item">
+        {{compte.code}}-{{compte.libelle}}
+      </ng-template>
+    </p-listbox>
+
+  </ng-template>
+</p-overlayPanel> -->
+<p-overlayPanel appendTo='body' [dismissable]='false' #op [showCloseIcon]="true"
+  [style]="{width: '450px', height:'300px'}">
+
+  <div class="row">
+
+    <div class="col-12">
+      <!-- <input type="text" #userSearchInput [(ngModel)]="typedValue" pInputText (keyup)="searchUser()" class="w-100"> -->
+      <!-- <p-autoComplete formControlName="city" [suggestions]="users" (completeMethod)="search($event)"></p-autoComplete> -->
+      <p-autoComplete  [suggestions]="filteredItems" (completeMethod)="filterItems($event)" field="sp_libelle" [minLength]="1"></p-autoComplete>
+    </div>
+  </div>
+  <mat-selection-list #shoes [multiple]="false">
+    <mat-list-option *ngFor="let compte of items" (click)="onRowSelect(compte, op)">
+      {{compte.code}}-{{compte.libelle}}
+    </mat-list-option>
+  </mat-selection-list>
+</p-overlayPanel>

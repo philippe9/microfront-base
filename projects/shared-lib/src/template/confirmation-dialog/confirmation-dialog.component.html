@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{data.heading}}</h1>
+<div mat-dialog-content>
+  <p>{{ data.dialogContext }} ?</p>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-raised-button (click)="userResponse(false)">Cancel</button>
+  <button mat-raised-button color={{color}} (click)="userResponse(true)">Confirm</button>
+</mat-dialog-actions>

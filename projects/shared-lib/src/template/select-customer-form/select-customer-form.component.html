@@ -1,0 +1,14 @@
+
+<form [formGroup]="selectAutoComplete" >
+  <mat-form-field class="col-12" >
+    <mat-label>{{lable}}</mat-label>
+    <mat-select  placeholder={{lable}} #singleSelect formControlName="item" [disabled]="disable" required>
+      <mat-option (keyup)="dosearch()" >
+        <ngx-mat-select-search  [formControl]="recordFilterCtrl"  [(ngModel)]="criterial"></ngx-mat-select-search>
+      </mat-option>
+      <mat-option *ngFor="let item of customers" [value]="item" (onSelectionChange)="emitSelection($event)" >
+        {{item.codePersonne}}--{{item.intituleClient}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

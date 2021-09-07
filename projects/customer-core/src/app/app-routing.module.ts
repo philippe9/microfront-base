@@ -3,15 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AppComponent,
-    pathMatch: 'full'
-  },
+  // {
+  //   path: '',
+  //   component: AppComponent,
+  //   pathMatch: 'full'
+  // },
   {
     path: 'customer',
     loadChildren: () => import('./customer-parent/customer-parent.module')
-      .then(m => m.CustomerParentModule)
+      .then(m => m.CustomerModule),
+      pathMatch: 'full'
   }
 ];
 

@@ -1,0 +1,38 @@
+
+span {
+  font-weight: 700;
+  font-size: 14px;
+  color: rgb(62, 62, 184);
+}
+
+h2 {
+  text-align: center;
+  color: rgb(62, 62, 184);
+  text-transform: uppercase;
+}
+
+.mat-dialog-actions {
+  display: flex;
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: 11px;
+}
+
+input {
+  font-size: 14px;
+}
+
+mat-form-field mat-label {
+  font-size: 14px;
+}
+
+.icon {
+  font-size: 22px;
+  margin: auto;
+}
+
+mat-dialog-content {
+  width: 50em;
+}

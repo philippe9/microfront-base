@@ -1,0 +1,50 @@
+<mat-card class="container">
+  <mat-card-title>Client décédé</mat-card-title>
+  <form [formGroup]="record">
+
+    <div class="row">
+      <div class="col-6">
+        <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{requestType}} formControlName="unite"
+          libelle={{uniteLibelle}}>
+        </microfi-select-auto-complete>
+      </div>
+      <div class="col-6">
+        <microfi-select-auto-complete url={{urlAgenceList}} requestType={{requestType}} formControlName="agence"
+          libelle={{agenceLibelle}}>
+        </microfi-select-auto-complete>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <!-- <microfi-select-customer-form formControlName="client"  class="col-6">
+      </microfi-select-customer-form> -->
+
+      <microfi-user-form [parentForm]="record" formControlName="client" class="col-9" >
+      </microfi-user-form>
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>Date decès</mat-label>
+        <input formControlName="dateDeces" matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Commentaire</mat-label>
+        <input formControlName="commentaire" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="col-5"></div>
+      <div class="col-3">
+        <button mat-raised-button color="primary" (click)="saveDeces()">Enregistrer</button>&nbsp;&nbsp;
+        <button mat-raised-button color="primary">Annuler</button>
+      </div>
+      <div class="col-4"></div>
+
+    </div>
+  </form>
+</mat-card>
