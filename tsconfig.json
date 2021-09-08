@@ -6,6 +6,12 @@
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
+    "paths": {
+      "helper-lib": [
+        "dist/helper-lib/helper-lib",
+        "dist/helper-lib"
+      ]
+    },
     "experimentalDecorators": true,
     "module": "ES2020",
     "allowJs": true,

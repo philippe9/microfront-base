@@ -4,14 +4,14 @@ import { MainComponent } from '../main/main.component';
 import { AdossageComponent } from '../../template/adossage/adossage.component';
 import { Subscription } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
-export const CUSTOM_INPUT_CONTROL_VALUE: any = [
-  { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MicrofiAccountFormComponent), multi: true }
-]
+// export const CUSTOM_INPUT_CONTROL_VALUE: any =
 @Component({
   selector: 'microfi-account-form',
   templateUrl: './microfi-account-form.component.html',
   styleUrls: ['./microfi-account-form.component.scss'],
-  providers: CUSTOM_INPUT_CONTROL_VALUE
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MicrofiAccountFormComponent), multi: true }
+  ]
 
 
 })

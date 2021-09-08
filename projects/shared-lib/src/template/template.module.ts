@@ -41,13 +41,11 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { AdossageComponent } from './adossage/adossage.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TemplateInterceptor } from './template.interceptor';
+import { HttpService } from '../service/http/http.service';
+import { ServiceModule } from '../service/service.module';
 
 @NgModule({
-  providers: [ApiService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TemplateInterceptor,
-    multi: true
-  },],
+  providers: [ApiService],
   declarations: [
     SelectAutoCompleteComponent,
     MainComponent,
@@ -105,6 +103,7 @@ import { TemplateInterceptor } from './template.interceptor';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    // HttpC
     IconsModule,
     MatInputModule,
     MatButtonModule,
@@ -116,6 +115,7 @@ import { TemplateInterceptor } from './template.interceptor';
     DropdownModule,
     ListboxModule,
     TooltipModule,
+    ServiceModule,
     AutoCompleteModule
   ]
 })

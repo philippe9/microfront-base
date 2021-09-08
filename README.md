@@ -18,3 +18,13 @@ Demonstrates webpack 5 Module Federation with Angular and the Angular Router.
 
 - Run at the root ng g application user-core --skip-install=true
 - Then run ng add @angular-architects/module-federation --project user-core --port 3000
+
+## New Library project
+
+- Run at the root ng new lib-demo --prefix ld
+
+## Documentation
+
+- To generate the documentation of an existing project, launch the compodoc command of the project from the package.json of the root
+
+- To add the documentation of a new project, add the compodoc of the project in the root package.json of the root as follows: npx compodoc -p ./projects/project_name/tsconfig.doc.json -d ./documentation/project_name

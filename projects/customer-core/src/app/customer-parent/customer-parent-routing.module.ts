@@ -22,12 +22,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: PhysicPersonListComponent,
-    data: { title: 'Clients', breadcrumb: env.physicalCustomerList.breadcumb },
-    resolve: {
-      /* physicPersonService: PhysicPersonResolver */
-    },
-    pathMatch: 'full'
+    component: BaseCustomerComponentComponent,
   },
   {
     path: 'customer-physique',

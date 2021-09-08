@@ -42,7 +42,7 @@ declare module '@angular/common/http/http' {
      * Do not use API prefix for this request.
      * @returns {HttpClient} The new instance.
      */
-    : HttpClient;
+    // : HttpClient;
 
   }
 
@@ -101,35 +101,35 @@ export class HttpService extends HttpClient {
     return this.removeInterceptor(ErrorHandlerInterceptor);
   }
 
-  : HttpClient {
-  return this.removeInterceptor(ApiPrefixInterceptor);
-}
+  //   : HttpClient {
+  //   return this.removeInterceptor(ApiPrefixInterceptor);
+  // }
 
-/**
- *  Override the original method to wire interceptors when triggering the request.
- */
-request(method ?: any, url ?: any, options ?: any): any {
-  const handler = this.interceptors.reduceRight(
-    (next, interceptor) => new HttpInterceptorHandler(next, interceptor),
-    this.httpHandler
-  );
-  return new HttpClient(handler).request(method, url, options);
-}
+  /**
+   *  Override the original method to wire interceptors when triggering the request.
+   */
+  request(method?: any, url?: any, options?: any): any {
+    const handler = this.interceptors.reduceRight(
+      (next, interceptor) => new HttpInterceptorHandler(next, interceptor),
+      this.httpHandler
+    );
+    return new HttpClient(handler).request(method, url, options);
+  }
 
   private removeInterceptor(interceptorType: Function): HttpService {
-  return new HttpService(
-    this.httpHandler,
-    this.injector,
-    this.interceptors.filter(i => !(i instanceof interceptorType))
-  );
-}
+    return new HttpService(
+      this.httpHandler,
+      this.injector,
+      this.interceptors.filter(i => !(i instanceof interceptorType))
+    );
+  }
 
   private addInterceptor(interceptor: HttpInterceptor): HttpService {
-  return new HttpService(
-    this.httpHandler,
-    this.injector,
-    this.interceptors.concat([interceptor])
-  );
-}
+    return new HttpService(
+      this.httpHandler,
+      this.injector,
+      this.interceptors.concat([interceptor])
+    );
+  }
 
 }

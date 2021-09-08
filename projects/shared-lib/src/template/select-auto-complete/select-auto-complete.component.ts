@@ -13,6 +13,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Parametre } from '../../domain/parametre';
 import { RequestType } from '../../domain/request-type.enum';
+import { HttpService } from '../../service/http/http.service';
 
 @Component({
   selector: 'microfi-select-auto-complete',
@@ -136,7 +137,7 @@ export class SelectAutoCompleteComponent implements ControlValueAccessor, OnInit
     }
 
     if (this.requestType == RequestType.GET && this.agence != undefined && this.devise != undefined) {
-      this.http.get(environment.baseApiUrl + this.url)
+      this.http.get(this.url)
         .toPromise()
         .then((res: any) => {
           if (res.success) {

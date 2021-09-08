@@ -4,14 +4,14 @@ import { FormGroup, FormBuilder, FormControl, NG_VALUE_ACCESSOR, NG_VALIDATORS, 
 import { MainComponent } from '../main/main.component';
 import { Subscription } from 'rxjs';
 
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = [
-  { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MicrofiUserFormComponent), multi: true }
-]
+// export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any =
 @Component({
   selector: 'microfi-user-form',
   templateUrl: './microfi-user-form.component.html',
   styleUrls: ['./microfi-user-form.component.scss'],
-  providers: CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MicrofiUserFormComponent), multi: true }
+  ]
 })
 export class MicrofiUserFormComponent extends MainComponent implements ControlValueAccessor, OnDestroy {
   @Input('isDisabled') isDisabled = false;

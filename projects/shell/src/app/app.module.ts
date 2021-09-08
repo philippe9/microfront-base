@@ -9,12 +9,19 @@ import { ConfigComponent } from './config/config.component';
 import { UserMenuBadgeComponent } from './user-menu-badge/user-menu-badge.component';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
+import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from '../../../shared-lib/src/material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forRoot(APP_ROUTES),
-    MenubarModule
+    MenubarModule,
+    HttpClientModule,
+    BrowserModule,
+    MaterialModule,
+    BrowserAnimationsModule,
   ],
   declarations: [
     AppComponent,

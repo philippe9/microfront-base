@@ -26,11 +26,7 @@ module.exports = {
 
       // No remotes configured upfront anymore!
       remotes: {
-        name: "customerCore",
-        filename: "remoteEntry.js",  // 2-3K w/ Meta Data
-        exposes: {
-          './Module': './projects/customer-core/src/app/customer-parent/customer-parent.module.ts',
-        },
+        'customerCore': "customerCore@http://localhost:3001/remoteEntry.js"
       },
 
       shared: share({

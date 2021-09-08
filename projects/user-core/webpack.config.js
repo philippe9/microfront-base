@@ -25,11 +25,12 @@ module.exports = {
     new ModuleFederationPlugin({
 
       // For remotes (please adjust)
-      // name: "userCore",
-      // filename: "remoteEntry.js",
-      // exposes: {
-      //   './Component': './projects/user-core/src/app/app.component.ts',
-      // },
+      name: "userCore",
+      filename: "remoteEntry.js",
+      exposes: {
+        './Component': './projects/user-core/src/app/app.component.ts',
+        './Module': './projects/user-core/src/app/app.module.ts',
+      },
 
       // For hosts (please adjust)
       // remotes: {
@@ -42,6 +43,7 @@ module.exports = {
         "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/compiler": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
 
         ...sharedMappings.getDescriptors()
       })

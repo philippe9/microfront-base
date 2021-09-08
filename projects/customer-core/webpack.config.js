@@ -28,7 +28,6 @@ module.exports = {
       name: "customerCore",
       filename: "remoteEntry.js",
       exposes: {
-        './Component': './projects/customer-core/src/app/app.component.ts',
         './Module': './projects/customer-core/src/app/customer-parent/customer-parent.module.ts'
       },
 

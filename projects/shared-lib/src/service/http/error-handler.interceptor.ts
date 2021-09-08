@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 /** Environment Configuration */
-import { environment } from '../../../../../shared-lib/src/environments/environment.prod';
+import { environment } from '../../environments/environment.prod';
 
 /** Custom Services */
 import { Logger } from '../logger/logger.service';

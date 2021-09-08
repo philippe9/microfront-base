@@ -32,6 +32,7 @@
               "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/primeng/resources/themes/saga-blue/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/shell/src/styles.scss"
             ],
             "scripts": [
@@ -380,6 +381,37 @@
             ],
             "scripts": [],
             "extraWebpackConfig": "projects/customer-core/webpack.config.js"
+          }
+        }
+      }
+    },
+    "helper-lib": {
+      "projectType": "library",
+      "root": "projects/helper-lib",
+      "sourceRoot": "projects/helper-lib/src",
+      "prefix": "help",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/helper-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/helper-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/helper-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/helper-lib/src/test.ts",
+            "tsConfig": "projects/helper-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/helper-lib/karma.conf.js"
           }
         }
       }

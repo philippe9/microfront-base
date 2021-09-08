@@ -4,14 +4,14 @@ import { RequestType } from '../../domain/request-type.enum';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.prod';
 import { MainComponent } from '../main/main.component';
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = [
-  { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MicrofiLovFormComponent), multi: true }
-]
+// export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any =
 @Component({
   selector: 'microfi-lov-form',
   templateUrl: './microfi-lov-form.component.html',
   styleUrls: ['./microfi-lov-form.component.scss'],
-  providers: CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR
+  providers: [
+    { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MicrofiLovFormComponent), multi: true }
+  ]
 })
 export class MicrofiLovFormComponent extends MainComponent implements ControlValueAccessor {
 
