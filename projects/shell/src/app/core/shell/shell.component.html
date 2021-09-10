@@ -1,0 +1,16 @@
+<mat-sidenav-container id="microfi-shell-container" autosize>
+  <!-- Content -->
+  <mat-sidenav-content>
+    <!-- Toolbar -->
+    <microfi-toolbar [sidenav]="sidenavCollapsed" (collapse)="toggleCollapse($event)"></microfi-toolbar>
+    <!-- Progress Bar -->
+    <mat-progress-bar [mode]="progressBarMode"></mat-progress-bar>
+    <!-- Breadcrumb -->
+    <microfi-breadcrumb></microfi-breadcrumb>
+    <!-- Content -->
+    <microfi-content></microfi-content>
+    <!-- Footer -->
+    <microfi-footer></microfi-footer>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

@@ -21,6 +21,7 @@ import { ApiService } from '../api.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 import { CloseDialogComponent } from '../close-dialog/close-dialog.component';
+import { Subject, Observable, BehaviorSubject } from 'rxjs';
 
 const log = new Logger('AbstractComponent');
 
@@ -65,15 +66,24 @@ export class AbstractComponent implements OnInit {
   public model: any;
   public dateFormat = "dd/mm/yyyy";
   _dateComptable: Date;
+  audit_subject = new BehaviorSubject<any>('Initiation de l\'audit');
 
   constructor(@Optional() public injector: Injector) {
     this.env = environments.routes;
+    // console.log(injector);
   }
 
   ngOnInit(): void {
     log.info(this.base);
     this.activatedRoute.data.subscribe(data => {
       this.initMode(data.mode);
+    });
+    this.audit_subject.subscribe({
+      next: (v) => {
+        this.logger.info(v);
+        console.log(v);
+        localStorage.setItem('audit_storage', localStorage.getItem('audit_storage') + v + '/n');
+      }
     });
   }
 
@@ -291,5 +301,15 @@ export class AbstractComponent implements OnInit {
       });
     return confimDialogRef.afterClosed().toPromise();
   }
+  sendAuditMessage(message: any) {
+    this.audit_subject.next(message);
+  }
 
+  clearMessage() {
+    this.audit_subject.next('');
+  }
+
+  getAuditMessages(): Observable<any> {
+    return this.audit_subject.asObservable();
+  }
 }

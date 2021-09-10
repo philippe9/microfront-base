@@ -60,6 +60,7 @@ export class PhysicPersonListComponent extends ViewComponent {
     this.searchCriteria.max = 20;
     this.searchCriteria.first = 0;
     this.logger.info(this.searchCriteria);
+    this.sendAuditMessage('Recherche client physique :' + JSON.stringify(this.searchCriteria));
     super.find(new PersonPhysic);
   }
 

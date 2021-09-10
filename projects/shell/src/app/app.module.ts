@@ -9,9 +9,11 @@ import { ConfigComponent } from './config/config.component';
 import { UserMenuBadgeComponent } from './user-menu-badge/user-menu-badge.component';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
-import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from '../../../shared-lib/src/material/material.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MaterialModule } from 'projects/shared-lib/src/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreModule } from './core/core.module';
+import { AuthenticationInterceptor } from 'projects/shared-lib/src/public-api';
 
 @NgModule({
   imports: [
@@ -22,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     MaterialModule,
     BrowserAnimationsModule,
+    CoreModule,
   ],
   declarations: [
     AppComponent,
@@ -29,7 +32,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ConfigComponent,
     UserMenuBadgeComponent
   ],
-  providers: [],
+  providers: [AuthenticationInterceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true
+    },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

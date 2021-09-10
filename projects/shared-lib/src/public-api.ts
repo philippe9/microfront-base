@@ -31,6 +31,12 @@ export * from './template/enable-dialog/enable-dialog.component';
 export * from './template//file-upload/file-upload.component';
 
 export * from './template/select-patner-form/select-patner-form.component';
-
-
+export * from './service/alert/alert.service';
+export * from './service/authentication/authentication.service';
+export * from './service/authentication/authentication.interceptor'
+export * from './service/general/general.service';
+export * from './service/http/http.service';
+export * from './service/logger/logger.service';
+export * from './service/progress-bar/progress-bar.service';
+export * from './service/setting/setting.service';
 export * from './template/template.module';

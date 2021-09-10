@@ -105,7 +105,7 @@ const MaterialComponent = [
   OverlayModule,
   PortalModule,
   ScrollingModule,
-  NgxMatSelectSearchModule
+  NgxMatSelectSearchModule,
 ];
 
 @NgModule({

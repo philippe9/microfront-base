@@ -43,9 +43,17 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TemplateInterceptor } from './template.interceptor';
 import { HttpService } from '../service/http/http.service';
 import { ServiceModule } from '../service/service.module';
+import { AuthenticationService } from '../service/authentication/authentication.service';
+import { AuthenticationInterceptor } from '../service/authentication/authentication.interceptor';
 
 @NgModule({
-  providers: [ApiService],
+  providers: [ApiService, AuthenticationService,
+    AuthenticationInterceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true
+    },],
   declarations: [
     SelectAutoCompleteComponent,
     MainComponent,
