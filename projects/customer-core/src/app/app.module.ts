@@ -8,6 +8,7 @@ import { CustomerParentRoutingModule } from './customer-parent/customer-parent-r
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../../../shared-lib/src/material/material.module';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { MaterialModule } from '../../../shared-lib/src/material/material.module
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/customer' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

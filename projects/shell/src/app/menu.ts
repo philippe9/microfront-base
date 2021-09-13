@@ -162,54 +162,54 @@ export const MICROFI_MENU = [
         "code": 11,
         "subMenu": [
           {
-            "url": "customer/account",
+            "url": "account/account",
             "breadcumb": "Compte",
             "code": 11,
             "subMenu": []
           }, {
-            "url": "print-rib",
+            "url": "account/print-rib",
             "breadcumb": "customer/Impression RIB",
             "code": 11,
             "subMenu": []
           }, {
-            "url": "account-postion",
+            "url": "account/account-postion",
             "breadcumb": "customer/Position de compte",
             "code": 11,
             "subMenu": []
           }, {
-            "url": "account-reservation",
+            "url": "account/account-reservation",
             "breadcumb": "customer/Reservation",
             "code": 11,
             "subMenu": []
           }, {
-            "url": "sleeper-account",
+            "url": "account/sleeper-account",
             "breadcumb": "customer/Gestion des comptes dormants",
             "code": 11,
             "subMenu": []
           }, {
-            "url": "account-opposition",
+            "url": "account/account-opposition",
             "breadcumb": "Opposition Compte",
             "code": 11,
             "subMenu": []
           }, {
-            "url": "closed-account",
+            "url": "account/closed-account",
             "breadcumb": "Fermeture de compte",
             "code": 11,
             "subMenu": []
           },
         ]
       }, {
-        "url": "sleeper-account",
+        "url": "account/sleeper-account",
         "breadcumb": "Gestion des comptes dormants",
         "code": 12,
         "subMenu": []
       }, {
-        "url": "customer-opposition",
+        "url": "customer/customer-opposition",
         "breadcumb": "Gestion des oppositions clients",
         "code": 13,
         "subMenu": []
       }, {
-        "url": "dead-customer",
+        "url": "/customer/dead-customer",
         "breadcumb": "Gestion des clients decedes",
         "code": 13,
         "subMenu": []

@@ -12,8 +12,6 @@ import { PhysicalPersonViewComponent } from './physical-person-view/physical-per
 import { CustomerOppositionListComponent } from './customer-opposition-list/customer-opposition-list.component';
 import { CustomerOppositionViewComponent } from './customer-opposition-view/customer-opposition-view.component';
 import { MoralPersonListComponent } from './moral-person-list/moral-person-list.component';
-import { AppResolver } from './resolver/app.resolver';
-import { AbstractComponent } from 'projects/shared-lib/src/public-api';
 // import { Router } from '@angular/router';
 let env = environment.routes;
 
@@ -23,7 +21,7 @@ const routes: Routes = [
     component: CustomerMoralComponent
   },
   {
-    path: '',
+    path: 'customer',
     component: BaseCustomerComponentComponent,
   },
   {
@@ -158,23 +156,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class CustomerParentRoutingModule extends AbstractComponent {
-  constructor(injector: Injector) {
-    super(injector);
-    // router.events.subscribe((val) => {
-    //   // see also
-    //   console.log(val instanceof NavigationEnd)
-    // });
-    // filter((e: Event): e is RouterEvent => e instanceof RouterEvent)
-
-    this.router.events.pipe(
-    ).subscribe((e: RouterEvent) => {
-      // Do something
-      if (e instanceof ResolveEnd) {
-        console.log("Routing to route : " + e.url);
-        this.sendAuditMessage("Routing to route : " + e.url);
-      }
-
-    });
-  }
+export class CustomerParentRoutingModule {
 }

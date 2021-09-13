@@ -41,7 +41,7 @@ const routeAddBreadcrumbLink = 'addBreadcrumbLink';
   template: `
   <nav class="breadcrumb-wrapper">
   <ul class="breadcrumb">
-    <span class="breadcrumb-title">{{ breadcrumbs[breadcrumbs.length-1].label }}</span>
+    <!-- <span class="breadcrumb-title">{{ breadcrumbs[breadcrumbs.length-1].label }}</span>
     <span *ngIf="breadcrumbs.length-1 !== 0" class="separator">
       <li *ngFor="let breadcrumb of breadcrumbs; let last = last" class="breadcrumb-label">
         <span *ngIf="!last" class="breadcrumb-link">
@@ -50,7 +50,7 @@ const routeAddBreadcrumbLink = 'addBreadcrumbLink';
         </span>
         <span *ngIf="last">{{ breadcrumb.label }}</span>
       </li>
-    </span>
+    </span> -->
   </ul>
 </nav>
   `,
