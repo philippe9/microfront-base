@@ -1,0 +1,43 @@
+<mat-card class="container">
+  <mat-card-title>Gestion des comptes</mat-card-title>
+  <div class="row">
+    <div class="col-12">
+      <mat-card class="container">
+        <mat-card-title style="font-size: medium;">Informaiotons sur l'historique</mat-card-title>
+        <form [formGroup]="recordRIB">
+          <div class="row">
+            <!-- <div class="col-6">
+              <microfi-select-auto-complete formControlName="uniteBancaire" libelle='Unité Bancaire'
+                url={{urlUniteBancaireList}} requestType={{requestType}}>
+              </microfi-select-auto-complete>
+            </div>
+            <div class="col-6">
+              <microfi-select-auto-complete formControlName="agence" url={{urlAgenceList}} requestType={{requestType}}
+                libelle='Agence'></microfi-select-auto-complete>
+            </div> -->
+            <div class="col-12">
+              <microfi-account-form [parentForm]="recordRIB" formControlName="compte">
+              </microfi-account-form>
+            </div>
+            <div class="col-12">
+              <mat-checkbox class="w-100" formControlName="en_cours">Par mail
+              </mat-checkbox>
+            </div>
+            <microfi-commission-tax class="w-100 col-12"></microfi-commission-tax>
+
+          </div>
+          <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <button mat-raised-button color="primary" (click)="submitForm()">Enregistrer</button>&nbsp;&nbsp;
+              <button mat-raised-button color="primary">Annuler</button>
+            </div>
+            <div class="col-4"></div>
+
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+</mat-card>
+<microfi-jasper-viewer></microfi-jasper-viewer>

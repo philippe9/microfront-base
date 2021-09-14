@@ -1,0 +1,144 @@
+<div class="container">
+
+  <mat-card>
+    <mat-card-title>Mise en place d'une réservation</mat-card-title>
+    <form [formGroup]="reserveRecord">
+      <div class="row">
+        <div class="col-6">
+          <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+            formControlName="uniteBancaire" libelle='Unité Bancaire' [enable]="!isView"
+            [defaultValue]="originalReservation.unite.code">
+          </microfi-select-auto-complete>
+        </div>
+
+        <div class="col-6">
+          <microfi-select-auto-complete url={{urlAgenceList}} [enable]="!isView" requestType={{resquesTypeGet}}
+            formControlName="agence" libelle='Agence' [defaultValue]="originalReservation.agence.code">
+          </microfi-select-auto-complete>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- <microfi-select-account-form formControlName="compte"  [(disable)]="isView" class="col-12">
+        </microfi-select-account-form> -->
+        <microfi-account-form class="col-12" [isDisabled]="isView" [(directSearch)]="isView" formControlName="compte"
+          [parentForm]="reserveRecord">
+        </microfi-account-form>
+      </div>
+
+      <div class="row">
+        <section class="example-section col-3"><br />
+          <mat-checkbox disabled={{disabledParMembre}} class="example-margin" formControlName="parMembre">Par le
+            membre
+          </mat-checkbox>
+        </section>
+
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>Date levée</mat-label>
+          <input value={{reservationView?.dteLeve}} matInput formControlName="dateLevee" [matDatepicker]="picker1">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <section class="example-section col-3"><br />
+          <mat-checkbox disabled={{disabledEncours}} class="example-margin" formControlName="enCours">En cours?
+          </mat-checkbox>
+        </section>
+
+        <section class="example-section col-3"><br />
+          <mat-checkbox disabled={{disabledNanti}} class="example-margin" formControlName="nanti">Nanti?
+          </mat-checkbox>
+        </section>
+
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>Code</mat-label>
+          <input value={{reservationView?.code}} formControlName="code" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>Montant</mat-label>
+          <input autonumeric options="French" value={{reservationView?.montantReser}} formControlName="montant"
+            matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Commentaire</mat-label>
+          <input value={{reservationView?.commentaire}} formControlName="commentaire" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <microfi-commission-tax class="col-12"></microfi-commission-tax>
+
+      </div>
+
+      <mat-card *ngIf="isView">
+        <mat-card-title style="font-size: medium;">Levée reservation</mat-card-title>
+
+        <br />
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="utilisateur">
+              <th mat-header-cell *matHeaderCellDef> Utilisateur</th>
+              <td mat-cell *matCellDef="let element"> {{element.codeUser}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> Date</th>
+              <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef> Total</th>
+              <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montant">
+              <th mat-header-cell *matHeaderCellDef> Montant </th>
+              <td mat-cell *matCellDef="let element"> {{element.montant}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="motif">
+              <th mat-header-cell *matHeaderCellDef> Motif</th>
+              <td mat-cell *matCellDef="let element"> {{element.motif}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        <br />
+
+
+      </mat-card>
+      <br />
+    </form>
+    <div class="row">
+      <div class="col-8"></div>
+      <mat-form-field appearance="outline" appearance="outline" class="col-4">
+        <mat-label>Montant total levée</mat-label>
+        <input matInput autonumeric options="French" [(ngModel)]="montantLev" disabled>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <div class="col-5"></div>
+      <div class="col-3">
+        <button mat-raised-button color="primary" *ngIf="!isView "
+          (click)="submitForm()">Enregistrer</button>&nbsp;&nbsp;
+        <button mat-raised-button color="primary">Annuler</button>
+      </div>
+      <div class="col-4"></div>
+    </div>
+
+  </mat-card>
+
+</div>

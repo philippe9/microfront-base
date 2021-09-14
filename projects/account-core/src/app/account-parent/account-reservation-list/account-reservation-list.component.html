@@ -1,0 +1,134 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Gestion reservation</mat-card-title>
+    <div class="row">
+      <div class="col-10">
+        <mat-card>
+          <mat-card-title style="font-size: medium;">Option de recherche</mat-card-title>
+          <form [formGroup]="searchDetails">
+            <div class="row">
+              <div class="col-6">
+                <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+                  formControlName="uniteBancaire" libelle={{uniteLibelle}}>
+                </microfi-select-auto-complete>
+                <!-- <p>Compte</p>
+                <microfi-select-account-form formControlName="compte" [(disable)]="Disabled" class="w-100">
+                </microfi-select-account-form> -->
+
+              </div>
+              <div class="col-6">
+                <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
+                  formControlName="agence" libelle={{agenceLibelle}}>
+                </microfi-select-auto-complete>
+                <mat-checkbox class="w-100" formControlName="en_cours">En cours
+                </mat-checkbox>
+
+              </div>
+              <microfi-account-form class="col-10" [isDisabled]="isView"
+                [parentForm]="searchDetails" formControlName="compte" >
+              </microfi-account-form>
+              <div class="col-2 right-align pt-1">
+                <button mat-raised-button color="primary" (click)="search()">Rechercher</button>
+              </div>
+            </div>
+          </form>
+
+        </mat-card>
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="agence">
+              <th mat-header-cell *matHeaderCellDef>Agence</th>
+              <td mat-cell *matCellDef="let element"> {{element.agence.code}} - {{element.agence.libelle}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="compte">
+              <th mat-header-cell *matHeaderCellDef>Compte</th>
+              <td mat-cell *matCellDef="let element"> {{element.compte.numeroCompte}} - {{element.compte.intituleCompte}}  </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montant">
+              <th mat-header-cell *matHeaderCellDef>Montant</th>
+              <td mat-cell *matCellDef="let element"> {{element.montantReser}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="motif">
+              <th mat-header-cell *matHeaderCellDef>Motif</th>
+              <td mat-cell *matCellDef="let element"> {{element.commentaire}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="enCours">
+              <th mat-header-cell *matHeaderCellDef>En cours</th>
+              <td mat-cell *matCellDef="let element"> {{element.enCours}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="utilSaisi">
+              <th mat-header-cell *matHeaderCellDef>Util. Saisi</th>
+              <td mat-cell *matCellDef="let element"> {{element.utilSaisi}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateLevee">
+              <th mat-header-cell *matHeaderCellDef>Date Levée</th>
+              <td mat-cell *matCellDef="let element"> {{element.dteLeve}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montantLeve">
+              <th mat-header-cell *matHeaderCellDef>Montant Levé</th>
+              <td mat-cell *matCellDef="let element"> {{element.montantLev}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="utilLeve">
+              <th mat-header-cell *matHeaderCellDef>Util. Levé</th>
+              <td mat-cell *matCellDef="let element"> {{element.utilLeve}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Action</th>
+              <td mat-cell *matCellDef="let element" class="action-link">
+
+                <button mat-mini-fab color="primary" title="Visualiser" >
+                  <mat-icon>remove_red_eye</mat-icon>
+                </button>&nbsp;
+
+                <button mat-mini-fab color="primary" title="Lever" >
+                  <mat-icon>done</mat-icon>
+                </button>&nbsp;
+              </td>
+            </ng-container> -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr (click)="selectedItem(row)" mat-row *matRowDef="let row; columns: displayedColumns;"
+              [class.selected_table]="row.code === selectedItemOnTables.code"></tr>
+          </table>
+
+          <mat-paginator [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPaginate($event)">
+          </mat-paginator>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="d-flex menu-btn-right">
+          <button mat-raised-button color="primary" routerLink="/{{urlAccountReservationView}}">
+            <mat-icon class="icon">add</mat-icon>
+            Nouveau
+          </button>
+          <button mat-raised-button color="primary" (click)="redirectToView(selectedItemOnTables.code)">
+            Consulter
+          </button>
+          <button mat-raised-button color="primary" (click)="redirectToUpdate(selectedItemOnTables.code)">
+            Lever
+          </button>
+          <button mat-raised-button color="primary">
+            Actualiser
+          </button>
+          <button mat-raised-button color="primary">
+            <mat-icon class="icon">print</mat-icon>
+            Imprimer
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </mat-card>
+</div>

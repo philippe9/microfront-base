@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthenticationService } from './authentication/authentication.service';
-import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpHandler, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { I18nService } from './i18n/i18n.service';
 import { ProgressBarService } from './progress-bar/progress-bar.service';
 import { ProgressInterceptor } from './progress-bar/progress.interceptor';
@@ -44,6 +44,7 @@ import { AutoService } from './auto.service';
       provide: HttpClient,
       useClass: HttpService
     },
+
     ProgressBarService,
     {
       provide: HTTP_INTERCEPTORS,

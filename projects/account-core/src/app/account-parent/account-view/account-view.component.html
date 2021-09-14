@@ -1,0 +1,362 @@
+<div class="container mat-card mt-2">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step label="Informations sur le menbre"><br />
+      <form name="form" #myForm="ngForm">
+        <div class="">
+          <div class="row">
+            <div class="col-6">
+              <microfi-select-auto-complete [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+                [(ngModel)]="unite" libelle='Unité Bancaire' url={{urlUniteBancaireList}} requestType={{requestType}}
+                required [enable]="isEnabled">
+              </microfi-select-auto-complete>
+            </div>
+
+            <div class="col-4">
+              <microfi-select-auto-complete [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+                [(ngModel)]="agence" [enable]="isEnabled" libelle='Agence' url={{urlAgenceList}}
+                requestType={{requestType}} required>
+              </microfi-select-auto-complete>
+            </div>
+            <section class="example-section col-2"><br />
+              <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+                [(ngModel)]="record.multiAgence" required>Mult-Agence</mat-checkbox>
+            </section>
+          </div>
+
+          <div class="row">
+
+            <!-- <microfi-select-customer-form [enable]="isEnabled" [(ngModel)]="membre" [ngModelOptions]="{standalone: true}" class="col-6" ></microfi-select-customer-form> -->
+            <microfi-user-form class="col-6" [(selectedUser)]="membre" [(isDisabled)]="!isEnabled">
+            </microfi-user-form>
+
+            <div class="col-6">
+              <microfi-select-auto-complete [enable]="isEnabled" [ngModelOptions]="{standalone: true}"
+                [disabled]="disabled" [(ngModel)]="produit" libelle='Produit' url={{urlProduitList}}
+                requestType={{requestType}}>
+              </microfi-select-auto-complete>
+            </div>
+
+
+
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <microfi-select-auto-complete [enable]="isEnabled" [ngModelOptions]="{standalone: true}"
+                [disabled]="disabled" [(ngModel)]="typeCompte" libelle='Type compte' url={{urltypeCompteList}}
+                data={{defaultCodeUnite}} requestType={{requestType}}>
+              </microfi-select-auto-complete>
+            </div>
+
+            <div class="col-6">
+              <microfi-select-auto-complete [enable]="isEnabled" [ngModelOptions]="{standalone: true}"
+                [disabled]="disabled" [(ngModel)]="devise" libelle='Devise' url={{urlDeviseList}}
+                requestType={{requestType}}>
+              </microfi-select-auto-complete>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <microfi-select-auto-complete [enable]="isEnabled" [ngModelOptions]="{standalone: true}"
+                [disabled]="disabled" [(ngModel)]="chapitre" libelle='Chapitre' url={{urlchapitreList}}
+                data="{{defaultCodeUnite}}" requestType={{requestType}}>
+              </microfi-select-auto-complete>
+            </div>
+            <!-- <mat-form-field appearance="outline" class="col-6">
+              <mat-label>Chapitre</mat-label>
+              <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled"  [(ngModel)]="record.chapitre" required>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="outline" class="col-4">
+              <mat-label>Intitulé</mat-label>
+              <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="record.intitule"
+                required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-2">
+              <mat-label>Champ libre</mat-label>
+              <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="record.chLibre"
+                required>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field appearance="outline" class="col-3">
+              <mat-label>N° Compte</mat-label>
+              <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="true"
+                [(ngModel)]="record.numeroCompte" [disabled]="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="col-1">
+              <mat-label>Clé</mat-label>
+              <input type="number" matInput [ngModelOptions]="{standalone: true}" [disabled]="true"
+                [(ngModel)]="record.cleCompte" [disabled]="true">
+            </mat-form-field>
+            <div class="col-1" *ngIf="record.cleCompte==null">
+              <button mat-raised-button color="primary" (click)="getCompte()">Primary</button>
+            </div>
+
+            <div class="col-1"></div>
+
+            <mat-form-field appearance="outline" class="col-6">
+              <mat-label>Etat</mat-label>
+              <mat-select [ngModelOptions]="{standalone: true}" [disabled]="disabled" [disabled]="disabled"
+                [(ngModel)]="record.etatCompte">
+                <mat-option value="InstanceValidation">Instance Validation</mat-option>
+                <mat-option value="Valider">Valider</mat-option>
+                <mat-option value="InstanceFermeture">Instance Fermeture</mat-option>
+                <mat-option value="Fermer">Fermer</mat-option>
+                <mat-option value="Apurer">Apurer</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+        </div>
+
+      </form>
+
+      <div class="navigation-button">
+        <button mat-raised-button matStepperNext>Suivant</button>
+      </div>
+
+    </mat-step>
+
+    <mat-step label="Condition de gestion"><br />
+      <form [formGroup]="formulaire">
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Sens compte</mat-label>
+            <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="record.sensCompte">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>A lettrage</mat-label>
+            <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="record.lettrage">
+          </mat-form-field>
+
+          <section class="example-section col-3"><br />
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.appurable">
+              Apurable ?</mat-checkbox>
+          </section>
+
+          <section class="example-section col-3"><br />
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.reportANouveau">Report à nouveau ?</mat-checkbox>
+          </section>
+        </div>
+
+        <div class="row">
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Mode comptabilisation</mat-label>
+            <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.modeComptabilisation">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Appartenance</mat-label>
+            <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.appartenance">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Mode arrêté</mat-label>
+            <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="record.modeArrete">
+          </mat-form-field>
+
+
+          <section class="example-section col-3"><br />
+            <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.taxable">
+              Taxable ?</mat-checkbox>
+          </section>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <microfi-select-auto-complete [enable]="isEnabled" url={{urlGestionnaireList}} requestType={{requestType}}
+              [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="gestionnaire"
+              libelle='Gestionnaire'>
+            </microfi-select-auto-complete>
+          </div>
+
+          <mat-form-field class="example-full-width" class="col-6">
+            <mat-label>Commentaire</mat-label>
+            <textarea [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="record.commentaire"
+              matInput placeholder="Ex. It makes me feel..."></textarea>
+          </mat-form-field>
+        </div>
+
+        <br />
+
+        <div class="row">
+          <div class="col-4">
+
+          </div>
+
+
+          <div class="col-1">
+            <button mat-raised-button matStepperPrevious>Précédent</button>
+          </div>
+          <div class="col-1"></div>
+          <div class="col-1">
+            <button mat-raised-button matStepperNext>Suivant</button>
+          </div>
+
+        </div>
+
+
+      </form>
+    </mat-step>
+
+    <mat-step label="Propriété du compte"><br />
+      <form name="form" class="">
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Date ouverture</mat-label>
+            <input matInput [matDatepicker]="picker1" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.dateOuverture">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Solde comptable</mat-label>
+            <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.soldeComptable">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Montant premier versement</mat-label>
+            <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.montantPremierVersement">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Montant reversé</mat-label>
+            <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.montantReserve">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Date dernière opération</mat-label>
+            <input matInput [matDatepicker]="picker2" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.dateDerniereOperation">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Solde journalier</mat-label>
+            <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.soldeJournalier">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Sens dernière opération</mat-label>
+            <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.sensDerniereOperation">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Solde initial</mat-label>
+            <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.soldeInitial">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Date dernier crédit</mat-label>
+            <input matInput [matDatepicker]="picker3" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.dateDernierCredit">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Cumul crédit</mat-label>
+            <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.montCreditPrevArrete">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Date dernier débit</mat-label>
+            <input matInput [matDatepicker]="picker4" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.dateDernierDebit">
+            <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+            <mat-datepicker #picker4></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Cumul débit</mat-label>
+            <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.montDebitPrevArrete">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Date Fermeture</mat-label>
+            <input matInput [matDatepicker]="picker5" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.dateFermeture">
+            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+            <mat-datepicker #picker5></mat-datepicker>
+          </mat-form-field>
+
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Autorisation découvert</mat-label>
+            <input matInput type="number" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.montantEnCoursDecouvert">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Du</mat-label>
+            <input matInput [matDatepicker]="picker6" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.du">
+            <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+            <mat-datepicker #picker6></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Au</mat-label>
+            <input matInput [matDatepicker]="picker7" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
+              [(ngModel)]="record.au">
+            <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+            <mat-datepicker #picker7></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div style="text-align: center;" *ngIf="isEnabled">
+          <button (click)="submit()" mat-raised-button [disabled]="mode==3"
+            color="primary">Enregistrer</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-raised-button>
+            <a [routerLink]="['/account']">
+              Annuler
+            </a>
+          </button>
+        </div>
+
+        <br />
+        <div class="navigation-button">
+          <button mat-raised-button matStepperPrevious>Précédent</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

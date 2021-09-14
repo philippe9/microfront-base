@@ -1,0 +1,121 @@
+<div class="container">
+
+  <mat-card>
+    <mat-card-title>Levée de réservation</mat-card-title>
+    <form [formGroup]="record">
+      <div class="row">
+        <div class="col-6">
+          <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+            formControlName="uniteBancaire" libelle='Unité Bancaire'>
+          </microfi-select-auto-complete>
+
+        </div>
+
+        <div class="col-6">
+          <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}} formControlName="agence"
+            formControlName="agence" libelle='Agence'>
+          </microfi-select-auto-complete>
+        </div>
+      </div>
+      <mat-card>
+        <mat-card-title style="font-size: medium;">Compte du membre</mat-card-title>
+        <div class="row">
+          <div class="col-2">
+            <microfi-select-auto-complete formControlName="devise" url={{urlDeviseList}} requestType={{resquesTypeGet}}
+              libelle='Dévise'></microfi-select-auto-complete>
+          </div>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>N° Compte</mat-label>
+            <input formControlName="numeroCompte" matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-1">
+            <mat-label>Clé</mat-label>
+            <input formControlName="cleCompte" matInput>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Intitulé compte</mat-label>
+            <input formControlName="intituleCompte" matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Intitulé client</mat-label>
+            <input formControlName="intituleClient" matInput>
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title style="font-size: medium;">Réservation de fonds</mat-card-title>
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Code</mat-label>
+            <input formControlName="code" matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Montant</mat-label>
+            <input formControlName="montantReservation" matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>Montant total Levée</mat-label>
+            <input formControlName="montantTotalLevee" matInput>
+          </mat-form-field>
+
+          <section class="example-section col-3"><br />
+            <mat-checkbox disabled={{disabledEncours}} class="example-margin" formControlName="enCours">En cours?
+            </mat-checkbox>
+          </section>
+        </div>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-title style="font-size: medium;">Levée une reservation</mat-card-title>
+
+        <div class="row">
+          <section class="example-section col-2"><br />
+            <mat-checkbox formControlName="total">Total ?
+            </mat-checkbox>
+          </section>
+
+          <mat-form-field appearance="outline" class="col-2">
+            <mat-label>Date levée</mat-label>
+            <input value={{reservationView?.dteLeve}} matInput formControlName="dateLevee" [matDatepicker]="picker1">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-2">
+            <mat-label>Montant</mat-label>
+            <input value={{reservationView?.montantReser}} formControlName="montantLevee" matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-6">
+            <mat-label>Commentaire</mat-label>
+            <input value={{reservationView?.commentaire}} formControlName="commentaire" matInput>
+          </mat-form-field>
+
+        </div>
+      </mat-card>
+
+      <div class="row">
+        <microfi-commission-tax class="col-12"></microfi-commission-tax>
+
+      </div>
+
+      <div class="row">
+        <div class="col-5"></div>
+        <div class="col-3">
+          <button mat-raised-button color="primary" (click)="submitForm()">Enregistrer</button>&nbsp;&nbsp;
+          <button mat-raised-button color="primary">Annuler</button>
+        </div>
+        <div class="col-4"></div>
+      </div>
+    </form>
+  </mat-card>
+
+</div>

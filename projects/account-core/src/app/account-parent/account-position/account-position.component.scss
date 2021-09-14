@@ -1,0 +1,39 @@
+mat-form-field.mat-form-field {
+  font-size: 13px;
+}
+
+/* table {
+  width: 100%;
+}
+ */
+.mat-cell {
+  font-size: 12px;
+  font-family: Verdana, Sans-Serif;
+  display: table-cell;
+  height: 48px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 2px solid rgba(0, 0, 0, 0.12);
+  border-right: 2px solid rgba(0, 0, 0, 0.12);
+}
+.mat-table {
+  display: table;
+  width: 100%;
+
+  > .mat-header-row,
+  > .mat-row {
+    display: table-row;
+    padding: 0;
+    border: none;
+
+    > .mat-header-cell,
+    > .mat-cell {
+      display: table-cell;
+      height: 48px;
+      vertical-align: middle;
+
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
+  }
+}

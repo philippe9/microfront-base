@@ -1,0 +1,145 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Gestion opposition compte</mat-card-title>
+    <div class="row">
+      <div class="col-10">
+        <mat-card>
+          <mat-card-title style="font-size: medium;">Option de recherche</mat-card-title>
+          <form [formGroup]="searchDetails">
+            <div class="row">
+              <div class="col-6">
+                <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+                  formControlName="uniteBancaire" libelle={{uniteLibelle}}>
+                </microfi-select-auto-complete>
+                <microfi-select-auto-complete formControlName="typeOpposition" url={{urlTypeOppositionList}}
+                  requestType={{resquesTypeGet}} libelle='Type opposition'></microfi-select-auto-complete>
+
+                <!-- <microfi-select-account-form formControlName="compte" class="w-100" [(disable)]='compte_form'>
+                </microfi-select-account-form> -->
+                <microfi-account-form class="col-12"  formControlName="compte" [parentForm]="searchDetails" >
+                </microfi-account-form>
+                <!-- <microfi-select-account-form [disable]="false" [(lable)]="labelClientDepot"
+              [ngModelOptions]="{standalone: true}" [(ngModel)]="record1.accountDepot" class="col-12">
+            </microfi-select-account-form> -->
+              </div>
+              <div class="col-6">
+                <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
+                  formControlName="agence" libelle={{agenceLibelle}}>
+                </microfi-select-auto-complete>
+                <div class="row">
+                  <mat-form-field appearance="outline" class="col-6">
+                    <mat-label>Date debut opposition</mat-label>
+                    <input formControlName="dateDebutOpposition" matInput [matDatepicker]="picker1">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-6">
+                    <mat-label>Date fin opposition</mat-label>
+                    <input formControlName="dateFinOpposition" matInput [matDatepicker]="picker2">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <mat-form-field class="col-6" appearance="outline">
+                    <mat-label>Levée ?</mat-label>
+                    <mat-select formControlName="levee">
+                      <mat-option value=""></mat-option>
+                      <mat-option value="Oui">Oui</mat-option>
+                      <mat-option value="Non">Non</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <div class="col-6 right-align p-1">
+                    <button mat-raised-button color="primary" (click)="search()">Rechercher</button>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </form>
+
+        </mat-card>
+
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="typeOpposition">
+              <th mat-header-cell *matHeaderCellDef>Type opposition</th>
+              <td mat-cell *matCellDef="let element">
+                {{element.typeOpposition.code + " - " + element.typeOpposition.libelle}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="compte">
+              <th mat-header-cell *matHeaderCellDef>Compte</th>
+              <td mat-cell *matCellDef="let element">{{element.compte.numeroCompte + " - " + element.compte.cleCompte}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="motif">
+              <th mat-header-cell *matHeaderCellDef>Motif</th>
+              <td mat-cell *matCellDef="let element">{{element.motif}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="parMembre">
+              <th mat-header-cell *matHeaderCellDef>Par le membre ?</th>
+              <td mat-cell *matCellDef="let element">{{element.alaDemande == "Std_Non" ? "Non" : "Oui"}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateOpposition">
+              <th mat-header-cell *matHeaderCellDef>Date Opposition</th>
+              <td mat-cell *matCellDef="let element">{{element.dateOpposition}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="utilSaisi">
+              <th mat-header-cell *matHeaderCellDef>Util. Saisi</th>
+              <td mat-cell *matCellDef="let element">{{element.utiCre}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateLevee">
+              <th mat-header-cell *matHeaderCellDef>Date Levée</th>
+              <td mat-cell *matCellDef="let element">{{element.dateLevee == "null"? "" : element.dateLevee}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="utilLeve">
+              <th mat-header-cell *matHeaderCellDef>Util. Levee</th>
+              <td mat-cell *matCellDef="let element">{{element.utiMod == "null"? "": element.utiMod}} </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row (click)="selectedItem(row)" mat-row *matRowDef="let row; columns: displayedColumns;"
+              [class.selected_table]="row.code === selectedItemOnTables.code"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="d-flex menu-btn-right">
+          <button mat-raised-button color="primary" routerLink="/{{urlAccountOppositionView}}">
+            <mat-icon class="icon">add</mat-icon>
+            Nouveau
+          </button>
+          <button mat-raised-button color="primary" (click)="leveOppositionCompte()">
+            Lever
+          </button>
+          <button mat-raised-button color="primary">
+            <mat-icon class="icon">print</mat-icon>
+            Imprimer
+          </button>
+          <button mat-raised-button color="primary">
+            Actualiser
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+
+</div>

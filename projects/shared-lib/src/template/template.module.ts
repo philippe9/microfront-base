@@ -45,10 +45,12 @@ import { HttpService } from '../service/http/http.service';
 import { ServiceModule } from '../service/service.module';
 import { AuthenticationService } from '../service/authentication/authentication.service';
 import { AuthenticationInterceptor } from '../service/authentication/authentication.interceptor';
+import { MicrofiJasperViewerComponent } from './microfi-jasper-viewer/microfi-jasper-viewer.component';
 
 @NgModule({
   providers: [ApiService, AuthenticationService,
     AuthenticationInterceptor,
+    { provide: Window, useValue: window },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
@@ -79,7 +81,8 @@ import { AuthenticationInterceptor } from '../service/authentication/authenticat
     SelectPatnerFormComponent,
     SelectPatnerFormComponent,
     SelectOrganismeFormComponent,
-    AdossageComponent
+    AdossageComponent,
+    MicrofiJasperViewerComponent
   ],
   exports: [
     SelectAutoCompleteComponent,
@@ -104,7 +107,8 @@ import { AuthenticationInterceptor } from '../service/authentication/authenticat
     MicrofiLovFormComponent,
     MicrofiUserFormComponent,
     SelectOrganismeFormComponent,
-    AdossageComponent
+    AdossageComponent,
+    MicrofiJasperViewerComponent
   ],
   imports: [
     CommonModule,

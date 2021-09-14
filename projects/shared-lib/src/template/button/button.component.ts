@@ -4,8 +4,8 @@ import { ControlValueAccessor } from '@angular/forms';
 @Component({
   selector: 'microfi-button',
   template: `
-  <button mat-raised-button  type="button" class="btn">{{name}}
-         <fa-icon *ngIf=iconName icon="{{iconName}}" size="lg"></fa-icon>
+  <button  type="button" class="btn btn-sm btn-primary w-100 text-white">{{name}}
+         <!-- <fa-icon *ngIf=iconName icon="{{iconName}}" size="lg"></fa-icon> -->
   </button>
   `,
   styles: [`
@@ -17,6 +17,8 @@ import { ControlValueAccessor } from '@angular/forms';
 export class ButtonComponent implements ControlValueAccessor, OnInit {
 
   @Input() name: string;
+  @Input() code: string;
+  @Input() code_name: string;
   @Input() iconName: string;
   @Output() onClick = new EventEmitter<any>();
   @Input() color: string;

@@ -26,7 +26,8 @@ module.exports = {
 
       // No remotes configured upfront anymore!
       remotes: {
-        'customerCore': "customerCore@http://localhost:3001/remoteEntry.js"
+        'customerCore': "customerCore@http://localhost:3001/remoteEntry.js",
+        'accountCore': "accountCore@http://localhost:3002/remoteEntry.js"
       },
 
       shared: share({

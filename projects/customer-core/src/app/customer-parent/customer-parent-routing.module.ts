@@ -1,5 +1,5 @@
-import { NgModule, Injector } from '@angular/core';
-import { Router, NavigationEnd, ResolveEnd, RouterEvent, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { CustomerMoralComponent } from './customer-moral/customer-moral.component';
 import { CustomerPhysiqueComponent } from './customer-physique/customer-physique.component';
 import { BaseCustomerComponentComponent } from './base-customer-component/base-customer-component.component';

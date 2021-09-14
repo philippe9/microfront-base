@@ -69,7 +69,7 @@ export class PhysicPersonListComponent extends ViewComponent {
     console.log(user);
     if (user.idClient !== null && user.idClient !== "") {
       this.selectedItemOnTables = user;
-      this.router.navigate([this.env.physicalCustomer.url], { queryParams: { mode: Dialog.CONSULTATION, code: user.idClient } });
+      this.router.navigate(['customer/' + this.env.physicalCustomer.url], { queryParams: { mode: Dialog.CONSULTATION, code: user.idClient } });
     }
 
   }

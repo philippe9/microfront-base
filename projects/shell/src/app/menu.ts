@@ -158,7 +158,7 @@ export const MICROFI_MENU = [
         "subMenu": []
       }, {
         "url": "",
-        "breadcumb": "customer/Account Management",
+        "breadcumb": "Account Management",
         "code": 11,
         "subMenu": [
           {
@@ -168,22 +168,22 @@ export const MICROFI_MENU = [
             "subMenu": []
           }, {
             "url": "account/print-rib",
-            "breadcumb": "customer/Impression RIB",
+            "breadcumb": "Impression RIB",
             "code": 11,
             "subMenu": []
           }, {
             "url": "account/account-postion",
-            "breadcumb": "customer/Position de compte",
+            "breadcumb": "Position de compte",
             "code": 11,
             "subMenu": []
           }, {
             "url": "account/account-reservation",
-            "breadcumb": "customer/Reservation",
+            "breadcumb": "Reservation",
             "code": 11,
             "subMenu": []
           }, {
             "url": "account/sleeper-account",
-            "breadcumb": "customer/Gestion des comptes dormants",
+            "breadcumb": "Gestion des comptes dormants",
             "code": 11,
             "subMenu": []
           }, {

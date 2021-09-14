@@ -28,7 +28,8 @@ export * from './template/main/main.component';
 export * from './template/amount/amount.component';
 export * from './template/disable-dialog/disable-dialog.component';
 export * from './template/enable-dialog/enable-dialog.component';
-export * from './template//file-upload/file-upload.component';
+export * from './template/file-upload/file-upload.component';
+export * from './template/microfi-jasper-viewer/microfi-jasper-viewer.component';
 
 export * from './template/select-patner-form/select-patner-form.component';
 export * from './service/alert/alert.service';

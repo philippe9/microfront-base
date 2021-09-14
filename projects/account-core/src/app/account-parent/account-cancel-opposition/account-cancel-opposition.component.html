@@ -1,0 +1,104 @@
+<br />
+<div class="container">
+  <mat-card>
+    <mat-card-title>Levée opposition Compte</mat-card-title>
+    <form [formGroup]="record">
+      <div class="row">
+        <div class="col-6">
+          <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+            formControlName="uniteBancaire" libelle='Unité Bancaire'>
+          </microfi-select-auto-complete>
+        </div>
+
+        <div class="col-6">
+          <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}} formControlName="agence"
+            formControlName="agence" libelle='Agence'>
+          </microfi-select-auto-complete>
+        </div>
+      </div>
+
+      <div class="row">
+        <section class="example-section col-2"><br />
+          <mat-checkbox class="example-margin" disabled={{disabledParMembre}} formControlName="parMembre">
+            Par le membre ?
+          </mat-checkbox>
+        </section>
+        <div class="col-1">
+
+        </div>
+
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>Date levée</mat-label>
+          <input disabled formControlName="dateLevee" matInput [matDatepicker]="picker1">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <div class="col-2">
+          <microfi-select-auto-complete formControlName="devise" url={{urlDeviseList}} requestType={{resquesTypeGet}}
+            libelle='Dévise'></microfi-select-auto-complete>
+        </div>
+
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>N° Compte</mat-label>
+          <input formControlName="numeroCompte" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-1">
+          <mat-label>Clé</mat-label>
+          <input formControlName="cleCompte" matInput>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>Intitulé compte</mat-label>
+          <input formControlName="intituleCompte" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>Intitulé client</mat-label>
+          <input formControlName="intituleClient" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <div class="col-3">
+          <microfi-select-auto-complete formControlName="typeOpposition" url={{urlTypeOppositionList}}
+            requestType={{resquesTypeGet}} libelle='Type opposition'></microfi-select-auto-complete>
+        </div>
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>Poids requis</mat-label>
+          <input formControlName="poidsRequis" matInput>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Motif</mat-label>
+          <input formControlName="motif" matInput>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-12">
+          <mat-label>Motif levée</mat-label>
+          <input formControlName="motifLevee" matInput>
+        </mat-form-field>
+      </div>
+
+      <microfi-commission-tax></microfi-commission-tax>
+
+
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+          <button mat-raised-button color="primary" (click)="submitForm()">Enregistrer</button>&nbsp;&nbsp;
+          <button mat-raised-button color="primary">Annuler</button>
+        </div>
+        <div class="col-4"></div>
+
+      </div>
+    </form>
+  </mat-card>
+
+</div>

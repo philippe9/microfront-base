@@ -1,0 +1,79 @@
+<h1 mat-dialog-title>Consultation des lots</h1>
+<div mat-dialog-content class="">
+
+  <table mat-table [dataSource]="tableData">
+
+    <ng-container matColumnDef="reference">
+      <th mat-header-cell *matHeaderCellDef>Ref Piece</th>
+      <td mat-cell *matCellDef="let element"> {{element.reference}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="typeOperation">
+      <th mat-header-cell *matHeaderCellDef>Code Ope.</th>
+      <td mat-cell *matCellDef="let element"> {{element.typeOperation}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="agence">
+      <th mat-header-cell *matHeaderCellDef>Code Agence</th>
+      <td mat-cell *matCellDef="let element"> {{element.agence}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="compte">
+      <th mat-header-cell *matHeaderCellDef>Compte</th>
+      <td mat-cell *matCellDef="let element"> {{element.compte}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="libelle">
+      <th mat-header-cell *matHeaderCellDef>Libelle</th>
+      <td mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sens">
+      <th mat-header-cell *matHeaderCellDef>Sens</th>
+      <td mat-cell *matCellDef="let element"> {{element.sens}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="montantDebit">
+      <th mat-header-cell *matHeaderCellDef>Montant débit</th>
+      <td mat-cell *matCellDef="let element"> {{element.montDebit}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="montantCredit">
+      <th mat-header-cell *matHeaderCellDef>Montant crédit</th>
+      <td mat-cell *matCellDef="let element"> {{element.montCredit}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dteCptable">
+      <th mat-header-cell *matHeaderCellDef>Date comptable</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.dteCptable}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dteValeur">
+      <th mat-header-cell *matHeaderCellDef>Date valeur</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.dteValeur}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userSaisi">
+      <th mat-header-cell *matHeaderCellDef>Util. Saisi</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.userSaisi}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userValid">
+      <th mat-header-cell *matHeaderCellDef>Util. Valid</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.userValid}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div style="text-align: center;" class="mt-2">
+    <button type="reset" color="primary" mat-raised-button mat-dialog-close>
+      <mat-icon class="icon">close</mat-icon>
+      Fermer
+    </button>
+  </div>
+</div>

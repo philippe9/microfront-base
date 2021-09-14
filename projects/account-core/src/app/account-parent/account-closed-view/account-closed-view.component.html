@@ -1,0 +1,99 @@
+<br/>
+<div class="container">
+  <mat-card>
+    <mat-card-title>Fermeture de compte</mat-card-title>
+    <form [formGroup]="record">
+
+    <div class="row">
+      <div class="col-6">
+        <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+        formControlName="uniteBancaire" libelle={{uniteLibelle}}>
+      </microfi-select-auto-complete>
+      </div>
+
+      <section class="example-section col-2"><br/>
+        <mat-checkbox class="example-margin" formControlName="parMembre">Par le
+          membre ?
+        </mat-checkbox>
+      </section>
+      <div class="col-1"></div>
+
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>Date cloture</mat-label>
+        <input formControlName="dateCloture" matInput type="date">
+
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <!-- <microfi-select-account-form formControlName="compte" [(lable)]="labelClient"
+      [(disable)]="DisableClient" [adossage]="DisableClient" class="col-12">
+      </microfi-select-account-form> -->
+      <microfi-account-form class="col-12" [adossage]="true" [isDisabled]="isView"  formControlName="compte" [parentForm]="record" >
+      </microfi-account-form>
+    </div>
+
+    <div class="row">
+
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Solde avant</mat-label>
+        <input formControlName="soldeAvant" matInput disabled>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Solde après</mat-label>
+        <input formControlName="soldeApres" matInput disabled>
+      </mat-form-field>
+
+    </div>
+
+    <div class="row">
+      <mat-card style="background-color: #f1f1f1; width: 98%;" class="col-12">
+        <mat-card-title>Comptes de cloture</mat-card-title>
+
+        <mat-card>
+          <mat-card-title style="font-size: medium;">Solde > 0</mat-card-title>
+          <div class="row">
+            <microfi-select-account-form formControlName="compteClotureSoldePlus" class="col-12">
+            </microfi-select-account-form>
+          </div>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title style="font-size: medium;">Solde &lt; 0</mat-card-title>
+          <div class="row">
+            <microfi-select-account-form formControlName="compteClotureSoldeMoins" class="col-12">
+            </microfi-select-account-form>
+
+          </div>
+        </mat-card>
+      </mat-card>
+
+    </div>
+    <br/>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-12">
+        <mat-label>Motif</mat-label>
+        <input formControlName="motif" matInput>
+      </mat-form-field>
+    </div>
+
+    <microfi-commission-tax></microfi-commission-tax>
+
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <button mat-raised-button color="primary" (click)="doSave()">Enregistrer</button>&nbsp;&nbsp;
+        <!-- <button mat-raised-button color="primary" (click)="doSimulate()">Simuler</button>&nbsp;&nbsp; -->
+        <button mat-raised-button color="primary">Annuler</button>
+      </div>
+      <div class="col-4"></div>
+
+    </div>
+  </form>
+  </mat-card>
+
+</div>
+
+

@@ -1,0 +1,157 @@
+<div class="mr-4 ml-4">
+  <mat-card>
+    <mat-card-title>Historique des comptes</mat-card-title>
+    <div class="row">
+      <div class="col-10">
+        <mat-card>
+          <mat-card-title style="font-size: medium;">Option de recherche</mat-card-title>
+
+          <form [formGroup]="searchDetails">
+
+            <div class="row">
+              <!-- <microfi-select-account-form formControlName="compte" [(lable)]="labelClient" [(disable)]="DisableClient"
+                class="col-12">
+              </microfi-select-account-form> -->
+              <microfi-account-form class="col-12" [isDisabled]="true" [(selectedUser)]="initialAccount" formControlName="compte" [parentForm]="searchDetails" >
+              </microfi-account-form>
+            </div>
+
+            <div class="row">
+
+              <div class="col-4">
+
+                <microfi-select-auto-complete url={{urlTypeOperationList}} requestType={{requestType}}
+                  formControlName="typeOperation" libelle='Type opération'>
+                </microfi-select-auto-complete>
+
+              </div>
+
+              <mat-form-field appearance="outline" appearance="outline" class="col-2">
+                <mat-label>Sens</mat-label>
+                <mat-select [formControl]="searchDetails.get('sens')">
+                  <mat-option value=""></mat-option>
+                  <mat-option value="Debit">Débit</mat-option>
+                  <mat-option value="Credit">Crédit</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <div class="col-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Date début</mat-label>
+                  <input matInput formControlName="dateDebut" [matDatepicker]="picker1">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div class="col-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Date fin</mat-label>
+                  <input matInput formControlName="dateFin" [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <mat-form-field appearance="outline" class="col-3">
+                <mat-label>Montant de</mat-label>
+                <input type="number" formControlName="montantMin" matInput>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="col-3">
+                <mat-label>A</mat-label>
+                <input type="number" formControlName="montantMax" matInput>
+              </mat-form-field>
+
+              <div class="col-3"></div>
+
+              <div class="col-3">
+                <button mat-raised-button color="primary" (click)="search()">Rechercher</button>
+              </div>
+
+            </div>
+          </form>
+
+        </mat-card>
+
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="historise">
+              <th mat-header-cell *matHeaderCellDef>Historisé ?</th>
+              <td mat-cell *matCellDef="let element"> Oui </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateComptable">
+              <th mat-header-cell *matHeaderCellDef>Date comptable</th>
+              <td mat-cell *matCellDef="let element"> {{element.dteComptable | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateValeur">
+              <th mat-header-cell *matHeaderCellDef>Date valeur</th>
+              <td mat-cell *matCellDef="let element"> {{element.dteValeur | date}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="refComptable">
+              <th mat-header-cell *matHeaderCellDef>Ref Comptable</th>
+              <td mat-cell *matCellDef="let element"> {{element.refLot}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="libelle">
+              <th mat-header-cell *matHeaderCellDef>Libelle</th>
+              <td mat-cell *matCellDef="let element"> {{element.libelleCourt}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="utilisateur">
+              <th mat-header-cell *matHeaderCellDef>Utilisateur</th>
+              <td mat-cell *matCellDef="let element"> {{element.userCode | uppercase}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montantDebit">
+              <th mat-header-cell *matHeaderCellDef>Montant débit</th>
+              <td mat-cell *matCellDef="let element"> {{element.sens == 'Debit' ? element.montant : 0}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montantCredit">
+              <th mat-header-cell *matHeaderCellDef>Montant crédit</th>
+              <td mat-cell *matCellDef="let element"> {{element.sens == 'Credit' ? element.montant : 0}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="soldeApres">
+              <th mat-header-cell *matHeaderCellDef>Solde après</th>
+              <td mat-cell *matCellDef="let element">
+                {{element.sens == 'Credit' ? element.solde + element.montant : element.solde - element.montant}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row (click)="selectedItem(row)" *matRowDef="let row; columns: displayedColumns;"
+              [class.selected_table]="row.referencePiece === selectedItemOnTables.referencePiece"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+      <div class="col-1">
+        <button mat-raised-button color="primary" class="mb-2" (click)="openConsultationLots()">
+          Consulter lot
+        </button>&nbsp;
+        <button mat-raised-button color="primary" class="mb-2">
+          Imprimer
+        </button>
+        <button mat-raised-button color="primary" class="mb-2">
+          Imprimer Excel
+        </button>
+      </div>
+    </div>
+
+    <div class="mat-card mt-4">
+      <div class="">Solde Ouverture : {{soldeOuverture}} &nbsp;&nbsp; - Cumul Débit : {{cumulDebit}} &nbsp;&nbsp; -
+        Cumul Credit : {{cumulCredit}}</div>
+    </div>
+  </mat-card>
+
+</div>

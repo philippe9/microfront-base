@@ -1,0 +1,165 @@
+<div class="mr-4 ml-4">
+  <mat-card>
+    <mat-card-title>Position de compte</mat-card-title>
+    <div class="row">
+      <div class="col-10">
+        <mat-card>
+          <mat-card-title style="font-size: medium;">Option de recherche</mat-card-title>
+
+          <form [formGroup]="searchDetails">
+            <div class="row">
+              <div class="col-6">
+                <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+                  formControlName="uniteBancaire" libelle={{uniteLibelle}}>
+                </microfi-select-auto-complete>
+                <!-- <p>Membre</p>
+                <microfi-select-customer-form formControlName="membre">
+                </microfi-select-customer-form> -->
+                <microfi-user-form class="col-6" [parentForm]="searchDetails" formControlName="membre">
+                </microfi-user-form>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Profil</mat-label>
+                  <input formControlName="profil" matInput>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
+                  formControlName="agence" libelle={{agenceLibelle}}>
+                </microfi-select-auto-complete>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Gestionnaire</mat-label>
+                  <input type="text" placeholder="Choisir un gestionnaire" aria-label="gestionnaire" matInput
+                    [formControl]="searchDetails.get('gestionnaire')" [matAutocomplete]="auto" />
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptionsGestionnaire | async" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <mat-checkbox class="w-50" formControlName="compte_ferme">Compte
+                  fermé ?
+                </mat-checkbox>
+                <mat-checkbox class="w-50" formControlName="compte_solde_null">
+                  Afficher comptes à solde null
+                </mat-checkbox>
+                <div class="col-12 right-align pt-1">
+                  <button mat-raised-button color="primary" (click)="find()">Rechercher</button>
+                </div>
+              </div>
+
+            </div>
+
+
+          </form>
+
+        </mat-card>
+
+
+      </div>
+      <div class="col-2">
+        <div class="d-flex menu-btn-right">
+          <microfi-button [name]="'Historique'" (click)="consultHistorique()">
+          </microfi-button>
+          <microfi-button [name]="'Actualiser'">
+          </microfi-button>
+          <microfi-button [name]="'Imprimer'">
+          </microfi-button>
+
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="agence">
+              <th mat-header-cell *matHeaderCellDef>Agence</th>
+              <td mat-cell *matCellDef="let element"> {{element.agence.code}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="typeCompte">
+              <th mat-header-cell *matHeaderCellDef>Type com..</th>
+              <td mat-cell *matCellDef="let element">
+                {{(element.typeCompte.code +" - "+ element.typeCompte.libelle).slice(0, 9)}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="chapitre">
+              <th mat-header-cell *matHeaderCellDef>Chapitre</th>
+              <td mat-cell *matCellDef="let element">
+                {{(element.chapitre.code +" - "+ element.chapitre.libelle).slice(0, 9)}}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="devise">
+              <th mat-header-cell *matHeaderCellDef>Devise</th>
+              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="racineCompte">
+              <th mat-header-cell *matHeaderCellDef>Racine Cpte</th>
+              <td mat-cell *matCellDef="let element"> {{element.numeroCompte}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="produit">
+              <th mat-header-cell *matHeaderCellDef>Produit</th>
+              <td mat-cell *matCellDef="let element"> {{element.produit.code}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="cle">
+              <th mat-header-cell *matHeaderCellDef>Cle</th>
+              <td mat-cell *matCellDef="let element"> {{element.cleCompte}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="soldeComptable">
+              <th mat-header-cell *matHeaderCellDef>Solde Cpt..</th>
+              <td mat-cell *matCellDef="let element"> {{element.soldeComptable}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="soldeJournalier">
+              <th mat-header-cell *matHeaderCellDef>Solde Jour...</th>
+              <td mat-cell *matCellDef="let element"> {{element.soldeJournalier}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montantReserve">
+              <th mat-header-cell *matHeaderCellDef>Mont. Réser...</th>
+              <td mat-cell *matCellDef="let element"> {{element.montantReserve}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montantDecouvert">
+              <th mat-header-cell *matHeaderCellDef>Mont. Déco..</th>
+              <td mat-cell *matCellDef="let element"> {{element.montantEnCoursDecouvert}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateFinDecouvert">
+              <th mat-header-cell *matHeaderCellDef>Date Fin Dec..</th>
+              <td mat-cell *matCellDef="let element"> {{element.dateEcheanceDecouvert}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="soldeDisponible">
+              <th mat-header-cell *matHeaderCellDef>Solde Disp..</th>
+              <td mat-cell *matCellDef="let element"> {{element.soldeJournalier}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="etat">
+              <th mat-header-cell *matHeaderCellDef>Etat</th>
+              <td mat-cell *matCellDef="let element"> {{element.etatCompte}} </td>
+            </ng-container>
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row (click)="selectedItem(row)" mat-row *matRowDef="let row; columns: displayedColumns;"
+              [class.selected_table]="row.numeroCompte === selectedItemOnTables.numeroCompte"></tr>
+          </table>
+
+          <mat-paginator [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPaginate($event)" showFirstLastButtons>
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-card>
+
+</div>

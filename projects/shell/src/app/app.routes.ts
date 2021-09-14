@@ -23,14 +23,15 @@ export const APP_ROUTES: Routes = [
       exposedModule: './Module',
     })
       .then(m => m.CustomerModule)
+  },
+  {
+    path: 'account',
+    loadChildren: () => loadRemoteModule({
+      remoteEntry: 'http://localhost:3002/remoteEntry.js',
+      remoteName: 'accountCore',
+      exposedModule: './Module',
+    })
+      .then(m => m.AccountParentModule)
   }
-  // {
-  //   path: 'user',
-  //   loadChildren: () => loadRemoteModule({
-  //     remoteEntry: 'http://localhost:3001/remoteEntry.js',
-  //     remoteName: 'userCore',
-  //     exposedModule: 'Module'
-  //   })
-  //     .then(m => m.AppComponent)
-  // },
+
 ];

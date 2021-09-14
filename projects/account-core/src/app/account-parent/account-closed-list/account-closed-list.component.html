@@ -1,0 +1,136 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>Fermeture des comptes</mat-card-title>
+    <div class="row">
+      <div class="col-10">
+        <mat-card>
+          <mat-card-title style="font-size: medium;">Option de recherche</mat-card-title>
+          <form [formGroup]="searchDetails">
+            <div class="row">
+              <div class="col-6">
+                <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+                  formControlName="uniteBancaire" libelle={{uniteLibelle}}>
+                </microfi-select-auto-complete>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Nature compte</mat-label>
+                  <mat-select formControlName="natureChapitreCompte">
+                    <mat-option value=""></mat-option>
+                    <mat-option value="Clientele">Clientèle</mat-option>
+                    <mat-option value="Generale">Genérale</mat-option>
+                    <mat-option value="ClienteleInterne">Clientèle interne</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <div class="row">
+                  <mat-form-field appearance="outline" class="col-6">
+                    <mat-label>N° Compte</mat-label>
+                    <input formControlName="numeroCompte" matInput>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="col-6">
+                    <mat-label>Clé</mat-label>
+                    <input formControlName="cleCompte" matInput>
+                  </mat-form-field>
+                </div>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Etat</mat-label>
+                  <mat-select formControlName="etatCloture">
+                    <mat-option value=""></mat-option>
+                    <mat-option value="Attente">En attente</mat-option>
+                    <mat-option value="Annuler">Annulé</mat-option>
+                    <mat-option value="Valider">Validé</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <div class="w-100 right-align">
+                  <button mat-raised-button color="primary" (click)="search()">Rechercher</button>
+                </div>
+              </div>
+            </div>
+
+
+          </form>
+        </mat-card>
+
+
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="compte">
+              <th mat-header-cell *matHeaderCellDef> No.</th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateOperation">
+              <th mat-header-cell *matHeaderCellDef> Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montant">
+              <th mat-header-cell *matHeaderCellDef> Weight</th>
+              <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="codeOperation">
+              <th mat-header-cell *matHeaderCellDef> Symbol</th>
+              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="colleteur">
+              <th mat-header-cell *matHeaderCellDef> Symbol</th>
+              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Action</th>
+              <td mat-cell *matCellDef="let element" class="action-link">
+
+                <button mat-mini-fab color="primary" title="Visualiser"
+                  aria-label="Example icon button with a plus one icon">
+                  <mat-icon>remove_red_eye</mat-icon>
+                </button>&nbsp;
+
+                <button mat-mini-fab color="primary" title="Lever"
+                  aria-label="Example icon button with a plus one icon">
+                  <mat-icon>done</mat-icon>
+                </button>&nbsp;
+
+
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="d-flex menu-btn-right">
+          <button mat-raised-button class="mb-1" color="primary" routerLink="/{{urlAccountClosedView}}">
+            <mat-icon class="icon">add</mat-icon>
+            Nouveau
+          </button>
+          <button mat-raised-button class="mb-1" color="primary">
+            <mat-icon class="icon">print</mat-icon>
+            Imprimer
+          </button>
+          <button mat-raised-button class="mb-1" color="primary">
+            Consulter
+          </button>
+          <button mat-raised-button class="mb-1" color="primary">
+            Annuler
+          </button>
+          <button mat-raised-button class="mb-1" color="primary">
+            Valider
+          </button>
+          <button mat-raised-button class="mb-1" color="primary">
+            Actualiser
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+
+</div>

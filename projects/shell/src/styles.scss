@@ -53,9 +53,18 @@ $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 // that you are using.
 @include angular-material-theme($my-app-theme);
 
-mat-form-field.mat-form-field {
-  font-size: 14px;
+:root {
+  --primary-color: #607d8b;
+  --bs-blue: #607d8b;
+  --bs-primary: #607d8b;
 }
+
+$primary:#607d8b;
+$theme-colors: ("primary": #607d8b, "secondary": #28a745, "primary-color":#f4f4f5);
+@import "node_modules/bootstrap/scss/bootstrap";
+
+//
+
 
 mat-card mat-card {
   background-color: rgb(250, 248, 248);
@@ -74,6 +83,7 @@ body {
 
 mat-form-field.mat-form-field {
   font-size: 13px;
+  margin-bottom: -1.25em;
 }
 
 #microfi-shell-container {
@@ -427,7 +437,7 @@ tr:hover {
 .menu-btn-right {
   flex-direction: column;
   justify-content: space-between;
-  min-height: 35vh;
+  min-height: 25vh;
 }
 
 input {
@@ -464,6 +474,7 @@ td.mat-footer-cell,
 .mat-toolbar-row,
 .mat-tab-link {
   height: 35px !important;
+  opacity: 1 !important;
 }
 
 .mat-toolbar-row,
@@ -472,7 +483,7 @@ td.mat-footer-cell,
 }
 
 #microfi-toolbar {
-  box-shadow: -10px 11px 1px -2px rgb(0 0 0 / 20%), -1px 7px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%) !important;
+  // box-shadow: -10px 11px 1px -2px rgb(0 0 0 / 20%), -1px 7px 2px 0 rgb(0 0 0 / 14%), 0 1px 5px 0 rgb(0 0 0 / 12%) !important;
 }
 
 .cdk-overlay-pane {
@@ -481,4 +492,41 @@ td.mat-footer-cell,
 
 body .ui-inputtext {
   padding: 0.1em !important;
+}
+
+.table-scroll-container {
+  height: 50vh;
+  overflow-y: scroll;
+}
+
+tr.mat-header-row {
+  height: 30px !important;
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+  height: 40px !important;
+}
+
+.mat-form-field-flex>.mat-form-field-infix {
+  padding: 0.4em 0px !important;
+}
+
+.mat-form-field-label-wrapper {
+  top: -1.5em !important;
+}
+
+.mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+  transform: translateY(-1.1em) scale(.75) !important;
+  width: 133.33333% !important;
+}
+
+.card-header {
+  background: #d7e1e5;
+  border: none;
+}
+
+table {
+  background-color: #eeeded;
+  height: 100% !important;
 }
