@@ -1,0 +1,21 @@
+<form [formGroup]="itemCtrl">
+  <mat-form-field class="example-chip-list">
+    <mat-label>Gestionnaires Autorisés (Saissizez un nom et appuyez sur la touche ENTREE pour ajouter)</mat-label>
+    <mat-chip-list #chipList>
+      <mat-chip *ngFor="let item of items" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(item)">
+        {{item}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="Nouveau gestionnaire..." #elementInput formControlName="elementSelected"
+             [matAutocomplete]="auto"
+             [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let element of filteredItems | async" [value]="element">
+        {{element}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

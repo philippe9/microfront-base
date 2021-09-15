@@ -32,6 +32,15 @@ export const APP_ROUTES: Routes = [
       exposedModule: './Module',
     })
       .then(m => m.AccountParentModule)
+  },
+  {
+    path: 'account-manager',
+    loadChildren: () => loadRemoteModule({
+      remoteEntry: 'http://localhost:3003/remoteEntry.js',
+      remoteName: 'accountManagerCore',
+      exposedModule: './Module',
+    })
+      .then(m => m.AccountManagerParentModule)
   }
 
 ];

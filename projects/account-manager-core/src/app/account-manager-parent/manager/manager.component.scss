@@ -1,0 +1,61 @@
+
+button {
+  margin: auto;
+  height: 45px;
+}
+
+.btn-menu {
+  background-color: #f44336;
+  color: white;
+  line-height: 25px;
+}
+
+.btn-search {
+  height: 45px;
+  margin-top: 2px;
+  margin-right: 0;
+}
+
+.btn-delete {
+  width: 30px;
+  height: 30px;
+}
+
+.icon {
+  font-size: 22px;
+  margin: auto;
+}
+
+
+mat-form-field {
+  width: 100%;
+  font-size: 11px;
+  margin-bottom: -1.25em;
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: 13px;
+}
+
+mat-card-title, mat-label {
+  font-size: 16px;
+}
+
+input {
+  font-size: 16px;
+}
+
+/* mat-form-field mat-label {
+  font-size: 14px;
+} */
+mat-radio-button {
+  margin: 10px 0;
+}
+
+table {
+  width: 100%;
+  margin: auto;
+  margin-top: 20px;
+  background-color: #eeeded;
+}

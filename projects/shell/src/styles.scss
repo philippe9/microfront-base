@@ -495,8 +495,9 @@ body .ui-inputtext {
 }
 
 .table-scroll-container {
-  height: 50vh;
+  min-height: 50vh;
   overflow-y: scroll;
+  height: 100%;
 }
 
 tr.mat-header-row {
@@ -529,4 +530,9 @@ tr.mat-footer-row {
 table {
   background-color: #eeeded;
   height: 100% !important;
+}
+
+.card-container {
+  min-height: 90vh;
+  max-height: 90vh;
 }

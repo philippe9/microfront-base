@@ -1,39 +1,39 @@
-<div class="container">
-  <mat-card>
-    <mat-card-title>Gestion des clients décédés</mat-card-title>
+<div class="card m-3 mb-0 card-container">
+  <!-- <mat-card-title>Gestion des clients décédés</mat-card-title> -->
+  <div class="card-header">
+    <h6 class="m-0 p-0">Gestion des clients décédés</h6>
+  </div>
+  <div class="card-body">
     <div class="row">
       <div class="col-10">
         <form>
           <form [formGroup]="searchInfo">
-            <mat-card>
-              <div class="row">
-                <div class="col-3">
-                  <microfi-select-auto-complete formControlName="unite" url={{urlUniteBancaireList}}
-                    requestType={{resquesTypeGet}} libelle={{uniteLibelle}}></microfi-select-auto-complete>
-                </div>
-                <div class="col-3">
-                  <microfi-select-auto-complete formControlName="agence" url={{urlAgenceList}}
-                    requestType={{resquesTypeGet}} libelle={{agenceLibelle}}>
-                  </microfi-select-auto-complete>
-                </div>
-                <div class="col-6">
-
-                  <microfi-user-form [parentForm]="searchInfo" formControlName="customer">
-                  </microfi-user-form>
-                </div>
-                <div class="col-12 right right-align">
-                  <microfi-button [name]="'Rechercher'" (click)="find()"></microfi-button>
-                </div>
+            <div class="row">
+              <div class="col-3">
+                <microfi-select-auto-complete formControlName="unite" url={{urlUniteBancaireList}}
+                  requestType={{resquesTypeGet}} libelle={{uniteLibelle}}></microfi-select-auto-complete>
               </div>
+              <div class="col-3">
+                <microfi-select-auto-complete formControlName="agence" url={{urlAgenceList}}
+                  requestType={{resquesTypeGet}} libelle={{agenceLibelle}}>
+                </microfi-select-auto-complete>
+              </div>
+              <div class="col-6">
 
-            </mat-card>
+                <microfi-user-form [parentForm]="searchInfo" formControlName="customer">
+                </microfi-user-form>
+              </div>
+              <div class="col-6"></div>
+              <div class="col-6 right right-align mb-1">
+                <microfi-button [name]="'Rechercher'" (click)="find()"></microfi-button>
+              </div>
+            </div>
+
           </form>
         </form>
 
-        <br />
-
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource">
+        <div class="table-scroll-container">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z2 h-100">
             <ng-container matColumnDef="agence">
               <th mat-header-cell *matHeaderCellDef> Agence</th>
               <td mat-cell *matCellDef="let element"> {{element.agence.code}} </td>
@@ -68,15 +68,15 @@
         </div>
       </div>
       <div class="col-2">
-        <div class="d-flex menu-btn-right">
-          <microfi-button [name]="'Nouveau'" routerLink="/dead-customer-view"></microfi-button>&nbsp;
-          <microfi-button [name]="'Imprimer'"></microfi-button>&nbsp;
-          <microfi-button [name]="'Consulter'"></microfi-button>&nbsp;
-          <microfi-button [name]="'Modifier'" (click)="updateDeces()"></microfi-button>&nbsp;
-          <microfi-button [name]="'Valider'" (click)="validateDeces()"></microfi-button>&nbsp;
-          <microfi-button [name]="'Actualiser'"></microfi-button>&nbsp;
+        <div class="d-flex menu-btn-right align-items-center">
+          <microfi-button class="w-50" [name]="'Nouveau'" routerLink="/dead-customer-view"></microfi-button>&nbsp;
+          <microfi-button class="w-50" [name]="'Imprimer'"></microfi-button>&nbsp;
+          <microfi-button class="w-50" [name]="'Consulter'"></microfi-button>&nbsp;
+          <microfi-button class="w-50" [name]="'Modifier'" (click)="updateDeces()"></microfi-button>&nbsp;
+          <microfi-button class="w-50" [name]="'Valider'" (click)="validateDeces()"></microfi-button>&nbsp;
+          <microfi-button class="w-50" [name]="'Actualiser'"></microfi-button>&nbsp;
         </div>
       </div>
     </div>
-  </mat-card>
+  </div>
 </div>

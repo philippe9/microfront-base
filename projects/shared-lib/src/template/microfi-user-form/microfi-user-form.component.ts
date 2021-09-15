@@ -26,6 +26,7 @@ export class MicrofiUserFormComponent extends MainComponent implements ControlVa
   critere = { name: 'Nom du membre', code: 'intituleClient' };
   subscriptions: Subscription[] = [];
   @Output() selectedUserChange: EventEmitter<any> = new EventEmitter<any>();
+  @Input('directSearch') directSearch: boolean = false;
 
   @Input('selectedUser') selectedUser: any = {
     idClient: "",
@@ -127,6 +128,11 @@ export class MicrofiUserFormComponent extends MainComponent implements ControlVa
       this.selectAutoComplete.patchValue({ item: value });
 
       this.onTouched();
+      if (this.directSearch) {
+        this.selectedUser = value;
+        this.typedValue = value.intituleClient;
+        this.searchUser();
+      }
     }
   }
 
@@ -146,6 +152,10 @@ export class MicrofiUserFormComponent extends MainComponent implements ControlVa
     if (this.selectedUser != null && this.selectedUser != undefined) {
       this.actualValue = this.selectedUser;
     }
+    if (this.actualValue.item) {
+      this.actualValue = this.actualValue.item;
+    }
+    // console.log(this.actualValue);
   }
   checkAccountEvent(event: any, op: any) {
     console.log(event);
@@ -158,26 +168,52 @@ export class MicrofiUserFormComponent extends MainComponent implements ControlVa
     }
   }
   focusLost(event: any) {
-    console.log(event);
-    console.log(this.actualValue);
-    if (this.actualValue.idClient.length !== 9) {
-      this.actualValue = {
-        idClient: "",
-        intituleClient: "  ",
-      };
-      this.selectedUser = {
-        idClient: "",
-        intituleClient: "  ",
-      }
-      this.onSelectedItem.emit({
-        idClient: "",
-        intituleClient: "  ",
-      });
-      this.selectedUserChange.emit({
-        idClient: "",
-        intituleClient: "  ",
-      });
-    }
+    // console.log(event);
+    // console.log(this.actualValue);
+    // console.log(this.actualValue.item);
+    // if (this.actualValue) {
+    //   if (this.actualValue.idClient) {
+    //     if (this.actualValue.idClient.length !== 9) {
+    //       this.actualValue = {
+    //         idClient: "",
+    //         intituleClient: "  ",
+    //       };
+    //       this.selectedUser = {
+    //         idClient: "",
+    //         intituleClient: "  ",
+    //       }
+    //       this.onSelectedItem.emit({
+    //         idClient: "",
+    //         intituleClient: "  ",
+    //       });
+    //       this.selectedUserChange.emit({
+    //         idClient: "",
+    //         intituleClient: "  ",
+    //       });
+    //     }
+    //   } else {
+    //     if (this.actualValue.item) {
+    //       if (this.actualValue.item.idClient.length !== 9) {
+    //         this.actualValue = {
+    //           idClient: "",
+    //           intituleClient: "  ",
+    //         };
+    //         this.selectedUser = {
+    //           idClient: "",
+    //           intituleClient: "  ",
+    //         }
+    //         this.onSelectedItem.emit({
+    //           idClient: "",
+    //           intituleClient: "  ",
+    //         });
+    //         this.selectedUserChange.emit({
+    //           idClient: "",
+    //           intituleClient: "  ",
+    //         });
+    //       }
+    //     }
+    //   }
+    // }
   }
   onRowSelect(compte: any, op: any) {
     console.log(compte);
@@ -189,7 +225,7 @@ export class MicrofiUserFormComponent extends MainComponent implements ControlVa
     this.onSelectedItem.emit({ item: this.selectedUser });
     this.selectedUserChange.emit({ item: this.selectedUser });
     op.toggle(this.cardAnchor);
-
+    console.log(this.actualValue);
 
   }
   searchUser() {
@@ -198,6 +234,13 @@ export class MicrofiUserFormComponent extends MainComponent implements ControlVa
     this.findDTOUsers.like[this.critere.code] = this.typedValue.toUpperCase() + '%';
     this.apiService.post(this.url, this.findDTOUsers).subscribe((data) => {
       this.users = data.returnValue;
+
+
+      if (this.directSearch == true && data.returnValue.length > 0) {
+        this.actualValue = data.returnValue[0];
+        this.directSearch = false;
+        console.log(this.actualValue);
+      }
     })
   }
 

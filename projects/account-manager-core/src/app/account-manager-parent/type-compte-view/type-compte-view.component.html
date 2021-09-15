@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>Pouvoir Type de Compte</h2>
+<form [formGroup]="searchInfo" class="first-section">
+  <mat-dialog-content>
+    <microfi-select-auto-complete
+      formControlName="typeCompte"
+      url="{{ urlTypeCompteList }}"
+      requestType="{{ requestType }}"
+      libelle="Type compte"
+    ></microfi-select-auto-complete>
+  </mat-dialog-content>
+
+  <mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Montant</mat-label>
+      <input formControlName="montantMaxDebit" matInput />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Cumul Prov Jour</mat-label>
+      <input formControlName="cumulJour" matInput />
+    </mat-form-field>
+  </mat-dialog-content>
+</form>
+
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    mat-dialog-close
+    class="btn-menu"
+    [mat-dialog-close]="null"
+  >
+    <mat-icon class="icon">close</mat-icon>
+    Annuler
+  </button>
+  <button
+    mat-raised-button
+    mat-dialog-close
+    class="btn-menu"
+    [mat-dialog-close]="searchInfo.value"
+  >
+    <mat-icon class="icon">save</mat-icon>
+    Enregistrer
+  </button>
+</mat-dialog-actions>

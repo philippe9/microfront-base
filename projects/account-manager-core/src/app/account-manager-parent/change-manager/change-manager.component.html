@@ -1,0 +1,87 @@
+<mat-card class="container">
+  <mat-card-title>Informations sur le gestionnaire</mat-card-title>
+  <mat-tab-group dynamicHeight>
+
+    <mat-tab label="Fichier">
+      <form [formGroup]="changeForm">
+        <mat-card class="first-section" style="margin-top: 20px; margin-bottom: 5px;">
+        </mat-card>
+      </form>
+    </mat-tab>
+    <mat-tab label="Groupe de client">
+      <form [formGroup]="changeForm">
+        <mat-card class="first-section " style="margin-top: 20px; margin-bottom: 5px;">
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Du Num Membre</mat-label>
+                <input formControlName="numeroDebut" matInput />
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Au Num Membre</mat-label>
+                <input formControlName="numeroFin" matInput />
+              </mat-form-field>
+            </div>
+            <microfi-select-auto-complete url={{urlGestionnaireList}} requestType={{requestType}}
+              [ngModelOptions]="{standalone: true}" [(ngModel)]="gestionnaire" libelle='Gestionnaire' class="col-12">
+
+            </microfi-select-auto-complete>
+            <div class="col-12">
+              <button mat-raised-button color="primary" (click)="submitForm('Groupe')">Enregistrer</button>&nbsp;&nbsp;
+              <button mat-raised-button color="primary">Annuler</button>
+            </div>
+          </div>
+
+
+        </mat-card>
+      </form>
+    </mat-tab>
+    <mat-tab label="Client">
+      <form [formGroup]="changeForm">
+        <mat-card class="first-section" style="margin-top: 20px; margin-bottom: 5px;">
+
+          <!-- <microfi-select-customer-form formControlName="customer" class="col-12"></microfi-select-customer-form> -->
+          <microfi-user-form [parentForm]="changeForm" formControlName="customer" class="col-12" >
+          </microfi-user-form>
+          <microfi-select-auto-complete url={{urlGestionnaireList}} requestType={{requestType}}
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="ancienGestionnaire" libelle='Ancien gestionnaire'
+            class="col-12">
+          </microfi-select-auto-complete>
+          <microfi-select-auto-complete url={{urlGestionnaireList}} requestType={{requestType}}
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="gestionnaire" libelle='Nouveau gestionnaire'
+            class="col-12">
+          </microfi-select-auto-complete>
+          <div class="col-12">
+            <button mat-raised-button color="primary" (click)="submitForm('Client')">Enregistrer</button>&nbsp;&nbsp;
+            <button mat-raised-button color="primary">Annuler</button>
+          </div>
+        </mat-card>
+      </form>
+    </mat-tab>
+    <mat-tab label="Compte">
+      <form [formGroup]="changeForm">
+        <mat-card class="first-section" style="margin-top: 20px; margin-bottom: 5px;">
+          <!-- <microfi-select-account-form class="col-6" formControlName="account" [(lable)]="labelClient"
+            [(disable)]="DisableClient">
+          </microfi-select-account-form> -->
+          <microfi-account-form class="col-12" [(isDisabled)]="DisableClient"  formControlName="account" [parentForm]="changeForm" >
+          </microfi-account-form>
+          <microfi-select-auto-complete url={{urlGestionnaireList}} requestType={{requestType}}
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="ancienGestionnaire" libelle='Ancien gestionnaire'
+            class="col-12">
+          </microfi-select-auto-complete>
+          <microfi-select-auto-complete url={{urlGestionnaireList}} requestType={{requestType}}
+            [ngModelOptions]="{standalone: true}" [(ngModel)]="gestionnaire" libelle='Nouveau gestionnaire'
+            class="col-12">
+          </microfi-select-auto-complete>
+          <div class="col-12">
+            <button mat-raised-button color="primary" (click)="submitForm('Compte')">Enregistrer</button>&nbsp;&nbsp;
+            <button mat-raised-button color="primary">Annuler</button>
+          </div>
+        </mat-card>
+      </form>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

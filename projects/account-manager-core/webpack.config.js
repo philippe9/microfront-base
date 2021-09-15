@@ -10,7 +10,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: "myTestApp",
+    uniqueName: "accountManagerCore",
     publicPath: "auto"
   },
   optimization: {
@@ -24,12 +24,21 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
 
-      // No remotes configured upfront anymore!
-      remotes: {
-        'customerCore': "customerCore@http://localhost:3001/remoteEntry.js",
-        'accountCore': "accountCore@http://localhost:3002/remoteEntry.js",
-        'accountManagerCore': "accountManagerCore@http://localhost:3003/remoteEntry.js"
+      // For remotes (please adjust)
+      name: "accountManagerCore",
+      filename: "remoteEntry.js",
+      exposes: {
+        './Module': './projects/account-manager-core/src/app/account-manager-parent/account-manager-parent.module.ts',
       },
+
+      // For hosts (please adjust)
+      // remotes: {
+      //     "shell": "shell@http://localhost:5000/remoteEntry.js",
+      //     "userCore": "userCore@http://localhost:3000/remoteEntry.js",
+      //     "customerCore": "customerCore@http://localhost:3001/remoteEntry.js",
+      //     "accountCore": "accountCore@http://localhost:3002/remoteEntry.js",
+
+      // },
 
       shared: share({
         "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
@@ -39,8 +48,8 @@ module.exports = {
         "@angular/compiler": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/material": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/platform-browser-dynamic": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-        "primeng": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
-        "primeicons": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/platform-server": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+
         ...sharedMappings.getDescriptors()
       })
 
@@ -48,4 +57,3 @@ module.exports = {
     sharedMappings.getPlugin()
   ],
 };
-

@@ -47,6 +47,7 @@ module.exports = {
         "@angular/compiler": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/material": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/platform-browser-dynamic": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+        "@angular/platform-server": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         ...sharedMappings.getDescriptors()
       })
 

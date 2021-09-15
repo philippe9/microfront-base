@@ -1,0 +1,215 @@
+<mat-card class="container">
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step label="Informations sur le gestionnaire">
+      <form [formGroup]="managerFormViewGroup" class="first-section">
+        <div class="first-section1 pr-2">
+          <div class="first-section-min1 w-100">
+            <microfi-select-auto-complete formControlName="codeBancaire" url="{{ urlUniteBancaireList }}"
+              requestType="{{ requestType }}" libelle="Code bancaire" class="w-100" [enable]="isEnabled"
+              [defaultValue]="actualPersonne.idCodebancaire">
+            </microfi-select-auto-complete>
+          </div>
+          <div class="first-section-min">
+            <mat-form-field appearance="outline">
+              <mat-label>Code gestionnaire</mat-label>
+              <input matInput formControlName="codeGestionnaire" />
+            </mat-form-field>
+          </div>
+          <div class="first-section-min">
+            <mat-form-field appearance="outline">
+              <mat-label>Libellé</mat-label>
+              <input matInput formControlName="libelle" />
+            </mat-form-field>
+          </div>
+          <div class="first-section-min1 w-100">
+            <microfi-select-auto-complete url="{{ urlUtilisateurList }}" requestType="{{ requestType }}"
+              formControlName="codeUtilisateur" libelle="Code utilisateur" class="w-100" [enable]="isEnabled"
+              [defaultValue]="actualPersonne.codeUser">
+            </microfi-select-auto-complete>
+          </div>
+          <div class="first-section-min1 w-100">
+            <microfi-select-auto-complete url="{{ urlDeviseList }}" formControlName="devise"
+              requestType="{{ requestType }}" libelle="Dévise" class="w-100" [enable]="isEnabled"
+              [defaultValue]="actualPersonne.devise">
+            </microfi-select-auto-complete>
+            <!--  <mat-form-field appearance="outline">
+              <mat-label>Devise</mat-label>
+              <mat-select formControlName="devise">
+                <mat-option selected value="XAF">XAF - Franc d'afrique centrale</mat-option>
+              </mat-select>
+            </mat-form-field> -->
+          </div>
+        </div>
+
+        <div class="first-section2">
+          <div class="second-section-min">
+            <mat-form-field appearance="outline">
+              <mat-label>Décisionnaire</mat-label>
+              <mat-select formControlName="decisionnaire">
+                <mat-option value="Oui">Oui</mat-option>
+                <mat-option value="Non">Non</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="second-section-min">
+            <mat-form-field appearance="outline">
+              <mat-label>Montant Maximum Forçage</mat-label>
+              <input type="number" matInput formControlName="montantMaxForcage" />
+            </mat-form-field>
+          </div>
+          <div class="second-section-min">
+            <mat-form-field appearance="outline">
+              <mat-label>Plafond Découvert</mat-label>
+              <input type="number" matInput formControlName="plafondDecouvert" />
+            </mat-form-field>
+          </div>
+          <div class="second-section-min">
+            <mat-form-field appearance="outline">
+              <mat-label>Cumul Jour</mat-label>
+              <input type="number" matInput formControlName="cumulJour" />
+            </mat-form-field>
+          </div>
+          <div class="second-section-min">
+            <mat-form-field appearance="outline">
+              <mat-label>Plafond SBF</mat-label>
+              <input type="number" matInput formControlName="plafondSbf" />
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <div class="div-menu">
+        <button mat-raised-button matStepperNext>Suivant</button>
+      </div>
+    </mat-step>
+    <mat-step label="Pouvoirs Type De Compte">
+      <button mat-raised-button [disabled]="disabled" style="margin-bottom: 20px" (click)="openDialogTypeCompte()">
+        Nouveau
+      </button>
+      <table mat-table [dataSource]="dataSourceTypeCompte" class="mat-elevation-z8">
+        <ng-container matColumnDef="typeCompte">
+          <th mat-header-cell *matHeaderCellDef>Type compte</th>
+          <td mat-cell *matCellDef="let objectCompte">
+            {{ objectCompte.typeCompte.code }} - {{objectCompte.typeCompte.libelle}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="montantMaxDeb">
+          <th mat-header-cell *matHeaderCellDef>Montant Max Debit</th>
+          <td mat-cell *matCellDef="let objectCompte">
+            {{ objectCompte.montantMaxDebit }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cumulJour">
+          <th mat-header-cell *matHeaderCellDef>Cumul Jour</th>
+          <td mat-cell *matCellDef="let objectCompte" class="action-link">
+            {{ objectCompte.cumulJourCourant }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsTypeCompte"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsTypeCompte"></tr>
+      </table>
+      <mat-paginator style="width: 90%; margin: auto" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+      </mat-paginator>
+      <div class="div-menu">
+        <button mat-raised-button matStepperPrevious style="margin: auto">
+          Précedent
+        </button>
+        <button mat-raised-button matStepperNext style="margin: auto">
+          Suivant
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Pouvoirs Type Opération">
+      <button mat-raised-button [disabled]="disabled" style="margin-bottom: 20px" (click)="openDialogTypeOperation()">
+        Nouveau
+      </button>
+      <table mat-table [dataSource]="dataSourceTypeOperation" class="mat-elevation-z8">
+        <ng-container matColumnDef="typeOperation">
+          <th mat-header-cell *matHeaderCellDef>Type opération</th>
+          <td mat-cell *matCellDef="let objectOperation">
+            {{ objectOperation.typeOperationDTO.code }} - {{ objectOperation.typeOperationDTO.libelle }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="montantMaxDeb">
+          <th mat-header-cell *matHeaderCellDef>Montant Max Debit</th>
+          <td mat-cell *matCellDef="let objectOperation">
+            {{ objectOperation.montantMaxProv }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cumulJour">
+          <th mat-header-cell *matHeaderCellDef>Cumul Jour</th>
+          <td mat-cell *matCellDef="let objectOperation">
+            {{ objectOperation.cumulJour }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsTypeOperation"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsTypeOperation"></tr>
+      </table>
+      <mat-paginator style="width: 90%; margin: auto" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+      </mat-paginator>
+      <div class="div-menu">
+        <button mat-raised-button matStepperPrevious style="margin: auto">
+          Précedent
+        </button>
+        <button mat-raised-button matStepperNext style="margin: auto">
+          Suivant
+        </button>
+      </div>
+    </mat-step>
+
+    <mat-step label="Gestionnaires Autorisés">
+      <!-- <microfi-add-chips enum="{{ enum }}"></microfi-add-chips> -->
+      <div class="row col-12">
+        <div class="col-5">
+          <mat-card style="height: 50vh;overflow-y: auto">
+            <mat-selection-list #shoesLeft (selectionChange)="leftChange($event, shoesLeft)">
+              <mat-list-option [disabled]="disabled" *ngFor="let gestionnaireDispo of gestionnairesDispo;let i=index" [value]="gestionnaireDispo">
+                {{gestionnaireDispo.code}} - {{gestionnaireDispo.libelle}}
+              </mat-list-option>
+            </mat-selection-list>
+          </mat-card>
+        </div>
+        <div class="col-2 d-flex p-0" style="flex-direction: column;">
+          <button [disabled]="disabled" mat-raised-button class="w-100 mb-1" color="primary" (click)="toggleSelection('all', 'right')">
+            <mat-icon class="icon">arrow_forward</mat-icon>Tout
+          </button>
+          <button [disabled]="disabled" mat-raised-button class="w-100 mb-1" color="primary" (click)="toggleSelection('selected', 'right')">
+            <mat-icon class="icon">arrow_forward</mat-icon>Selection
+          </button>
+          <button [disabled]="disabled" mat-raised-button class="w-100 mb-1" color="primary" (click)="toggleSelection('selected', 'left')">
+            <mat-icon class="icon">arrow_back</mat-icon>Selection
+          </button>
+          <button [disabled]="disabled" mat-raised-button class="w-100 mb-1" color="primary" (click)="toggleSelection('all', 'left')">
+            <mat-icon class="icon">arrow_back</mat-icon>Tout
+          </button>
+        </div>
+        <div class="col-5">
+          <mat-card style="height: 50vh;overflow-y: auto">
+            <mat-selection-list #shoesRight (selectionChange)="rightChange($event, shoesRight)">
+              <mat-list-option *ngFor="let gestionnaireAttribue of gestionnairesAttribues;let i=index" [value]="gestionnaireAttribue" [disabled]="disabled">
+                {{gestionnaireAttribue.code}} - {{gestionnaireAttribue.libelle}}
+              </mat-list-option>
+            </mat-selection-list>
+          </mat-card>
+        </div>
+
+      </div>
+      <div class="div-menu">
+
+        <button mat-raised-button matStepperPrevious style="margin: auto">
+          Précedent
+        </button>
+        <button mat-raised-button matStepperNext style="margin: auto" [disabled]="disabled"
+        (click)="doSave(managerFormViewGroup.value)">
+        Valider
+      </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-card>

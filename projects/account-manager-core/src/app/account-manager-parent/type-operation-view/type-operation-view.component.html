@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Pouvoir Type opération</h2>
+<form [formGroup]="typeOperationForm" class="first-section">
+  <mat-dialog-content>
+    <microfi-select-auto-complete
+      url="{{ urlTypeOperationList }}"
+      requestType="{{ requestType }}"
+      formControlName="typeOperation"
+      libelle="Type opération"
+    >
+    </microfi-select-auto-complete>
+  </mat-dialog-content>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Montant</mat-label>
+      <input formControlName="montantMaxProv" matInput />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-content>
+    <mat-form-field appearance="outline">
+      <mat-label>Cumul Prov Jour</mat-label>
+      <input formControlName="cumulJour" matInput />
+    </mat-form-field>
+  </mat-dialog-content>
+</form>
+
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    mat-dialog-close
+    class="btn-menu"
+    [mat-dialog-close]="null"
+  >
+    <mat-icon class="icon">close</mat-icon>
+    Annuler
+  </button>
+  <button
+    mat-raised-button
+    mat-dialog-close
+    class="btn-menu"
+    [mat-dialog-close]="typeOperationForm.value"
+  >
+    <mat-icon class="icon">save</mat-icon>
+    Enregistrer
+  </button>
+</mat-dialog-actions>

@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter, forwardRef, Injector, SimpleChanges } from '@angular/core';
 import { NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MainComponent } from '../main/main.component';
-import { AdossageComponent } from '../../template/adossage/adossage.component';
-import { Subscription } from 'rxjs';
+import { AdossageComponent } from '../adossage/adossage.component';
 import { environment } from '../../environments/environment.prod';
+import { Subscription } from 'rxjs';
 // export const CUSTOM_INPUT_CONTROL_VALUE: any =
 @Component({
   selector: 'microfi-account-form',
@@ -13,15 +13,16 @@ import { environment } from '../../environments/environment.prod';
     { provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => MicrofiAccountFormComponent), multi: true }
   ]
 
-
 })
 export class MicrofiAccountFormComponent extends MainComponent implements ControlValueAccessor {
 
   @Input('isDisabled') isDisabled = false;
   @Input('label') label = 'Compte';
   @Input('adossage') adossage: boolean = false;
+  @Input('directSearch') directSearch: boolean = false;
   @Input('actif') actif = true;
   @Input('parentForm') parentForm: FormGroup;
+  @Input('forCustomer') forCustomer = '';
   @Input('checkOpposition') checkOpposition: boolean = false;
   @Output() selectedUserChange: EventEmitter<any> = new EventEmitter<any>();
   @Input('selectedUser') selectedUser: any = {
@@ -57,7 +58,7 @@ export class MicrofiAccountFormComponent extends MainComponent implements Contro
 
   users = [];
   innerValue: any;
-  directSearch = false;
+  // directSearch = false;
   selectAutoComplete: FormGroup = this.formBuilder.group({
     item: ['']
   });
@@ -134,8 +135,13 @@ export class MicrofiAccountFormComponent extends MainComponent implements Contro
     console.log(value);
     if (value != null) {
       this.selectAutoComplete.patchValue({ item: value });
-
       this.onTouched();
+      if (this.directSearch) {
+        this.selectedUser = value;
+        this.typedValue = value.intituleCompte;
+        this.searchUser();
+      }
+
     }
   }
 
@@ -159,9 +165,10 @@ export class MicrofiAccountFormComponent extends MainComponent implements Contro
       this.typedValue = this.selectedUser.intituleCompte;
       // this.directSearch = false;
       this.searchUser();
+      console.log('any');
       this.actualValue = this.selectedUser;
     }
-    console.log('any1')
+    console.log('any1');
 
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -258,7 +265,14 @@ export class MicrofiAccountFormComponent extends MainComponent implements Contro
   }
   onRowSelect(compte: any, op: any) {
     console.log(compte);
+    console.log(this.forCustomer);
+    console.log(this.parentForm);
     // this.actualValue = this.selectedUser;
+    if (this.forCustomer.length >= 8) {
+      if (compte.client.idUtilisateur != this.forCustomer) {
+        return;
+      }
+    }
     this.actualValue = compte;
     this.selectedUser = compte;
     // this.writeValue(compte);
@@ -273,11 +287,12 @@ export class MicrofiAccountFormComponent extends MainComponent implements Contro
     this.onSelectedItem.emit({ item: this.selectedUser });
     this.selectedUserChange.emit({ item: this.selectedUser });
     if (this.parentForm != null && this.parentForm != undefined) {
-      // this.parentForm.setValue({ item: compte });
-      this.selectAutoComplete.controls['item'].setValue(compte);
+      this.parentForm.patchValue({ compte: compte });
+      // this.selectAutoComplete.controls['item'].setValue(compte);
     }
+
     op.toggle(this.cardAnchor);
-    // console.log(this.parentForm);
+    // console.log('xxxxxxxxxxxxxxxxxxxxxx',this.parentForm);
     // console.log(this.actualValue);
     // console.log(this.selectedUser);
   }
@@ -291,16 +306,37 @@ export class MicrofiAccountFormComponent extends MainComponent implements Contro
     this.findDTOUsers.alias = {};
     this.findDTOUsers.like = {};
     // this.findDTOUsers.alias[this.critere.code] = this.critere.code;
+    // console.log('cccccccccccccccc',this.typedValue);
+    // console.log('cccccccccccccccc',this.selectedUser);
     if (this.typedValue !== undefined && this.typedValue !== null) {
       this.findDTOUsers.like[this.critere.code] = this.typedValue.toUpperCase() + '%';
       if (this.critere.alias != '') {
         this.findDTOUsers.alias[this.critere.alias] = this.critere.alias;
       }
+      if (this.directSearch == true) {
+        this.findDTOUsers.like['numeroCompte'] = this.selectedUser.numeroCompte.toUpperCase() + '%';
+      }
+      console.log(this.findDTOUsers);
       this.apiService.post(this.url, this.findDTOUsers).subscribe((data) => {
-        this.users = data.returnValue;
+        if (this.forCustomer.length >= 5) {
+          let finalUser = [];
+          console.log(this.forCustomer)
+          data.returnValue.forEach(element => {
+            if (element.client.idUtilisateur == this.forCustomer) {
+              finalUser.push(element);
+            }
+          });
+          this.users = finalUser;
+        } else {
+          this.users = data.returnValue;
+        }
+
+        console.log(this.users);
+
         if (this.directSearch == true && data.returnValue.length > 0) {
           this.actualValue = data.returnValue[0];
-          // this.directSearch = false;
+          this.directSearch = false;
+          console.log(this.actualValue);
         }
       })
     }
@@ -318,7 +354,9 @@ export class MicrofiAccountFormComponent extends MainComponent implements Contro
         this.onSelectedItem.emit({ item: compte });
         this.selectedUserChange.emit({ item: compte });
         this.selectAutoComplete.controls['item'].setValue(compte);
+        this.parentForm.setValue({ item: compte });
         this.onChange(compte);
+        console.log('xxxxxxxxxxxxxxxxxxxxxx', this.parentForm);
         return compte;
       } else {
 

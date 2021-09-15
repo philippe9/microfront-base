@@ -1,55 +1,55 @@
-<br />
-<div class="container">
-  <mat-card>
-    <mat-card-title>Gestion des comptes dormants</mat-card-title>
+<div class="card m-3 mb-0">
+  <!-- <mat-card-title></mat-card-title> -->
+  <div class="card-header">
+    <h6 class="m-0 p-0">Gestion des comptes dormants</h6>
+  </div>
+  <div class="card-body">
+
     <div class="row">
       <div class="col-10">
-        <mat-card>
-          <mat-card-title style="font-size: medium;">Option de recherche</mat-card-title>
-          <form [formGroup]="searchDetails">
-            <div class="row">
-              <div class="col-6">
-                <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
-                  formControlName="uniteBancaire" libelle='Unité Bancaire'>
-                </microfi-select-auto-complete>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>N° Compte</mat-label>
-                  <input formControlName="numeroCompte" matInput>
-                </mat-form-field>
-              </div>
-              <div class="col-6">
-                <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
-                  formControlName="agence" libelle='Agence'>
-                </microfi-select-auto-complete>
-                <mat-form-field appearance="outline" class="w-50 pr-1">
-                  <mat-label>En cours ?</mat-label>
-                  <mat-select formControlName="enCours">
-                    <mat-option value=""></mat-option>
-                    <mat-option value="Oui">Oui</mat-option>
-                    <mat-option value="Non">Non</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="w-50">
-                  <mat-label>Dormant ?</mat-label>
-                  <mat-select formControlName="dormant">
-                    <mat-option value=""></mat-option>
-                    <mat-option value="Oui">Oui</mat-option>
-                    <mat-option value="Non">Non</mat-option>
-                  </mat-select>
-                </mat-form-field>
-                <div class="col-12 right-align pt-1">
-                  <button mat-raised-button color="primary" (click)="search()">Rechercher</button>
-                </div>
+        <h6 style="font-size: medium;">Option de recherche</h6>
+        <form [formGroup]="searchDetails">
+          <div class="row">
+            <div class="col-6">
+              <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+                formControlName="uniteBancaire" class="mb-1" libelle='Unité Bancaire'>
+              </microfi-select-auto-complete>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>N° Compte</mat-label>
+                <input formControlName="numeroCompte" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
+                formControlName="agence" class="mb-1" libelle='Agence'>
+              </microfi-select-auto-complete>
+              <mat-form-field appearance="outline" class="w-50 pr-1">
+                <mat-label>En cours ?</mat-label>
+                <mat-select formControlName="enCours">
+                  <mat-option value=""></mat-option>
+                  <mat-option value="Oui">Oui</mat-option>
+                  <mat-option value="Non">Non</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="w-50">
+                <mat-label>Dormant ?</mat-label>
+                <mat-select formControlName="dormant">
+                  <mat-option value=""></mat-option>
+                  <mat-option value="Oui">Oui</mat-option>
+                  <mat-option value="Non">Non</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="col-12 right-align mb-1">
+                <button mat-raised-button color="primary" (click)="search()">Rechercher</button>
               </div>
             </div>
+          </div>
 
-          </form>
+        </form>
 
-        </mat-card>
+        <div class="table-scroll-container">
 
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource">
-
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 h-100">
             <ng-container matColumnDef="agence">
               <th mat-header-cell *matHeaderCellDef> Agence</th>
               <td mat-cell *matCellDef="let element"> {{element.agence}} </td>
@@ -98,25 +98,19 @@
 
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
-
       </div>
       <div class="col-2">
-        <div class="d-flex menu-btn-right">
-          <button mat-raised-button color="primary">
-            Lever
-          </button>
-          <button mat-raised-button color="primary">
-            <mat-icon class="icon">print</mat-icon>
-            Imprimer
-          </button>
-          <button mat-raised-button color="primary">
-            Actualiser
-          </button>
+        <div class="d-flex menu-btn-right align-items-center">
+          <microfi-button class="w-50" [name]="'Lever'">
+          </microfi-button>
+          <microfi-button class="w-50" [name]="'Imprimer'">
+          </microfi-button>
+          <microfi-button class="w-50" [name]="'Actualiser'">
+          </microfi-button>
+
         </div>
       </div>
     </div>
-
-  </mat-card>
-
+  </div>
 
 </div>

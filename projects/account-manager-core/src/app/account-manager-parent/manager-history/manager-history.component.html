@@ -1,0 +1,88 @@
+<mat-card class="container">
+  <mat-card-title>Historique Gestionnaire</mat-card-title>
+  <mat-card>
+    <mat-card-title>Option de recherche</mat-card-title>
+    <form [formGroup]="managerHistoryFormGroup">
+
+      <div class="row">
+        <microfi-user-form class="col-6" [parentForm]="managerHistoryFormGroup"
+          (onSelectedItem)="selectedUserClicked($event)" formControlName="customer">
+        </microfi-user-form>
+
+        <microfi-account-form class="col-6" [parentForm]="managerHistoryFormGroup"
+          (onSelectedItem)="selectedAccountClicked($event)" formControlName="account">
+        </microfi-account-form>
+        <!-- <microfi-select-customer-form formControlName="customer2" class="col-6"></microfi-select-customer-form>
+        <microfi-select-account-form class="col-6" formControlName="account2" [(lable)]="labelClient"
+          [(disable)]="DisableClient">
+        </microfi-select-account-form> -->
+        <div class="col-12 mt-1" style="display: flex;justify-content: flex-end;">
+          <microfi-button [name]="'Rechercher'" (click)="find()"></microfi-button>
+        </div>
+      </div>
+    </form>
+    <br />
+  </mat-card>
+  <div class="row">
+    <div class="col-8"></div>
+    <div class="col-4">
+      <microfi-button [name]="'Imprimer'"></microfi-button> &nbsp;
+      <microfi-button [name]="'Aide'"></microfi-button> &nbsp;
+    </div>
+  </div>
+  <mat-card>
+    <mat-card-title>Liste des clients, personnes morales</mat-card-title>
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="numMenbre">
+        <th mat-header-cell *matHeaderCellDef>Numero Client</th>
+        <td mat-cell *matCellDef="let element">{{element.clientCode}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="numCompte">
+        <th mat-header-cell *matHeaderCellDef>Intitule Client</th>
+        <td mat-cell *matCellDef="let element">{{ element.clientTitle }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="intituleMenbre">
+        <th mat-header-cell *matHeaderCellDef>Numero Compte</th>
+        <td mat-cell *matCellDef="let element">{{ element.compteNumero }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="intituleCompte">
+        <th mat-header-cell *matHeaderCellDef>Intitule Compte</th>
+        <td mat-cell *matCellDef="let element">{{ element.compteTitle }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ancienGestionnaire">
+        <th mat-header-cell *matHeaderCellDef>Gestionnaire avant</th>
+        <td mat-cell *matCellDef="let element">{{ element.gestionnaireAvantName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nouveauGestionnaire">
+        <th mat-header-cell *matHeaderCellDef>Gestionnaire apres</th>
+        <td mat-cell *matCellDef="let element">{{ element.gestionnaireApresName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="utiSaisie">
+        <th mat-header-cell *matHeaderCellDef>Uti Cre</th>
+        <td mat-cell *matCellDef="let element">{{ element.utiCre }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="dateChangement">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.dateChangement }}</td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element" class="action-link">
+          <mat-icon class="icon">edit</mat-icon>
+          <mat-icon class="icon">delete</mat-icon>
+        </td>
+      </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-card>
+</mat-card>
