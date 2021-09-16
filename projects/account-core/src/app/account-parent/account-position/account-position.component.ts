@@ -134,9 +134,9 @@ export class AccountPositionComponent extends MainComponent {
   }
   consultHistorique() {
     if (this.selectedItemOnTables.client === null || this.selectedItemOnTables.client === undefined) {
-      this.router.navigate([environment.routes.accountPositionHistory.url], { queryParams: { mode: Dialog.MODIFICATION, code: "", idClient: "" } });
+      this.router.navigate(['account/' + environment.routes.accountPositionHistory.url], { queryParams: { mode: Dialog.MODIFICATION, code: "", idClient: "" } });
     } else {
-      this.router.navigate([environment.routes.accountPositionHistory.url], { queryParams: { mode: Dialog.MODIFICATION, code: this.selectedItemOnTables.numeroCompte, idClient: this.selectedItemOnTables.client.idClient } });
+      this.router.navigate(['account/' + environment.routes.accountPositionHistory.url], { queryParams: { mode: Dialog.MODIFICATION, code: this.selectedItemOnTables.numeroCompte, idClient: this.selectedItemOnTables.client.idClient } });
     }
 
   }

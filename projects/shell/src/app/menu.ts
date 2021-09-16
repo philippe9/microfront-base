@@ -219,19 +219,19 @@ export const MICROFI_MENU = [
         "code": 13,
         "subMenu": [
           {
-            "url": "account-manager",
+            "url": "account-manager/account-manager",
             "breadcumb": "Gestionnaire",
             "code": 13,
             "subMenu": []
           },
           {
-            "url": "change-gestionnaire",
+            "url": "account-manager/change-gestionnaire",
             "breadcumb": "Changement gestionnaire",
             "code": 13,
             "subMenu": []
           },
           {
-            "url": "account-manager-history",
+            "url": "account-manager/account-manager-history",
             "breadcumb": "Historique gestionnaire",
             "code": 13,
             "subMenu": []

@@ -19,7 +19,10 @@ Demonstrates webpack 5 Module Federation with Angular and the Angular Router.
 - Run at the root ng g application user-core --skip-install=true
 - Add aot:true in the object of the project in angular.json, user-core->architect->build->options (add it here)
 - Then run ng add @angular-architects/module-federation --project user-core --port 3000(new port)
+- Create a new module in the new project and expose it, uncomment the name, filename and expose the module (Do not expose app.component)
+- Add @angular/platform-browser-dynamic in the shared libs of the new project and any other dependency needed
 - Add entry point in shell
+- Add base route of project in app.routes.ts
 
 ## New Library project
 

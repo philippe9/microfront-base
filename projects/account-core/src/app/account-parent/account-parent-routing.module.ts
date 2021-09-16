@@ -26,7 +26,7 @@ import { Dialog } from 'projects/shared-lib/src/domain/dialog.enum';
 let env = environment.routes;
 const routes: Routes = [
   {
-    path: 'account/account/view/:cle/:num',
+    path: 'view/:cle/:num',
     component: AccountViewComponent,
     resolve: {
       Response: AccountResolver,
@@ -36,7 +36,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'account/account/edit/:cle/:num',
+    path: 'edit/:cle/:num',
     component: AccountViewComponent,
     resolve: {
       Response: AccountResolver,
@@ -46,14 +46,14 @@ const routes: Routes = [
     }
   },
   {
-    path: 'account/account/create',
+    path: 'create',
     component: AccountViewComponent,
     data: {
       mode: Dialog.CREATION
     }
   },
   {
-    path: 'account/account/validate/:cle/:num',
+    path: 'validate/:cle/:num',
     component: AccountViewComponent,
     resolve: {
       Response: AccountResolver,

@@ -14,7 +14,7 @@ let env = environment.routes;
 const routes: Routes = [
 
   {
-    path: 'account-manager/view/:id',
+    path: 'view/:id',
     component: ManagerViewComponent,
     resolve: {
       Response: AccountManagerResolver,
@@ -24,7 +24,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'account-manager/edit/:id',
+    path: 'edit/:id',
     component: ManagerViewComponent,
     resolve: {
       Response: AccountManagerResolver,
@@ -34,7 +34,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'account-manager/create',
+    path: 'create',
     component: ManagerViewComponent,
     data: {
       mode: Dialog.CREATION
@@ -47,7 +47,7 @@ const routes: Routes = [
     data: { title: 'Clients', breadcrumb: env.accountManager.breadcumb },
   },
   {
-    path: 'account-manager/view/:code',
+    path: 'view/:code',
     component: ManagerViewComponent,
     resolve: {
       Response: AccountManagerResolver,
@@ -57,7 +57,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'account-manager/edit/:code',
+    path: 'edit/:code',
     component: ManagerViewComponent,
     resolve: {
       Response: AccountManagerResolver,
@@ -67,7 +67,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'account-manager/create',
+    path: 'create',
     component: ManagerViewComponent,
     resolve: {
       Response: AccountManagerResolver,

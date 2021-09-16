@@ -1,4 +1,4 @@
-<div class="card m-3 mb-0">
+<div class="card m-3 mt-0 mb-0">
   <div class="card-header">
 
     <h6>Gestion des clients (Personne Morale)</h6>
@@ -10,7 +10,7 @@
         <h6>Option de recherche</h6>
         <form [formGroup]="searchFormGroup">
 
-          <div class="row">
+          <div class="row mb-1">
             <div class="col-6">
               <microfi-select-auto-complete formControlName="unite" libelle={{uniteLibelle}}
                 url={{urlUniteBancaireList}} requestType={{requestType}}>

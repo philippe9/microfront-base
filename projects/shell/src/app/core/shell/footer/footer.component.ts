@@ -9,7 +9,7 @@ import { environment } from 'projects/shared-lib/src/environments/environment.pr
       <p fxFlexAlign="center" class="footer-content">Version {{ version }}</p>
       <p fxFlexAlign="center" class="footer-content">Granite X is up to date</p>
     </div> -->
-    <div class="w-100 text-center" style="position:absolute;bottom:0px"><small class="mr-2">Version {{ version }}</small><small>Granite X is up to date</small><div>
+    <div class="w-100 text-center"><small class="mr-2">Version {{ version }}</small><small>Granite X is up to date</small><div>
   `,
   styles: [`
     #footer {

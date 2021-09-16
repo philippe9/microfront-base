@@ -14,6 +14,9 @@ import { ChangeManagerComponent } from './change-manager/change-manager.componen
 import { MaterialModule } from 'projects/shared-lib/src/material/material.module';
 import { TemplateModule } from 'projects/shared-lib/src/template/template.module';
 import { AccountManagerParentRoutingModule } from './account-manager-parent-routing.module';
+import { AccountManagerResolver } from './account-manager.resolver';
+import { AccountManagerService } from './account-manager.service';
+import { ApiService } from 'projects/shared-lib/src/template/api.service';
 @NgModule({
   declarations: [
     ManagerComponent, ManagerViewComponent,
@@ -31,6 +34,8 @@ import { AccountManagerParentRoutingModule } from './account-manager-parent-rout
     MaterialModule,
     TemplateModule,
     AccountManagerParentRoutingModule
-  ]
+  ],
+  providers: [AccountManagerResolver, AccountManagerService, ApiService],
+
 })
 export class AccountManagerParentModule { }

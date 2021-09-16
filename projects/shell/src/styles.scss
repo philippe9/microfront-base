@@ -462,6 +462,15 @@ td.mat-footer-cell,
   font-size: 1em !important;
 }
 
+.p-overlaypanel-close-icon {
+  font-size: 1em !important;
+}
+
+.p-overlaypanel-content .mat-list-base {
+  height: 220px !important;
+  overflow-y: auto !important;
+}
+
 .ui-overlaypanel .mat-list-base {
   height: 220px !important;
   overflow-y: auto !important;
@@ -498,6 +507,7 @@ body .ui-inputtext {
   min-height: 50vh;
   overflow-y: scroll;
   height: 100%;
+  max-height: 50vh;
 }
 
 tr.mat-header-row {
@@ -535,4 +545,18 @@ table {
 .card-container {
   min-height: 90vh;
   max-height: 90vh;
+}
+
+.p-inputtext {
+  padding: 0px !important;
+}
+
+.mat-icon {
+  display: none;
+  opacity: 0;
+}
+
+tr.mat-row,
+tr.mat-footer-row {
+  height: 30px !important;
 }

@@ -1,4 +1,4 @@
-<div class="card m-3 mb-0 card-container">
+<div class="card m-3 mt-0 mb-0 card-container">
   <!-- <mat-card-title>Gestion des clients décédés</mat-card-title> -->
   <div class="card-header">
     <h6 class="m-0 p-0">Gestion des clients décédés</h6>
@@ -24,7 +24,7 @@
                 </microfi-user-form>
               </div>
               <div class="col-6"></div>
-              <div class="col-6 right right-align mb-1">
+              <div class="col-6 right right-align mt-1 mb-1">
                 <microfi-button [name]="'Rechercher'" (click)="find()"></microfi-button>
               </div>
             </div>
@@ -69,7 +69,8 @@
       </div>
       <div class="col-2">
         <div class="d-flex menu-btn-right align-items-center">
-          <microfi-button class="w-50" [name]="'Nouveau'" routerLink="/dead-customer-view"></microfi-button>&nbsp;
+          <microfi-button class="w-50" [name]="'Nouveau'" routerLink="customer/dead-customer-view"></microfi-button>
+          &nbsp;
           <microfi-button class="w-50" [name]="'Imprimer'"></microfi-button>&nbsp;
           <microfi-button class="w-50" [name]="'Consulter'"></microfi-button>&nbsp;
           <microfi-button class="w-50" [name]="'Modifier'" (click)="updateDeces()"></microfi-button>&nbsp;

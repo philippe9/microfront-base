@@ -84,13 +84,13 @@ export class MoralPersonListComponent extends ViewComponent {
   }
   public redirectToDetails = () => {
     var user = this.selectedItemOnTables
-    this.router.navigate([environment.routes.moralCustomer.url], { queryParams: { mode: Dialog.CONSULTATION, code: user.idClient } });
+    this.router.navigate(['customer/' + environment.routes.moralCustomer.url], { queryParams: { mode: Dialog.CONSULTATION, code: user.idClient } });
   }
 
   public redirectToUpdate = () => {
     var user = this.selectedItemOnTables
 
-    this.router.navigate([environment.routes.moralCustomer.url], { queryParams: { mode: Dialog.MODIFICATION, code: user.idClient } });
+    this.router.navigate(['customer/' + environment.routes.moralCustomer.url], { queryParams: { mode: Dialog.MODIFICATION, code: user.idClient } });
   }
 
   async deleteUser() {

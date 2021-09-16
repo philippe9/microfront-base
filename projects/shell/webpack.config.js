@@ -25,12 +25,16 @@ module.exports = {
     new ModuleFederationPlugin({
 
       // No remotes configured upfront anymore!
+      // remotes: {
+      //   'customerCore': "customerCore@http://localhost:3001/remoteEntry.js",
+      //   'accountCore': "accountCore@http://localhost:3002/remoteEntry.js",
+      //   'accountManagerCore': "accountManagerCore@http://localhost:3003/remoteEntry.js"
+      // },
       remotes: {
-        'customerCore': "customerCore@http://localhost:3001/remoteEntry.js",
-        'accountCore': "accountCore@http://localhost:3002/remoteEntry.js",
-        'accountManagerCore': "accountManagerCore@http://localhost:3003/remoteEntry.js"
+        'customerCore': "customerCore@http://localhost/dist_prod/customer-core/remoteEntry.js",
+        'accountCore': "accountCore@http://localhost/dist_prod/account-core/remoteEntry.js",
+        'accountManagerCore': "accountManagerCore@http://localhost/dist_prod/account-manager-core/remoteEntry.js"
       },
-
       shared: share({
         "@angular/core": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
         "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' },

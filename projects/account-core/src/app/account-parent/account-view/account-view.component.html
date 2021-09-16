@@ -1,4 +1,4 @@
-<div class="container mat-card mt-2">
+<div class="m-3 mt-0 mb-0">
   <mat-horizontal-stepper linear #stepper>
     <mat-step label="Informations sur le menbre"><br />
       <form name="form" #myForm="ngForm">
@@ -117,14 +117,6 @@
         </div>
 
       </form>
-
-      <div class="navigation-button">
-        <button mat-raised-button matStepperNext>Suivant</button>
-      </div>
-
-    </mat-step>
-
-    <mat-step label="Condition de gestion"><br />
       <form [formGroup]="formulaire">
         <div class="row">
           <mat-form-field appearance="outline" class="col-3">
@@ -137,13 +129,13 @@
             <input matInput [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="record.lettrage">
           </mat-form-field>
 
-          <section class="example-section col-3"><br />
+          <section class="example-section col-3" style="display:flex;align-items:center"><br />
             <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
               [(ngModel)]="record.appurable">
               Apurable ?</mat-checkbox>
           </section>
 
-          <section class="example-section col-3"><br />
+          <section class="example-section col-3" style="display:flex;align-items:center"><br />
             <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
               [(ngModel)]="record.reportANouveau">Report à nouveau ?</mat-checkbox>
           </section>
@@ -169,7 +161,7 @@
           </mat-form-field>
 
 
-          <section class="example-section col-3"><br />
+          <section class="example-section col-3" style="display:flex;align-items:center"><br />
             <mat-checkbox class="example-margin" [ngModelOptions]="{standalone: true}" [disabled]="disabled"
               [(ngModel)]="record.taxable">
               Taxable ?</mat-checkbox>
@@ -190,29 +182,9 @@
               matInput placeholder="Ex. It makes me feel..."></textarea>
           </mat-form-field>
         </div>
-
-        <br />
-
-        <div class="row">
-          <div class="col-4">
-
-          </div>
-
-
-          <div class="col-1">
-            <button mat-raised-button matStepperPrevious>Précédent</button>
-          </div>
-          <div class="col-1"></div>
-          <div class="col-1">
-            <button mat-raised-button matStepperNext>Suivant</button>
-          </div>
-
-        </div>
-
-
       </form>
-    </mat-step>
 
+    </mat-step>
     <mat-step label="Propriété du compte"><br />
       <form name="form" class="">
         <div class="row">
@@ -343,19 +315,9 @@
         </div>
 
         <div style="text-align: center;" *ngIf="isEnabled">
-          <button (click)="submit()" mat-raised-button [disabled]="mode==3"
-            color="primary">Enregistrer</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button mat-raised-button>
-            <a [routerLink]="['/account']">
-              Annuler
-            </a>
-          </button>
+          <button (click)="submit()" mat-raised-button [disabled]="mode==3" color="primary">Enregistrer</button>
         </div>
 
-        <br />
-        <div class="navigation-button">
-          <button mat-raised-button matStepperPrevious>Précédent</button>
-        </div>
       </form>
     </mat-step>
   </mat-horizontal-stepper>

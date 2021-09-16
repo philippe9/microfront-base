@@ -1,52 +1,55 @@
-<mat-card class="container">
-  <mat-card-title>Gestion des gestionnaires</mat-card-title>
+<div class="card m-3 mt-0 mb-0">
+  <!-- <mat-card-title></mat-card-title> -->
+  <div class="card-header">
+    <h6 class="m-0 p-0">Gestion des gestionnaires</h6>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-10">
+        <div class="first-section">
+          <h6 style="font-size: medium;">Option de recherche</h6>
+          <form [formGroup]="managerFormGroup">
+            <div class="row">
+              <div class="col-3">
+                <microfi-select-auto-complete formControlName="unite" url="{{ urlUniteBancaireList }}"
+                  requestType="{{ requestType }}" libelle="Unité Bancaire">
+                </microfi-select-auto-complete>
+              </div>
+              <div class="col-2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Code</mat-label>
+                  <input formControlName="code" matInput />
+                </mat-form-field>
+              </div>
+              <div class="col-5">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nom</mat-label>
+                  <input formControlName="nom" matInput />
+                </mat-form-field>
+              </div>
+              <div class="col-2">
+                <microfi-button [name]="'Rechercher'" (click)="find()" [iconName]="'search'"></microfi-button>
+              </div>
+            </div>
+          </form>
+        </div>
 
-  <div class="row">
-    <div class="col-10">
-      <mat-card class="first-section">
-        <mat-card-title>Option de recherche</mat-card-title>
-        <form [formGroup]="managerFormGroup">
-          <div class="row">
-            <div class="col-3">
-              <microfi-select-auto-complete formControlName="unite" url="{{ urlUniteBancaireList }}"
-                requestType="{{ requestType }}" libelle="Unité Bancaire">
-              </microfi-select-auto-complete>
-            </div>
-            <div class="col-2">
-              <mat-form-field appearance="outline">
-                <mat-label>Code</mat-label>
-                <input formControlName="code" matInput />
-              </mat-form-field>
-            </div>
-            <div class="col-5">
-              <mat-form-field appearance="outline">
-                <mat-label>Nom</mat-label>
-                <input formControlName="nom" matInput />
-              </mat-form-field>
-            </div>
-            <div class="col-2">
-              <microfi-button [name]="'Rechercher'" (click)="find()" [iconName]="'search'"></microfi-button>
-            </div>
-          </div>
-        </form>
-      </mat-card>
+        <div class="table-scroll-container">
 
-      <mat-card>
-        <mat-card-title>Liste des gestionnaires</mat-card-title>
-        <table mat-table [dataSource]="dataSource">
-          <ng-container matColumnDef="code">
-            <th mat-header-cell *matHeaderCellDef>Code</th>
-            <td mat-cell *matCellDef="let accountManager">
-              {{ accountManager.code }}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="nom">
-            <th mat-header-cell *matHeaderCellDef>Nom</th>
-            <td mat-cell *matCellDef="let accountManager">
-              {{ accountManager.nom }}
-            </td>
-          </ng-container>
-          <!-- <ng-container matColumnDef="actions">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 h-100">
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef>Code</th>
+              <td mat-cell *matCellDef="let accountManager">
+                {{ accountManager.code }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="nom">
+              <th mat-header-cell *matHeaderCellDef>Nom</th>
+              <td mat-cell *matCellDef="let accountManager">
+                {{ accountManager.nom }}
+              </td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let accountManager" class="action-link">
               <button mat-mini-fab color="primary" [routerLink]="['/account-manager/view', accountManager.code]"
@@ -62,26 +65,31 @@
               </button>
             </td>
           </ng-container> -->
-          <tr mat-header-row *matHeaderRowDef="displayedColumnsGestionnaire"></tr>
-          <tr mat-row (click)="selectedItem(row)" *matRowDef="let row; columns: displayedColumnsGestionnaire"
-            [class.selected_table]="row.code === selectedItemOnTables.code"></tr>
-        </table>
-        <mat-paginator style="width: 90%; margin: auto" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
-        </mat-paginator>
-      </mat-card>
-    </div>
-    <div class="col-2">
-      <div class="d-flex menu-btn-right">
-        <button class="w-100 mb-1" mat-raised-button color="primary"  [routerLink]="['/account-manager/create']">
-          Nouveau
-        </button>
-        <button class="w-100 mb-1" mat-raised-button color="primary" (click)="openPage('Modifier')">Modifier</button>&nbsp;
-        <button class="w-100 mb-1" mat-raised-button color="primary" (click)="openPage('Consulter')">Consulter</button>&nbsp;
-        <button class="w-100 mb-1" mat-raised-button color="primary" (click)="openPage('Supprimer')">Supprimer</button>&nbsp;
-        <button class="w-100 mb-1" mat-raised-button color="primary">Actualiser</button>
-          <button class="w-100" mat-raised-button color="primary">Imprimer</button>
-
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsGestionnaire"></tr>
+            <tr mat-row (click)="selectedItem(row)" *matRowDef="let row; columns: displayedColumnsGestionnaire"
+              [class.selected_table]="row.code === selectedItemOnTables.code"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+          </mat-paginator>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="d-flex menu-btn-right align-items-center">
+          <microfi-button class="w-50 mb-1" [name]="'Nouveau'" color="primary"
+            [routerLink]="['/account-manager/create']">
+          </microfi-button>
+          <microfi-button class="w-50 mb-1" [name]="'Modifier'" color="primary" (click)="openPage('Modifier')">
+          </microfi-button>
+          <microfi-button class="w-50 mb-1" [name]="'Consulter'" color="primary" (click)="openPage('Consulter')">
+          </microfi-button>
+          <microfi-button class="w-50 mb-1" [name]="'Supprimer'" color="primary" (click)="openPage('Supprimer')">
+          </microfi-button>
+          <microfi-button class="w-50 mb-1" [name]="'Actualiser'" color="primary">
+          </microfi-button>
+          <microfi-button class="w-50" [name]="'Imprimer'" color="primary">
+          </microfi-button>
+        </div>
       </div>
     </div>
   </div>
-</mat-card>
+</div>

@@ -40,8 +40,9 @@ const routeAddBreadcrumbLink = 'addBreadcrumbLink';
   selector: 'microfi-breadcrumb',
   template: `
   <nav class="breadcrumb-wrapper">
-  <ul class="breadcrumb">
-    <!-- <span class="breadcrumb-title">{{ breadcrumbs[breadcrumbs.length-1].label }}</span>
+  <ul class="breadcrumb" style="padding-left:2em !important;" *ngIf="breadcrumbs">
+  <div *ngIf="breadcrumbs.length - 1 >= 0">
+     <span class="breadcrumb-title">{{ breadcrumbs[breadcrumbs.length-1].label }}</span>
     <span *ngIf="breadcrumbs.length-1 !== 0" class="separator">
       <li *ngFor="let breadcrumb of breadcrumbs; let last = last" class="breadcrumb-label">
         <span *ngIf="!last" class="breadcrumb-link">
@@ -50,7 +51,8 @@ const routeAddBreadcrumbLink = 'addBreadcrumbLink';
         </span>
         <span *ngIf="last">{{ breadcrumb.label }}</span>
       </li>
-    </span> -->
+    </span>
+    </div>
   </ul>
 </nav>
   `,
@@ -84,11 +86,11 @@ export class BreadcrumbComponent extends AbstractComponent implements OnInit {
       this.breadcrumbs = [];
       let currentRoute = this.activatedRoute.root;
       let currentUrl = '';
-
       while (currentRoute.children.length > 0) {
         const childrenRoutes = currentRoute.children;
         let breadcrumbLabel: any;
         let url: any;
+        console.log(childrenRoutes);
 
         childrenRoutes.forEach(route => {
           currentRoute = route;
@@ -136,6 +138,7 @@ export class BreadcrumbComponent extends AbstractComponent implements OnInit {
           }
         });
       }
+      console.log(this.breadcrumbs.length)
     });
   }
 

@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccountManagerParentModule } from './account-manager-parent/account-manager-parent.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +21,6 @@ import { AccountManagerParentModule } from './account-manager-parent/account-man
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

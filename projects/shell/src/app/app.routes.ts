@@ -18,7 +18,8 @@ export const APP_ROUTES: Routes = [
   {
     path: 'customer',
     loadChildren: () => loadRemoteModule({
-      remoteEntry: 'http://localhost:3001/remoteEntry.js',
+      remoteEntry: 'http://localhost/dist_prod/customer-core/remoteEntry.js',
+      // remoteEntry: 'http://localhost:3001/remoteEntry.js',
       remoteName: 'customerCore',
       exposedModule: './Module',
     })
@@ -27,7 +28,8 @@ export const APP_ROUTES: Routes = [
   {
     path: 'account',
     loadChildren: () => loadRemoteModule({
-      remoteEntry: 'http://localhost:3002/remoteEntry.js',
+      remoteEntry: 'http://localhost/dist_prod/account-core/remoteEntry.js',
+      // remoteEntry: 'http://localhost:3002/remoteEntry.js',
       remoteName: 'accountCore',
       exposedModule: './Module',
     })
@@ -36,7 +38,8 @@ export const APP_ROUTES: Routes = [
   {
     path: 'account-manager',
     loadChildren: () => loadRemoteModule({
-      remoteEntry: 'http://localhost:3003/remoteEntry.js',
+      remoteEntry: 'http://localhost/dist_prod/account-manager-core/remoteEntry.js',
+      // remoteEntry: 'http://localhost:3003/remoteEntry.js',
       remoteName: 'accountManagerCore',
       exposedModule: './Module',
     })

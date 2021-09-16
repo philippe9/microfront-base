@@ -1,5 +1,5 @@
 <b>{{label}}</b>
-<div class="compte_container row mb-1" #frmBody>
+<div class="compte_container row mb-0" #frmBody>
   <form [formGroup]="selectAutoComplete">
     <input type="text" formControlName="item" style="display: none;">
   </form>
@@ -11,7 +11,9 @@
     <input type="text" class="w-100" [(ngModel)]="actualValue.devise.code" pInputText [disabled]="true">
   </div>
   <div class="col-3">
-    <input type="text" class="w-100" [value]="actualValue.numeroCompte" [(ngModel)]="actualValue.numeroCompte" (blur)="focusLost($event)" (keyup)="checkAccountEvent($event, op);" (keypress.enter)="searchUser()" pInputText [disabled]="isDisabled" (ngModelChange)="changeInput($event)">
+    <input type="text" class="w-100" [value]="actualValue.numeroCompte" [(ngModel)]="actualValue.numeroCompte"
+      (blur)="focusLost($event)" (keyup)="checkAccountEvent($event, op);" (keypress.enter)="searchUser()" pInputText
+      [disabled]="isDisabled" (ngModelChange)="changeInput($event)">
   </div>
   <div class="col-2">
     <input type="text" class="w-100" [(ngModel)]="actualValue.cleCompte" (blur)="focusLost($event)" pInputText
@@ -34,10 +36,12 @@
       <mat-option [value]="critereL.code" *ngFor="let critereL of criteres">{{critereL.name}}</mat-option>
     </mat-select>
   </mat-form-field> -->
-  <select name="" id="" [(ngModel)]="critere.code" (change)="changeCriteria($event)" style="width: 25%;margin-right: 5px;">
+  <select name="" id="" [(ngModel)]="critere.code" (change)="changeCriteria($event)"
+    style="width: 25%;margin-right: 5px;">
     <option [value]="critereL.code" *ngFor="let critereL of criteres">{{critereL.name}}</option>
   </select>
-  <input type="text" pInputText style="margin-left: 10px;width: 70%;" [(ngModel)]="typedValue" (keyup)="searchUser()">
+  <input type="text" pInputText style="height:100%;margin-left: 10px;width: 70%;" [(ngModel)]="typedValue"
+    (keyup)="searchUser()">
   <mat-selection-list #shoes [multiple]="false">
     <mat-list-option *ngFor="let compte of users" [value]="user" (click)="onRowSelect(compte, op)">
       {{compte.numeroCompte}}-{{compte.cleCompte}} {{compte.intitule}}

@@ -98,7 +98,7 @@ export class AccountOppositionListComponent extends ViewComponent {
 
   public redirectToUpdate = (code: string) => {
     console.log(code);
-    this.router.navigate([environment.routes.accountCancelOpposition.url], { queryParams: { mode: Dialog.MODIFICATION, code: code } });
+    this.router.navigate(['account/' + environment.routes.accountCancelOpposition.url], { queryParams: { mode: Dialog.MODIFICATION, code: code } });
   }
   selectedItem(item: any) {
     this.selectedItemOnTables = item;

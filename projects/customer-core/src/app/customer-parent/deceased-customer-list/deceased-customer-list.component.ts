@@ -82,6 +82,6 @@ export class DeceasedCustomerListComponent extends ViewComponent {
     }
   }
   updateDeces() {
-    this.router.navigate([environment.routes.deadCustomerView.url], { queryParams: { mode: Dialog.MODIFICATION, code: this.selectedItemOnTables.id } });
+    this.router.navigate(['customer/' + environment.routes.deadCustomerView.url], { queryParams: { mode: Dialog.MODIFICATION, code: this.selectedItemOnTables.id } });
   }
 }

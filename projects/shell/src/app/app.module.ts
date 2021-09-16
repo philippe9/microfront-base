@@ -14,6 +14,7 @@ import { MaterialModule } from 'projects/shared-lib/src/material/material.module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { AuthenticationInterceptor } from 'projects/shared-lib/src/public-api';
+import { ServiceModule } from '../../../shared-lib/src/service/service.module';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { AuthenticationInterceptor } from 'projects/shared-lib/src/public-api';
     MaterialModule,
     BrowserAnimationsModule,
     CoreModule,
+    ServiceModule
   ],
   declarations: [
     AppComponent,

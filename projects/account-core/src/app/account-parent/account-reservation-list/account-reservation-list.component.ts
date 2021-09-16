@@ -89,7 +89,7 @@ export class AccountReservationListComponent extends ViewComponent {
 
   public redirectToUpdate = (code: string,) => {
     if (this.selectedItemOnTables.montantLev <= 0) {
-      this.router.navigate([environment.routes.reservationView.url], { queryParams: { mode: Dialog.MODIFICATION, code: code } });
+      this.router.navigate(['account/' + environment.routes.reservationView.url], { queryParams: { mode: Dialog.MODIFICATION, code: code } });
     } else {
       this.alerteDialog('Levee impossible');
     }
@@ -97,7 +97,7 @@ export class AccountReservationListComponent extends ViewComponent {
   }
 
   public redirectToView = (code: string) => {
-    this.router.navigate([environment.routes.reservationView.url], { queryParams: { mode: Dialog.CONSULTATION, code: code } });
+    this.router.navigate(['account/' + environment.routes.reservationView.url], { queryParams: { mode: Dialog.CONSULTATION, code: code } });
   }
   selectedItem(item: any) {
     this.selectedItemOnTables = item;

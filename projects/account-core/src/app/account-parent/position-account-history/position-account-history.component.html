@@ -12,7 +12,8 @@
               <!-- <microfi-select-account-form formControlName="compte" [(lable)]="labelClient" [(disable)]="DisableClient"
                 class="col-12">
               </microfi-select-account-form> -->
-              <microfi-account-form class="col-12" [isDisabled]="true" [(selectedUser)]="initialAccount" formControlName="compte" [parentForm]="searchDetails" >
+              <microfi-account-form class="col-12" [isDisabled]="true" [(selectedUser)]="initialAccount"
+                formControlName="compte" [parentForm]="searchDetails">
               </microfi-account-form>
             </div>
 
@@ -78,8 +79,9 @@
         </mat-card>
 
 
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource">
+        <div class="table-scroll-container" style="max-height: 40vh;min-height: 40vh;">
+
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 h-100">
 
             <ng-container matColumnDef="historise">
               <th mat-header-cell *matHeaderCellDef>Historisé ?</th>
@@ -135,16 +137,18 @@
           <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
         </div>
       </div>
-      <div class="col-1">
-        <button mat-raised-button color="primary" class="mb-2" (click)="openConsultationLots()">
-          Consulter lot
-        </button>&nbsp;
-        <button mat-raised-button color="primary" class="mb-2">
-          Imprimer
-        </button>
-        <button mat-raised-button color="primary" class="mb-2">
-          Imprimer Excel
-        </button>
+      <div class="col-2">
+        <div class="d-flex menu-btn-right align-items-center">
+
+          <microfi-button class="w-50" (click)="openConsultationLots()" [name]="'Consulter lot'" color="primary">
+          </microfi-button>
+
+          <microfi-button class="w-50" [name]="'Imprimer'" color="primary">
+          </microfi-button>
+          <microfi-button class="w-50" [name]="'Imprimer Excel'" color="primary">
+          </microfi-button>
+
+        </div>
       </div>
     </div>
 

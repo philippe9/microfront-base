@@ -1,6 +1,9 @@
-<div class="mr-4 ml-4">
-  <mat-card>
-    <mat-card-title>Position de compte</mat-card-title>
+<div class="card m-3 mt-0 mb-0">
+  <!-- <mat-card-title>Levée Position Compte</mat-card-title> -->
+  <div class="card-header">
+    <h6 class="m-0 p-0">Position Compte</h6>
+  </div>
+  <div class="card-body">
     <div class="row">
       <div class="col-10">
         <mat-card>
@@ -53,8 +56,6 @@
           </form>
 
         </mat-card>
-
-
       </div>
       <div class="col-2">
         <div class="d-flex menu-btn-right">
@@ -64,12 +65,12 @@
           </microfi-button>
           <microfi-button [name]="'Imprimer'">
           </microfi-button>
-
         </div>
       </div>
-      <div class="col-12">
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource">
+      <div class="col-12 mt-1">
+        <div class="table-scroll-container">
+
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 h-100">
 
             <ng-container matColumnDef="agence">
               <th mat-header-cell *matHeaderCellDef>Agence</th>
@@ -158,8 +159,5 @@
         </div>
       </div>
     </div>
-
-
-  </mat-card>
-
+  </div>
 </div>

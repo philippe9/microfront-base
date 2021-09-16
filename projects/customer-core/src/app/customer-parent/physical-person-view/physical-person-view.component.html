@@ -1,491 +1,457 @@
-<div class="card m-3 mb-0">
-  <div class="card-header">
-    <h6 class="m-0 p-0">Personne physique</h6>
-  </div>
-  <div class="card-body">
+<div style="height: 80vh;overflow-y: scroll;">
+  <div class="card m-3 mt-0 mb-0" sty>
+    <!-- <mat-card-title></mat-card-title> -->
+    <div class="card-header">
+      <h6 class="m-0 p-0">Personnes physique</h6>
+    </div>
+    <div class="card-body">
 
-    <mat-horizontal-stepper linear #stepper>
-      <mat-step label="Informations sur le menbre">
-        <form [formGroup]="physicalPersonForm">
-          <div class="row">
-            <div class="col-6">
-              <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
-                formControlName="uniteBancaire" libelle={{uniteLibelle}} [enable]="isEnabled"
-                [defaultValue]="actualPersonne.idUnite">
-              </microfi-select-auto-complete>
-            </div>
-            <div class="col-6">
-              <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
-                formControlName="agence" libelle={{agenceLibelle}} [enable]="isEnabled"
-                [defaultValue]="actualPersonne.idAgence">
-              </microfi-select-auto-complete>
-            </div>
-          </div>
 
-          <div class="row">
-            <div class="col-3">
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Code</mat-label>
-                <input formControlName="code" matInput [disabled]="true" />
+      <div class="row">
+        <div class="col-10">
+          <form [formGroup]="physicalPersonForm">
+            <div class="row">
+              <div class="col-4">
+                <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+                  formControlName="uniteBancaire" libelle={{uniteLibelle}} [enable]="isEnabled"
+                  [defaultValue]="actualPersonne.idUnite">
+                </microfi-select-auto-complete>
+              </div>
+              <div class="col-4">
+                <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
+                  formControlName="agence" libelle={{agenceLibelle}} [enable]="isEnabled"
+                  [defaultValue]="actualPersonne.idAgence">
+                </microfi-select-auto-complete>
+              </div>
+              <div class="col-4">
+                <microfi-select-auto-complete url={{urlCiviliteList}} requestType={{resquesTypePost}}
+                  formControlName="civilite" libelle="Civilité" [enable]="isEnabled"
+                  [defaultValue]="actualPersonne.civilite">
+                </microfi-select-auto-complete>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Code</mat-label>
+                  <input formControlName="code" matInput [disabled]="true" />
+                </mat-form-field>
+              </div>
+              <div class="col-3">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Sexe</mat-label>
+                  <mat-select formControlName="sexe">
+                    <mat-option value="Homme">Masculin</mat-option>
+                    <mat-option value="Femme">Feminin</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Date de naissance</mat-label>
+                <input formControlName="dateNaissance" matInput type="date" />
+              </mat-form-field>
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Date Adhesion</mat-label>
+                <input matInput [matDatepicker]="picker2" formControlName="dateAdhesion" />
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
             </div>
-            <div class="col-3">
-              <mat-form-field appearance="outline">
-                <mat-label>Sexe</mat-label>
-                <mat-select formControlName="sexe">
-                  <mat-option value="Homme">Masculin</mat-option>
-                  <mat-option value="Femme">Feminin</mat-option>
-                </mat-select>
+            <div class="row">
+              <mat-form-field class="col-6" appearance="outline">
+                <mat-label>Nom</mat-label>
+                <input formControlName="nom" matInput />
+              </mat-form-field>
+              <mat-form-field class="col-6" appearance="outline">
+                <mat-label>Prénom</mat-label>
+                <input formControlName="prenom" matInput />
+              </mat-form-field>
+
+            </div>
+            <div class="row">
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Nbre enfants</mat-label>
+                <input formControlName="nbreEnfant" type="number" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Lieu de Naissance</mat-label>
+                <input formControlName="lieuNaissance" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Nom Jeune fille</mat-label>
+                <input formControlName="nomJeuneFille" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>N° RCCM</mat-label>
+                <input formControlName="numRccm" matInput />
               </mat-form-field>
             </div>
-            <div class="col-6">
-              <microfi-select-auto-complete url={{urlCiviliteList}} requestType={{resquesTypePost}}
-                formControlName="civilite" libelle="Civilité" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.civilite">
-              </microfi-select-auto-complete>
-              <!-- <microfi-lov-form url={{urlCiviliteList}} requestType={{resquesTypePost}}
-            formControlName="civilite" libelle="Civilité" ></microfi-lov-form> -->
+
+            <div class="row">
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Nom Père</mat-label>
+                <input formControlName="nomPere" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Prénom Père</mat-label>
+                <input formControlName="prenomPere" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Nom Mère</mat-label>
+                <input formControlName="nomMere" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Prénom Mère</mat-label>
+                <input formControlName="prenomMere" matInput />
+              </mat-form-field>
             </div>
-          </div>
-          <div class="row">
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Nom</mat-label>
-              <input formControlName="nom" matInput />
-            </mat-form-field>
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Prénom</mat-label>
-              <input formControlName="prenom" matInput />
-            </mat-form-field>
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Date de naissance</mat-label>
-              <input formControlName="dateNaissance" matInput type="date" />
 
-            </mat-form-field>
+            <div class="row">
+              <mat-form-field class="col-4" appearance="outline">
 
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Lieu de Naissance</mat-label>
-              <input formControlName="lieuNaissance" matInput />
-            </mat-form-field>
-          </div>
-          <div class="row">
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Nbre enfants</mat-label>
-              <input formControlName="nbreEnfant" type="number" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Date Adhesion</mat-label>
-              <input matInput [matDatepicker]="picker2" formControlName="dateAdhesion" />
-              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-              <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Nom Jeune fille</mat-label>
-              <input formControlName="nomJeuneFille" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>N° RCCM</mat-label>
-              <input formControlName="numRccm" matInput />
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Nom Père</mat-label>
-              <input formControlName="nomPere" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Prénom Père</mat-label>
-              <input formControlName="prenomPere" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Nom Mère</mat-label>
-              <input formControlName="nomMere" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Prénom Mère</mat-label>
-              <input formControlName="prenomMere" matInput />
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <mat-form-field class="col-4" appearance="outline">
-
-              <!-- <div class="row">
+                <!-- <div class="row">
               <microfi-select-customer-form formControlName="client" (eventSelection)="assignValues($event)"
                 [(ngModel)]="data" class="col-12"></microfi-select-customer-form>
             </div> -->
 
-              <mat-label>Tuteur</mat-label>
-              <input formControlName="tuteur" [value]="tuteur?.code +' - ' + tuteur?.nom+' ' + tuteur?.prenom"
-                matInput />
-            </mat-form-field>
-            <button *ngIf="isEnabled" class="col-1" style="height: 3.3em !important;" (click)="openDialogCreatePerson()"
-              mat-raised-button color="primary">
-              <!-- <mat-icon>add</mat-icon> -->
-              Ajouter
-            </button>
-          </div>
-          <div *ngIf=isView class="col-1">
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Mont. Parts</mat-label>
-              <input formControlName="montPart" type="number" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Mont. Fonds.</mat-label>
-              <input formControlName="montFondSol" type="number" matInput />
-            </mat-form-field>
-          </div>
-        </form>
-        <div class="stepper-bouton">
-          <br />
-          <div class="row">
-            <div class="col-5"></div>
-
-            <div class="col-2">
-              <button mat-raised-button matStepperNext>Suivant
-                <!-- <mat-icon>chevron_right</mat-icon> -->
+                <mat-label>Tuteur</mat-label>
+                <input formControlName="tuteur" [value]="tuteur?.code +' - ' + tuteur?.nom+' ' + tuteur?.prenom"
+                  matInput />
+              </mat-form-field>
+              <button *ngIf="isEnabled" class="col-1" style="height: 3.3em !important;"
+                (click)="openDialogCreatePerson()" mat-raised-button color="primary">
+                Ajouter
               </button>
             </div>
-          </div>
-        </div>
-      </mat-step>
+            <div *ngIf=isView class="col-1">
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Mont. Parts</mat-label>
+                <input formControlName="montPart" type="number" matInput />
+              </mat-form-field>
 
-      <mat-step label="Adresses" [optional]="isOptional">
-        <form [formGroup]="physicalPersonForm">
-          <div class="row">
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Adresse 1</mat-label>
-              <input formControlName="adresse1" matInput />
-            </mat-form-field>
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Mont. Fonds.</mat-label>
+                <input formControlName="montFondSol" type="number" matInput />
+              </mat-form-field>
+            </div>
+          </form>
 
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Adresse 2</mat-label>
-              <input formControlName="adresse2" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Adresse 3</mat-label>
-              <input formControlName="adresse3" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Adresse 4</mat-label>
-              <input formControlName="adresse4" matInput />
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>télephone 1</mat-label>
-              <input formControlName="tel1" type="tel" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>télephone 2</mat-label>
-              <input formControlName="tel2" type="tel" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>télephone 3</mat-label>
-              <input formControlName="tel3" type="tel" matInput />
-            </mat-form-field>
-
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>E-mail</mat-label>
-              <input formControlName="email" type="email" matInput />
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>N. Fax</mat-label>
-              <input formControlName="numFax" matInput />
-            </mat-form-field>
-          </div>
-
-          <mat-card>
-            <mat-card-title style="font-size: medium">Personne à contacter</mat-card-title>
+          <form [formGroup]="physicalPersonForm">
             <div class="row">
               <mat-form-field class="col-3" appearance="outline">
-                <mat-label>Nom</mat-label>
-                <input formControlName="nomPersContacter" matInput />
+                <mat-label>Adresse 1</mat-label>
+                <input formControlName="adresse1" matInput />
               </mat-form-field>
 
               <mat-form-field class="col-3" appearance="outline">
-                <mat-label>Boite Postal</mat-label>
-                <input formControlName="adressePersContacter" matInput />
+                <mat-label>Adresse 2</mat-label>
+                <input formControlName="adresse2" matInput />
               </mat-form-field>
 
               <mat-form-field class="col-3" appearance="outline">
-                <mat-label>télephone</mat-label>
-                <input type="tel" formControlName="telPersContacter" matInput />
+                <mat-label>Adresse 3</mat-label>
+                <input formControlName="adresse3" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>Adresse 4</mat-label>
+                <input formControlName="adresse4" matInput />
               </mat-form-field>
             </div>
-          </mat-card>
-        </form>
-        <div class="row">
-          <div class="col-5"></div>
 
-          <div class="col-1">
-            <button mat-raised-button matStepperPrevious>Précédent
-              <!-- <mat-icon>chevron_left</mat-icon> -->
-            </button>
-          </div>
-          <div class="col-1"></div>
-          <div class="col-1">
-            <button mat-raised-button matStepperNext>Suivant
-              <!-- <mat-icon>chevron_right</mat-icon> -->
-            </button>
-          </div>
+            <div class="row">
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>télephone 1</mat-label>
+                <input formControlName="tel1" type="tel" matInput />
+              </mat-form-field>
 
-        </div>
-      </mat-step>
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>télephone 2</mat-label>
+                <input formControlName="tel2" type="tel" matInput />
+              </mat-form-field>
 
-      <mat-step label="Informations générales" [optional]="isOptional">
-        <form [formGroup]="physicalPersonForm">
-          <div class="row">
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlPaysList}} requestType={{resquesTypeGet}}
-                formControlName="paysOrigine" libelle="Pays origine" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.paysNaissance">
-              </microfi-select-auto-complete>
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>télephone 3</mat-label>
+                <input formControlName="tel3" type="tel" matInput />
+              </mat-form-field>
+
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>E-mail</mat-label>
+                <input formControlName="email" type="email" matInput />
+              </mat-form-field>
             </div>
 
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlPaysList}} requestType={{resquesTypeGet}}
-                formControlName="paysResidence" libelle="Pays résidence" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.paysResidence">
-              </microfi-select-auto-complete>
+            <div class="row">
+              <mat-form-field class="col-3" appearance="outline">
+                <mat-label>N. Fax</mat-label>
+                <input formControlName="numFax" matInput />
+              </mat-form-field>
             </div>
 
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlNationalite}} requestType={{resquesTypePost}}
-                formControlName="nationalite" libelle="Nationalité" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.idNationalite">
-              </microfi-select-auto-complete>
+            <mat-card>
+              <mat-card-title style="font-size: medium">Personne à contacter</mat-card-title>
+              <div class="row">
+                <mat-form-field class="col-3" appearance="outline">
+                  <mat-label>Nom</mat-label>
+                  <input formControlName="nomPersContacter" matInput />
+                </mat-form-field>
+
+                <mat-form-field class="col-3" appearance="outline">
+                  <mat-label>Boite Postal</mat-label>
+                  <input formControlName="adressePersContacter" matInput />
+                </mat-form-field>
+
+                <mat-form-field class="col-3" appearance="outline">
+                  <mat-label>télephone</mat-label>
+                  <input type="tel" formControlName="telPersContacter" matInput />
+                </mat-form-field>
+              </div>
+            </mat-card>
+          </form>
+          <mat-horizontal-stepper linear #stepper>
+
+            <mat-step label="Informations générales" [optional]="isOptional">
+              <form [formGroup]="physicalPersonForm">
+                <div class="row">
+                  <div class="col-3">
+                    <microfi-select-auto-complete url={{urlPaysList}} requestType={{resquesTypeGet}}
+                      formControlName="paysOrigine" libelle="Pays origine" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.paysNaissance">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <div class="col-3">
+                    <microfi-select-auto-complete url={{urlPaysList}} requestType={{resquesTypeGet}}
+                      formControlName="paysResidence" libelle="Pays résidence" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.paysResidence">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <div class="col-3">
+                    <microfi-select-auto-complete url={{urlNationalite}} requestType={{resquesTypePost}}
+                      formControlName="nationalite" libelle="Nationalité" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.idNationalite">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <div class="col-3">
+                    <microfi-select-auto-complete url={{urlTypePieceList}} requestType={{resquesTypePost}}
+                      formControlName="typePiece" libelle="Type identité" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.typePiece2">
+                    </microfi-select-auto-complete>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <mat-form-field class="col-3" appearance="outline">
+                    <mat-label>Numéro d'identité</mat-label>
+                    <input type="text" formControlName="numIdentite" matInput />
+                  </mat-form-field>
+
+                  <mat-form-field class="col-3" appearance="outline">
+                    <mat-label>Délivré à</mat-label>
+                    <input formControlName="lieuDelivrance" matInput />
+                  </mat-form-field>
+
+                  <mat-form-field class="col-3" appearance="outline">
+                    <mat-label>Date de délivrance</mat-label>
+                    <input matInput formControlName="dateDelivrance" [matDatepicker]="picker3" />
+                    <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3></mat-datepicker>
+                  </mat-form-field>
+
+                  <mat-form-field class="col-3" appearance="outline">
+                    <mat-label>Date d'expiration</mat-label>
+                    <input matInput formControlName="dateExpire" [matDatepicker]="picker4" />
+                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4></mat-datepicker>
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <div class="col-3">
+                    <microfi-select-auto-complete url={{urlProfessionList}} requestType={{resquesTypePost}}
+                      formControlName="profession" libelle="Profession" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.idNationalite">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <div class="col-3">
+                    <microfi-select-auto-complete url={{urlSecteurActivite}} requestType={{resquesTypePost}}
+                      formControlName="secteurAct" libelle="Secteur Activité" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.idSecteurActivite">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <mat-form-field class="col-6" appearance="outline">
+                    <mat-label>Employeur</mat-label>
+                    <input formControlName="employeur" matInput />
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <div class="col-4">
+                    <microfi-select-auto-complete url={{urlStatutMatrimoniale}} requestType={{resquesTypePost}}
+                      formControlName="statutMat" libelle="Statut Matrimonale" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.statusMatrimonial">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <div class="col-4">
+                    <microfi-select-auto-complete url={{urlRegimeBienList}} requestType={{resquesTypePost}}
+                      formControlName="regimeBien" libelle="Régime bien" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.regimeBiens">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <div class="col-4">
+                    <microfi-select-auto-complete url={{urlPlageRevenue}} requestType={{resquesTypePost}}
+                      formControlName="revenu" libelle="Revenu" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.plageRevenu">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <div class="col-3"></div>
+                </div>
+              </form>
+              <!-- <div class="row">
+            <div class="col-5"></div>
+
+            <div class="col-1">
+              <button mat-raised-button matStepperPrevious>Précédent
+                <mat-icon>chevron_left</mat-icon>
+              </button>
             </div>
-
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlTypePieceList}} requestType={{resquesTypePost}}
-                formControlName="typePiece" libelle="Type identité" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.typePiece2">
-              </microfi-select-auto-complete>
+            <div class="col-1"></div>
+            <div class="col-1">
+              <button mat-raised-button matStepperNext>Suivant
+                <mat-icon>chevron_right</mat-icon>
+              </button>
             </div>
-          </div>
+          </div> -->
+            </mat-step>
 
-          <div class="row">
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Numéro d'identité</mat-label>
-              <input type="text" formControlName="numIdentite" matInput />
-            </mat-form-field>
+            <mat-step label="Autres informations" [optional]="isOptional">
+              <form [formGroup]="physicalPersonForm">
+                <div class="row">
+                  <microfi-select-auto-complete class="col-6" url={{urlGestionnaireList}} requestType={{requestType}}
+                    formControlName="gestionnaire" libelle="Gestionnaire" [enable]="isEnabled"
+                    [defaultValue]="actualPersonne.idGestionnaire">
+                  </microfi-select-auto-complete>
 
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Délivré à</mat-label>
-              <input formControlName="lieuDelivrance" matInput />
-            </mat-form-field>
+                  <mat-form-field class="col-6" appearance="outline">
+                    <mat-label>Famille</mat-label>
+                    <input type="text" placeholder="Choisir une famille" aria-label="famille" matInput
+                      [formControl]="physicalPersonForm.get('famille')" [matAutocomplete]="auto1" />
+                    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptionsFamilleClient | async" [value]="option">
+                        {{ option }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
 
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Date de délivrance</mat-label>
-              <input matInput formControlName="dateDelivrance" [matDatepicker]="picker3" />
-              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-              <mat-datepicker #picker3></mat-datepicker>
-            </mat-form-field>
+                <div class="row">
+                  <div class="col-6">
+                    <microfi-select-auto-complete url={{urlQualiteList}} requestType={{resquesTypePost}}
+                      formControlName="qualite" libelle="Qualité" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.qualite">
+                    </microfi-select-auto-complete>
+                  </div>
 
-            <mat-form-field class="col-3" appearance="outline">
-              <mat-label>Date d'expiration</mat-label>
-              <input matInput formControlName="dateExpire" [matDatepicker]="picker4" />
-              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
-              <mat-datepicker #picker4></mat-datepicker>
-            </mat-form-field>
-          </div>
+                  <div class="col-6">
+                    <microfi-select-auto-complete url={{urlCategorieInterneList}} requestType={{resquesTypePost}}
+                      formControlName="catInterne" libelle="Cat. interne" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.catInterne">
+                    </microfi-select-auto-complete>
+                  </div>
+                </div>
 
-          <div class="row">
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlProfessionList}} requestType={{resquesTypePost}}
-                formControlName="profession" libelle="Profession" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.idNationalite">
-              </microfi-select-auto-complete>
+                <div class="row">
+                  <div class="col-6">
+                    <microfi-select-auto-complete url={{urlUtilisateurList}} requestType={{resquesTypeGet}}
+                      formControlName="utilAssocie" libelle="Util. associé" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.idUtilisateur">
+                    </microfi-select-auto-complete>
+                  </div>
+                  <mat-form-field class="col-6" appearance="outline">
+                    <mat-label>Groupe</mat-label>
+                    <input type="text" placeholder="Choisir un groupe" aria-label="unité" matInput
+                      [formControl]="physicalPersonForm.get('groupe')" [matAutocomplete]="auto2" />
+                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptionsGroupeClient | async" [value]="option">
+                        {{ option }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <microfi-select-auto-complete class="col-4" url={{urlNatureClientList}}
+                    requestType={{resquesTypePost}} formControlName="nature" libelle="Nature" [enable]="isEnabled"
+                    [defaultValue]="actualPersonne.natureClient">
+                  </microfi-select-auto-complete>
+
+                  <div class="col-4">
+                    <microfi-select-auto-complete url={{urlProfilClientList}} requestType={{resquesTypePost}}
+                      formControlName="profil" libelle="Profil" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.profilClient">
+                    </microfi-select-auto-complete>
+                  </div>
+
+                  <div class="col-4">
+                    <microfi-select-auto-complete url={{urlVilleList}} requestType={{resquesTypePost}}
+                      formControlName="ville" libelle="Ville" [enable]="isEnabled"
+                      [defaultValue]="actualPersonne.ville">
+                    </microfi-select-auto-complete>
+                  </div>
+                </div>
+              </form>
+              <!-- <div class="row">
+            <div class="col-5"></div>
+            <div class="col-4">
+              <button mat-raised-button color="accent">
+                <mat-icon class="icon">close</mat-icon>
+                Annuler
+              </button>
+              &nbsp;&nbsp;&nbsp;
+
             </div>
-
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlSecteurActivite}} requestType={{resquesTypePost}}
-                formControlName="secteurAct" libelle="Secteur Activité" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.idSecteurActivite">
-              </microfi-select-auto-complete>
-            </div>
-
-            <mat-form-field class="col-6" appearance="outline">
-              <mat-label>Employeur</mat-label>
-              <input formControlName="employeur" matInput />
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlStatutMatrimoniale}} requestType={{resquesTypePost}}
-                formControlName="statutMat" libelle="Statut Matrimonale" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.statusMatrimonial">
-              </microfi-select-auto-complete>
-            </div>
-
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlRegimeBienList}} requestType={{resquesTypePost}}
-                formControlName="regimeBien" libelle="Régime bien" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.regimeBiens">
-              </microfi-select-auto-complete>
-            </div>
-
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlPlageRevenue}} requestType={{resquesTypePost}}
-                formControlName="revenu" libelle="Revenu" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.plageRevenu">
-              </microfi-select-auto-complete>
-            </div>
-
             <div class="col-3"></div>
-          </div>
-        </form>
-        <div class="row">
-          <div class="col-5"></div>
+          </div><br /> -->
 
-          <div class="col-1">
-            <button mat-raised-button matStepperPrevious>Précédent
-              <!-- <mat-icon>chevron_left</mat-icon> -->
-            </button>
-          </div>
-          <div class="col-1"></div>
-          <div class="col-1">
-            <button mat-raised-button matStepperNext>Suivant
-              <!-- <mat-icon>chevron_right</mat-icon> -->
-            </button>
-          </div>
+
+            </mat-step>
+          </mat-horizontal-stepper>
         </div>
-      </mat-step>
-
-      <mat-step label="Autres informations" [optional]="isOptional">
-        <form [formGroup]="physicalPersonForm">
-          <div class="row">
-
-            <!-- <mat-form-field class="col-6" appearance="outline">
-            <mat-label>Gestionnaire</mat-label>
-            <input type="text" placeholder="Choisir un gestionnaire" aria-label="gestionnaire" matInput
-              [formControl]="physicalPersonForm.get('gestionnaire')" [matAutocomplete]="auto" />
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptionsGestionnaire | async" [value]="option">
-                {{ option }}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field> -->
-
-            <!-- <microfi-select-auto-complete class="col-6" url={{urlGestionnaireList}} requestType={{resquesTypeGet}}
-            [formControl]="physicalPersonForm.get('gestionnaire')" libelle="Gestionnaire">
-          </microfi-select-auto-complete> -->
-
-            <microfi-select-auto-complete class="col-6" url={{urlGestionnaireList}} requestType={{requestType}}
-              formControlName="gestionnaire" libelle="Gestionnaire" [enable]="isEnabled"
-              [defaultValue]="actualPersonne.idGestionnaire">
-            </microfi-select-auto-complete>
-
-            <mat-form-field class="col-6" appearance="outline">
-              <mat-label>Famille</mat-label>
-              <input type="text" placeholder="Choisir une famille" aria-label="famille" matInput
-                [formControl]="physicalPersonForm.get('famille')" [matAutocomplete]="auto1" />
-              <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptionsFamilleClient | async" [value]="option">
-                  {{ option }}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <microfi-select-auto-complete url={{urlQualiteList}} requestType={{resquesTypePost}}
-                formControlName="qualite" libelle="Qualité" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.qualite">
-              </microfi-select-auto-complete>
-            </div>
-
-            <div class="col-6">
-              <microfi-select-auto-complete url={{urlCategorieInterneList}} requestType={{resquesTypePost}}
-                formControlName="catInterne" libelle="Cat. interne" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.catInterne">
-              </microfi-select-auto-complete>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <microfi-select-auto-complete url={{urlUtilisateurList}} requestType={{resquesTypeGet}}
-                formControlName="utilAssocie" libelle="Util. associé" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.idUtilisateur">
-              </microfi-select-auto-complete>
-            </div>
-            <mat-form-field class="col-6" appearance="outline">
-              <mat-label>Groupe</mat-label>
-              <input type="text" placeholder="Choisir un groupe" aria-label="unité" matInput
-                [formControl]="physicalPersonForm.get('groupe')" [matAutocomplete]="auto2" />
-              <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptionsGroupeClient | async" [value]="option">
-                  {{ option }}
-                </mat-option>
-              </mat-autocomplete>
-            </mat-form-field>
-          </div>
-
-          <div class="row">
-            <microfi-select-auto-complete url={{urlNatureClientList}} requestType={{resquesTypePost}}
-              formControlName="nature" libelle="Nature" [enable]="isEnabled"
-              [defaultValue]="actualPersonne.natureClient">
-            </microfi-select-auto-complete>
-
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlProfilClientList}} requestType={{resquesTypePost}}
-                formControlName="profil" libelle="Profil" [enable]="isEnabled"
-                [defaultValue]="actualPersonne.profilClient">
-              </microfi-select-auto-complete>
-            </div>
-
-            <div class="col-3">
-              <microfi-select-auto-complete url={{urlVilleList}} requestType={{resquesTypePost}} formControlName="ville"
-                libelle="Ville" [enable]="isEnabled" [defaultValue]="actualPersonne.ville">
-              </microfi-select-auto-complete>
-            </div>
-          </div>
-        </form>
-        <div class="row">
-          <div class="col-5"></div>
-          <div class="col-4">
-            <button mat-raised-button color="accent">
-              <!-- <mat-icon class="icon">close</mat-icon> -->
-              Annuler
-            </button>
-            &nbsp;&nbsp;&nbsp;
-            <button mat-raised-button class="btn-valider" (click)="submitForm()">
-              <!-- <mat-icon class="icon">check</mat-icon> -->
-              Valider
-            </button>
-          </div>
-          <div class="col-3"></div>
-        </div><br />
-
-        <div class="row">
-          <div class="col-9"></div>
-          <div class="col-1">
-            <button mat-raised-button matStepperPrevious name="Précédent"></button>
-          </div>&nbsp;&nbsp;
-          <div class="col-1">
-            <button mat-raised-button color="warn" name="Reset" (click)="reset(stepper)"></button>
-          </div>
+        <div class="col-2">
+          <button *ngIf="mode != 3" mat-raised-button color="primary" class="btn-valider" (click)="submitForm()">
+            Valider
+          </button>
         </div>
-      </mat-step>
-    </mat-horizontal-stepper>
+      </div>
+
+      <div class="row">
+        <div class="col-9"></div>
+        <div class="col-1">
+          <button mat-raised-button color="warn" name="Reset" (click)="reset(stepper)"></button>
+        </div>
+        <div class="col-1">
+          <!-- <button mat-raised-button color="primary"  class="btn-valider" (click)="submitForm()">
+        <mat-icon class="icon">check</mat-icon>
+        Valider
+      </button> -->
+        </div>
+
+      </div>
+
+    </div>
   </div>
 </div>

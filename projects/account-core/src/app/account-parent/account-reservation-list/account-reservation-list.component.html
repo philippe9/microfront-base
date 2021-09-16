@@ -1,42 +1,41 @@
-<div class="container">
-  <mat-card>
-    <mat-card-title>Gestion reservation</mat-card-title>
+<div class="card m-3 mt-0 mb-0">
+  <div class="card-header">
+    <h6 class="m-0 p-0">Gestion reservation</h6>
+  </div>
+  <div class="card-body">
     <div class="row">
       <div class="col-10">
-        <mat-card>
-          <mat-card-title style="font-size: medium;">Option de recherche</mat-card-title>
-          <form [formGroup]="searchDetails">
-            <div class="row">
-              <div class="col-6">
-                <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
-                  formControlName="uniteBancaire" libelle={{uniteLibelle}}>
-                </microfi-select-auto-complete>
-                <!-- <p>Compte</p>
+
+        <form [formGroup]="searchDetails">
+          <div class="row">
+            <div class="col-6">
+              <microfi-select-auto-complete url={{urlUniteBancaireList}} requestType={{resquesTypeGet}}
+                formControlName="uniteBancaire" libelle={{uniteLibelle}}>
+              </microfi-select-auto-complete>
+              <!-- <p>Compte</p>
                 <microfi-select-account-form formControlName="compte" [(disable)]="Disabled" class="w-100">
                 </microfi-select-account-form> -->
 
-              </div>
-              <div class="col-6">
-                <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
-                  formControlName="agence" libelle={{agenceLibelle}}>
-                </microfi-select-auto-complete>
-                <mat-checkbox class="w-100" formControlName="en_cours">En cours
-                </mat-checkbox>
-
-              </div>
-              <microfi-account-form class="col-10" [isDisabled]="isView"
-                [parentForm]="searchDetails" formControlName="compte" >
-              </microfi-account-form>
-              <div class="col-2 right-align pt-1">
-                <button mat-raised-button color="primary" (click)="search()">Rechercher</button>
-              </div>
             </div>
-          </form>
+            <div class="col-6">
+              <microfi-select-auto-complete url={{urlAgenceList}} requestType={{resquesTypeGet}}
+                formControlName="agence" libelle={{agenceLibelle}}>
+              </microfi-select-auto-complete>
+              <mat-checkbox class="w-100" formControlName="en_cours">En cours
+              </mat-checkbox>
 
-        </mat-card>
+            </div>
+            <microfi-account-form class="col-10" [isDisabled]="isView" [parentForm]="searchDetails"
+              formControlName="compte">
+            </microfi-account-form>
+            <div class="col-2 right-align pt-1">
+              <button mat-raised-button color="primary" (click)="search()">Rechercher</button>
+            </div>
+          </div>
+        </form>
 
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource">
+        <div class="table-scroll-container">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 h-100">
 
             <ng-container matColumnDef="agence">
               <th mat-header-cell *matHeaderCellDef>Agence</th>
@@ -45,7 +44,8 @@
 
             <ng-container matColumnDef="compte">
               <th mat-header-cell *matHeaderCellDef>Compte</th>
-              <td mat-cell *matCellDef="let element"> {{element.compte.numeroCompte}} - {{element.compte.intituleCompte}}  </td>
+              <td mat-cell *matCellDef="let element"> {{element.compte.numeroCompte}} -
+                {{element.compte.intituleCompte}} </td>
             </ng-container>
 
             <ng-container matColumnDef="montant">
@@ -108,27 +108,23 @@
         </div>
       </div>
       <div class="col-2">
-        <div class="d-flex menu-btn-right">
-          <button mat-raised-button color="primary" routerLink="/{{urlAccountReservationView}}">
-            <mat-icon class="icon">add</mat-icon>
-            Nouveau
-          </button>
-          <button mat-raised-button color="primary" (click)="redirectToView(selectedItemOnTables.code)">
-            Consulter
-          </button>
-          <button mat-raised-button color="primary" (click)="redirectToUpdate(selectedItemOnTables.code)">
-            Lever
-          </button>
-          <button mat-raised-button color="primary">
-            Actualiser
-          </button>
-          <button mat-raised-button color="primary">
-            <mat-icon class="icon">print</mat-icon>
-            Imprimer
-          </button>
+        <div class="d-flex menu-btn-right align-items-center">
+          <microfi-button class="w-50" routerLink="/account/{{urlAccountReservationView}}" [name]="'Nouveau'"
+            color="primary">
+          </microfi-button>
+          <microfi-button class="w-50" (click)="redirectToView(selectedItemOnTables.code)" [name]="'Consulter'"
+            color="primary">
+          </microfi-button>
+          <microfi-button class="w-50" [name]="'Lever'" (click)="redirectToUpdate(selectedItemOnTables.code)"
+            color="primary">
+          </microfi-button>
+          <microfi-button class="w-50" [name]="'Actualiser'" color="primary">
+          </microfi-button>
+          <microfi-button class="w-50" [name]="'Imprimer'" color="primary">
+          </microfi-button>
 
         </div>
       </div>
     </div>
-  </mat-card>
+  </div>
 </div>
