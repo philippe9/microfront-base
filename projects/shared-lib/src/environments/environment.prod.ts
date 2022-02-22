@@ -2,29 +2,33 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 import env from './.env';
-
 export const environment = {
   idUniteBancaire: 1,
   codeUniteBancaire: "00001",
   codeAgence: "0904",
   codeDevise: "950",
-  production: false,
+  production: true,
   version: env.microfi_x_version, //+ '-dev',
   microfiPlatformTenantId: 'default',  // For connecting to server running elsewhere update the tenant identifier 192.168.202.91
-  baseApiUrl: JSON.parse(localStorage.getItem('microfiXServerBranchUrl')) || 'http://192.168.202.91:5833',  // For connecting to server running elsewhere update the base API URL
+  baseAuthUrl: localStorage.getItem('microfiXServerBranchUrl') || 'http://127.0.0.1:5833', // to point to a different server
+  baseApiUrl: localStorage.getItem('microfiXServerBranchUrl') || 'http://127.0.0.1:5833',  // For connecting to server running elsewhere update the base API URL
   allowServerSwitch: env.allow_switching_backend_instance,
   apiProvider: '/api', // /resource
   apiVersion: '',// /v1
   serverUrl: '',
   oauth: {
-    enabled: true,  // For connecting to Microfi X using OAuth2 Authentication change the value to true
+    enabled: false,  // For connecting to Microfi X using OAuth2 Authentication change the value to true
     serverUrl: ''
   },
-  jwt: {
-    enabled: false,  // For connecting to Microfi X using OAuth2 Authentication change the value to true
-    serverUrl: 'http://172.21.253.31:5933/auth/'
+  keycloak: {
+    enabled: false,  // For connecting to Keycloak using OAuth2 Authentication change the value to true
+    serverUrl: '/keycloak/auth/realms/microfi-web-realm/protocol/openid-connect'
   },
-  defaultLanguage: 'en-US',
+  jwt: {
+    enabled: true,  // For connecting to Microfi X using JWT Authentication token, change the value to true
+    serverUrl: '/sec/oauth' // http://localhost:6001 'http://172.21.253.31:5933/auth/'
+  },
+  defaultLanguage: 'fr-FR',
   supportedLanguages: [
     'en-US',
     'fr-FR'
@@ -83,7 +87,7 @@ export const environment = {
     sameBranchDeposit: { url: 'same-branch-deposit', breadcumb: 'Versement même agence' },
     specificDeposit: { url: 'specific-deposit', breadcumb: 'Versement spécifique' },
     sameBranchWithdrawal: { url: 'same-branch-withdrawal', breadcumb: 'Retrait même agence' },
-    cashierPayment: { url: 'cashier-payment', breadcumb: 'Paiment par caisse' },
+    cashierPayment: { url: 'cashier-payment', breadcumb: 'Paiement par caisse' },
     currencyChange: { url: 'currency-change', breadcumb: "Change d'espèce" },
     saleCurrency: { url: 'sale-currency', breadcumb: "Vente dévise" },
     buyCurrency: { url: 'buy-currency', breadcumb: "Achat dévise" },
@@ -233,6 +237,7 @@ export const environment = {
   },
   api: {
     logUser: "/login",
+    userCredentials: "/auth",
     physicalCustomerList: "/api/clients/physique/list",
     physicalCustomerPage: "/api/clients/physique/page",
     moralCustomerList: "/api/clients/morale/list",
@@ -313,7 +318,7 @@ export const environment = {
     partSocialeRemboursement: "/api/partSociale/remboursement",
     CheckAdherant: "/api/partSociale/adherant/get",
     partSocialeAugmentationFond: "/api/partSociale/fondSolidarite/augmentation",
-    partSocialeAdhesionMembre: "/api/partSociale/adhesionMembre",
+    partSocialeAdhesionMembre: "/api/partSociale/adherant/add",
     partSocialeSouscription: "/api/partSociale/souscription",
     pagePartSocial: "/api/partSociale/pagePartSocial",
     pageCessionParts: "/api/partSociale/pageCessionParts",
@@ -340,6 +345,7 @@ export const environment = {
     caisseAjustage: "/ope/caisse/ajuster",
     caisseFermeture: "/ope/caisse/fermer",
     CaisseForcage: "/ope/caisse/forcer",
+    reouvrirCaisse: "/ope/caisse/reouvrirCaisse",
     caissePage: "/ope/caisse/page",
     doAjusterCaisse: "/ope/caisse/ajusterCaisse",
     partSocialeParamsByCode: "/api/partSociale/parametreMicrofi/get",
@@ -351,11 +357,24 @@ export const environment = {
     customerPage: "/api/clients/page",
     doCreateVirement: "/ope/virement/create",
     docreateVirementPermanent: "/ope/virement/permanent/create",
+    doupdateVirementPermanent: "/ope/virement/permanent/update",
     doOppositionAccounttPage: "/api/compte/opposition/page",
     doisChequeBanque: "/ope/cheque/doisChequeBanque",
-    doisChequeOpposition: "/cheque/doisChequeOpposition",
-    doisChequeRemis: "/cheque/doisChequeRemis",
-    doisChequeBanqueEmis: "/cheque/doisChequeBanqueEmis",
+    doisChequeOpposition: "/ope/cheque/doisChequeOpposition",
+    doisChequeRemis: "/ope/cheque/doisChequeRemis",
+    doisChequeBanqueEmis: "/ope/cheque/doisChequeBanqueEmis",
+    dofindOppositionCheque: "/ope/cheque/dofindOppositionCheque",
+    dosaveRemiseCheque: "/ope/cheque/dosaveRemiseCheque",
+    saveChequeBanque: "/ope/cheque/saveChequeBanque",
+    annulerChequeCertifie: "/ope/cheque/annulerChequeCertifie",
+    saveRemiseChequeGuichet: "/ope/cheque/saveRemiseChequeGuichet",
+    saveChequeCertifie: "/ope/cheque/saveChequeCertifie",
+    annulerChequeBanque: "/ope/cheque/annulerChequeBanque",
+    saveArbitrageCheque: "/ope/cheque/saveArbitrageCheque",
+    saveLeveeOppositionCheque: "/ope/cheque/saveLeveeOppositionCheque",
+    saveOppositionCheque: "/ope/cheque/saveOppositionCheque",
+    findRemiseChequeArbitrage: "/ope/cheque/findRemiseChequeArbitrage",
+    saveRemiseChequeSpecifique: "/ope/cheque/saveRemiseChequeSpecifique",
     calculerCommission: "/api/commission/calculer",
     dofindTypeCaisse: "/caisse/dofindTypeCaisse",
     dogetCoupure: "/ope/caisse/coupure",
@@ -380,7 +399,8 @@ export const environment = {
     mode: "/caisse/mode",
     creationDecouvert: "/eng/decouvert/autoriser",
     doversement: "/ope/caisse/versement",
-    doFindTypeDecouverte: "/eng/placement/typesDecouvert",
+    doFindTypeDecouverte: "/eng/decouvert/typeDecouvert",
+    doFindTypesDecouverte: "/eng/decouvert/typeDecouverts",
     listDecouvert: "/eng/engagement/list",
     findDecouvert: "/eng/decouvert/list",
     dofindCheque: "/ope/cheque/dofindCheque",
@@ -403,8 +423,6 @@ export const environment = {
     doavenantDossierCredit: "/eng/tresorerie/avenantDossierCredit",
     doabandonnerInteretRetard: "/eng/tresorerie/abandonnerInteretRetard",
     doabandonnerDossierCredit: "/eng/tresorerie/abandonnerDossierCredit",
-
-
     findSimulationTableau: "/eng/tresorerie/findSimulationTableau",
     findSimulationCreditTableau: "/eng/tresorerie/findSimulationCreditTableau",
     findSessionCommite: "/eng/tresorerie/findSessionCommite",
@@ -438,7 +456,8 @@ export const environment = {
     dofindPlacements: "/eng/placement/dofindPlacements",
     docreatePlacement: "/eng/placement/docreatePlacement",
     dofindEcheance: "/eng/placement/dofindEcheance",
-    nantirPlacement: "/eng/placement/nantirPlacem",
+    nantirPlacement: "/eng/placement/nantirPlacement",
+    updatePlacement: "/eng/placement/updatePlacement",
     leverNantirPlacement: "/eng/placement/dolevernantirPlacement",
     dofindPlacement: "/eng/placement/dofindPlacement",
     doSaisirOpposition: "/eng/placement/doOppositionPlacemBC",
@@ -492,6 +511,7 @@ export const environment = {
     getBalanceType: "/api/balance/type",
     // dofindOrganisme :"/ope/caisse/findOrganisme",
     dofindDemandeChequier: "/ope/cheque/dofindDemandeChequier",
+    annulerDemandeChequier: "/ope/cheque/annulerDemandeChequier",
     dofindTypeChequier: "/ope/cheque/dofindTypeChequier",
     dofindChequier: "/ope/cheque/dofindChequier",
     doSaveChequier: "/ope/cheque/doSaveChequier",
@@ -503,11 +523,36 @@ export const environment = {
     type_piece: "/api/general/find/type_piece",
     listAgences: "/api/general/list/agence",
     balanceBuild: "/api/balance/build",
-    findCaisse: "/ope/caisse/findCaisse",
+    findCaisse: "/ope/caisse/findCaisseList",
+    findCaisse1: "/ope/caisse/findCaisse1",
     journalCaisse: "/api/balance/journalCaisse",
     findArreteCompte: "/api/balance/arreteCompte",
     grandLivre: "/api/balance/grandLivre",
     historiqueBalance: "/api/balance/historique",
+    etatRapports: "/api/balance/etatRapports",
+    journal: "/api/balance/journal",
+    rapportTraitement: "/api/balance/rapportTraitement",
+    releveCompte: "/api/balance/releveCompte",
+    arreteCompte: "/api/balance/arreteCompte",
+    etatRapport: "/api/balance/etatRapport",
+    reportType: "/api/balance/reportType",
+    listPosteComptable: "/api/balance/listPosteComptable",
+    reportColumnType: "/api/balance/reportColumnType",
+    findTypeDeclaration: "/api/balance/findTypeDeclaration",
+    findFichierDeclaration: "/api/balance/findFichierDeclaration",
+    listTypeDeclaration: "/api/balance/listTypeDeclaration",
+    findFeuilletDeclaration: "/api/balance/findFeuilletDeclaration",
+    listPeriodeTypeDeclaration: "/api/balance/listPeriodeTypeDeclaration",
+    printReport: "/api/balance/printReport",
+    valoriserPoste: "/api/balance/valoriserPoste",
+    cloturerPeriode: "/api/balance/cloturerPeriode",
+    listReglePeriode: "/api/balance/listReglePeriode",
+    indexPeriode: "/api/balance/indexPeriode",
+    periodicite: "/api/balance/periodicite",
+    typeDeclaration: "/api/balance/typeDeclaration",
+    feuilletDeclaration: "/api/balance/feuilletDeclaration",
+    reportParamType: "/api/balance/reportParamType",
+
     dofindChequeAutreBanque: "/ope/cheque/dofindChequeAutreBanque",
     urlGestionVirementPermanent: "/ope/virement/permanent/page",
     dofindPartenaire: "/ope/virement/partenaires",
@@ -531,12 +576,13 @@ export const environment = {
     doparamBiometrieByCode: "/api/biometrie/paramBiometrieByCode",
     doValidateCompte: "/api/compte/compte/validation",
     impressionRIB: "/api/compte/impressionRIB",
+    impressionUsers: "/api/clients/impressionUsers",
   }
 };
-
 environment.serverUrl = `${environment.baseApiUrl}${environment.apiProvider}${environment.apiVersion}`;
-environment.oauth.serverUrl = `${environment.baseApiUrl}${environment.apiProvider}`;
-
+environment.oauth.serverUrl = `${environment.baseApiUrl}${environment.api.logUser}${environment.apiProvider}`;
+environment.keycloak.serverUrl = `${environment.baseAuthUrl}${environment.keycloak.serverUrl}`;
+environment.jwt.serverUrl = `${environment.baseAuthUrl}${environment.jwt.serverUrl}`;
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

@@ -1,37 +1,34 @@
 <mat-toolbar fxLayout="row" color="primary" id="microfi-toolbar">
 
-  <button mat-icon-button *ngIf="!sidenavCollapsed" (click)="toggleSidenav()" matTooltip="Toggle Hide/Open">
+    <button mat-icon-button *ngIf="!sidenavCollapsed" (click)="toggleSidenav()" matTooltip="Toggle Hide/Open">
     <fa-icon icon="bars" size="lg"></fa-icon>
   </button>
 
-  <button mat-icon-button *ngIf="sidenav.opened" (click)="toggleSidenavCollapse()" matTooltip="Toggle Collapse"
-    fxHide.lt-md="true">
+    <button mat-icon-button *ngIf="sidenav.opened" (click)="toggleSidenavCollapse()" matTooltip="Toggle Collapse" fxHide.lt-md="true">
     <fa-icon *ngIf="!sidenavCollapsed" icon="chevron-left"></fa-icon>
     <fa-icon *ngIf="sidenavCollapsed" icon="chevron-right"></fa-icon>
   </button>
-  <button mat-icon-button class="ml-1 img-button">
+    <button mat-icon-button class="ml-1 img-button">
     <img src="assets/images/MifosX_logo.png">
   </button>
 
-  <nav mat-tab-nav-bar backgroundColor="primary" class="ml-1">
+    <nav mat-tab-nav-bar backgroundColor="primary" class="ml-1">
 
-    <ng-container *ngFor="let menu of appMenu">
-      <a mat-tab-link class="tab-link" class="font-weight-bold" [matMenuTriggerFor]="customMenu"
-        #CustomMenuTrigger="matMenuTrigger" [hidden]="userHasPermission(menu.code)">
+        <ng-container *ngFor="let menu of appMenu">
+            <a mat-tab-link class="tab-link" class="font-weight-bold" [matMenuTriggerFor]="customMenu" #CustomMenuTrigger="matMenuTrigger" [hidden]="userHasPermission(menu.code)">
         {{ menu.breadcumb }}
       </a>
-      <mat-menu #customMenu="matMenu">
-        <span *ngFor="let subMenu of menu.subMenu">
-          <button [hidden]="userHasPermission(subMenu.code)" mat-menu-item *ngIf="subMenu.subMenu.length == 0 && subMenu.code != 999"
-            mat-menu-item [routerLink]="'/'+subMenu.url">
+            <mat-menu #customMenu="matMenu">
+                <span *ngFor="let subMenu of menu.subMenu">
+          <button [hidden]="userHasPermission(subMenu.code)" mat-menu-item
+            *ngIf="subMenu.subMenu.length == 0 && subMenu.code != 999" mat-menu-item [routerLink]="'/'+subMenu.url">
             {{ subMenu.breadcumb }}
           </button>
           <button [hidden]="userHasPermission(subMenu.code)" *ngIf="subMenu.subMenu.length != 0 && subMenu.code != 999"
             mat-menu-item [matMenuTriggerFor]="customSubMenu"
             [routerLink]="'/'+subMenu.url">{{subMenu.breadcumb}}</button>
 
-          <button *ngIf="subMenu.code == 999" mat-menu-item
-            (click)="relogin()">{{subMenu.breadcumb}}</button>
+          <button *ngIf="subMenu.code == 999" mat-menu-item (click)="relogin()">{{subMenu.breadcumb}}</button>
 
           <mat-menu #customSubMenu="matMenu">
             <span [hidden]="userHasPermission(littleMenu.code)" *ngFor="let littleMenu of subMenu.subMenu">
@@ -46,17 +43,16 @@
                 <span [hidden]="userHasPermission(smallest.code)" *ngFor="let smallest of littleMenu.subMenu">
                   <button mat-menu-item [routerLink]="'/'+smallest.url">{{smallest.breadcumb}}</button>
                 </span>
-              </mat-menu>
+            </mat-menu>
 
             </span>
-          </mat-menu>
-        </span>
-      </mat-menu>
-    </ng-container>
-  </nav>
-
-  <span fxFlex="auto"></span>
-  <button mat-icon-button class="ml-1 img-button" [matMenuTriggerFor]="applicationMenu">
+            </mat-menu>
+            </span>
+            </mat-menu>
+        </ng-container>
+    </nav>
+    <span fxFlex="auto"></span>
+    <button mat-icon-button class="ml-1 img-button" [matMenuTriggerFor]="applicationMenu">
     <img src="assets/images/user_placeholder.png">
   </button>
 
@@ -64,25 +60,25 @@
 
 <!-- Application User Help Menu -->
 <mat-menu #applicationMenu="matMenu" [overlapTrigger]="false">
-  <button mat-menu-item (click)="help()">
+    <button mat-menu-item (click)="help()">
     <mat-icon matListIcon>
       <fa-icon icon="question-circle" size="sm"></fa-icon>
     </mat-icon>
     <span>Help</span>
   </button>
-  <button mat-menu-item [routerLink]="['/profile']">
+    <button mat-menu-item [routerLink]="['/profile']">
     <mat-icon>
       <fa-icon icon="user" size="sm"></fa-icon>
     </mat-icon>
     <span>Profile</span>
   </button>
-  <button mat-menu-item [routerLink]="['/settings']">
+    <button mat-menu-item [routerLink]="['/settings']">
     <mat-icon>
       <fa-icon icon="cog" size="sm"></fa-icon>
     </mat-icon>
     <span>Settings</span>
   </button>
-  <button mat-menu-item (click)="logout()" id="logout">
+    <button mat-menu-item (click)="logout()" id="logout">
     <mat-icon>
       <fa-icon icon="sign-out-alt" size="sm"></fa-icon>
     </mat-icon>

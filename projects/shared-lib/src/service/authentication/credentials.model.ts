@@ -1,6 +1,9 @@
 export interface Credentials {
   object: UtilisateurDTO;
   message: string;
+  refreshExpiresIn: number;
+  tokenExpiresIn: number;
+  token_type: string;
 }
 
 export class UtilisateurDTO {

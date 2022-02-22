@@ -6,12 +6,11 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/c
 import { Observable } from 'rxjs';
 
 /** Environment Configuration */
-import { environment } from '../../environments/environment.prod';
 
 /** Http request options headers. */
 const httpOptions = {
   headers: {
-    'Microfi-Platform-TenantId': environment.microfiPlatformTenantId
+    // 'Microfi-Platform-TenantId': environment.microfiPlatformTenantId
   }
 };
 
@@ -33,8 +32,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
    * Intercepts a Http request and sets the request headers.
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // request = request.clone({ setHeaders: httpOptions.headers });
-    request = request.clone();
+    request = request.clone({ setHeaders: httpOptions.headers });
     return next.handle(request);
   }
 
@@ -42,12 +40,12 @@ export class AuthenticationInterceptor implements HttpInterceptor {
    * Sets the basic/oauth authorization header depending on the configuration.
    * @param {string} authenticationKey Authentication key.
    */
-  setAuthorizationToken(authenticationKey: string) {
-    if (environment.oauth.enabled) {
-      httpOptions.headers[authorizationHeader] = `Bearer ${authenticationKey}`;
-    } else {
-      httpOptions.headers[authorizationHeader] = `Basic ${authenticationKey}`;
-    }
+  setAuthorizationToken(authenticationKey: string, tokenType: String) {
+    // if (environment.oauth.enabled) {
+    httpOptions.headers[authorizationHeader] = `${tokenType} ${authenticationKey}`;
+    // } else {
+    //   httpOptions.headers[authorizationHeader] = `Basic ${authenticationKey}`;
+    // }
   }
 
   /**

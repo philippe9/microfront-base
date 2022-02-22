@@ -4,8 +4,7 @@ import {
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { IHash } from 'dist/shared-lib/domain/SearchParam';
-import { SearchParam } from 'projects/shared-lib/src/domain/SearchParam';
+import { IHash, SearchParam } from 'projects/shared-lib/src/domain/SearchParam';
 import { ApiService } from 'projects/shared-lib/src/template/api.service';
 import { BaseRecords } from 'projects/shared-lib/src/template/base-records';
 import { Observable, of } from 'rxjs';

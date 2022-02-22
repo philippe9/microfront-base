@@ -2,23 +2,22 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>Shell</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <title>Microfi</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-  <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
 
-  <style>
-    body {
-      font-family: 'Comfortaa', cursive;
-      margin: 0px;
-      /* padding-top: 80px; */
-      /* padding-left: 10px; */
-    }
-
-    /*
+    <style>
+        body {
+            font-family: 'Cambria', 'Comfortaa', cursive;
+            margin: 0px;
+            /* padding-top: 80px; */
+            /* padding-left: 10px; */
+        }
+        /*
       ul {
           list-style-type: none;
           margin: 0;
@@ -56,15 +55,22 @@
           background-color: lightgray;
           padding:10px;
       } */
-  </style>
+    </style>
 
 </head>
 
 <body>
-  <app-root></app-root>
-  <!-- Shell -->
-  <!-- <script src="http://localhost:3000/remoteEntry.js"></script> -->
-  <!-- doItWebpack({mfe1: 'http://localhost:3000/remoteEntry.js'}) -->
+    <app-root>
+        <div class="loader-wrapper">
+            <div class="bottom triangle"></div>
+            <div class="top triangle"></div>
+            <div class="left triangle"></div>
+            <div class="right triangle"></div>
+        </div>
+    </app-root>
+    <!-- Shell -->
+    <!-- <script src="http://localhost:3000/remoteEntry.js"></script> -->
+    <!-- doItWebpack({mfe1: 'http://localhost:3000/remoteEntry.js'}) -->
 </body>
 
 </html>
